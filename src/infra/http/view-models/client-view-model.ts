@@ -6,7 +6,6 @@ export class ClientViewModel {
       id: client.id,
       name: client.name,
       phone: client.phone,
-      pets: client.pets,
     }
   }
 }

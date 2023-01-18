@@ -1,7 +1,8 @@
 import { CreateClientService } from "@app/use-cases/client/create-client-service";
 import { ListClientsService } from "@app/use-cases/client/list-clients-service";
 import { Controller, Body, Post, Get } from "@nestjs/common"
-import { ClientViewModel } from "./client-view-model";
+import { ClientViewModel } from "../view-models/client-view-model";
+import { CreateClientBody } from "./dtos/create-client-body";
 
 @Controller("clients")
 export class ClientController {
@@ -13,8 +14,9 @@ export class ClientController {
 
     return { clients: clients.map(ClientViewModel.toHTTP) }
   }
+
   @Post()
-  async create(@Body() body: any) {
+  async create(@Body() body: CreateClientBody) {
     await this.createClientService.execute(body)
   }
 } 

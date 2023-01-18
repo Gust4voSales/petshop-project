@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Post } from "@nestjs/common";
 import { CreatePetshopService } from "@app/use-cases/petshop-service/create-petshop-service";
 import { ListPetshopServices } from "@app/use-cases/petshop-service/list-petshop-services";
-import { PetshopServiceViewModel } from "./petshop-service-view-model";
+import { PetshopServiceViewModel } from "../view-models/petshop-service-view-model";
 import { CreatePetshopServiceBody } from "./dtos/create-petshop-service-body";
 
 @Controller("services")

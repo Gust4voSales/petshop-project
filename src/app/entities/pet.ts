@@ -38,6 +38,14 @@ export class Pet {
     this.props.age = age
   }
 
+  public get breed() {
+    return this.props.breed
+  }
+
+  public set breed(breed: string) {
+    this.props.breed = breed
+  }
+
   public get ownerId() {
     return this.props.ownerId
   }
