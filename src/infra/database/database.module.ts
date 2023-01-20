@@ -1,8 +1,8 @@
-import { ClientRepository } from "@app/repositories/client-repository";
+import { Module } from "@nestjs/common";
+import { CustomerRepository } from "@app/repositories/customer-repository";
 import { PetRepository } from "@app/repositories/pet-repository";
 import { PetshopServiceRepository } from "@app/repositories/petshop-service-repository";
-import { Module } from "@nestjs/common";
-import { InMemoryClientRepository } from "./InMemoryDB/in-memory-client-repository";
+import { InMemoryCustomerRepository } from "./InMemoryDB/in-memory-customer-repository";
 import { InMemoryPetRepository } from "./InMemoryDB/in-memory-pet-repository";
 import { InMemoryPetshopServiceRepository } from "./InMemoryDB/in-memory-petshop-service-repository";
 
@@ -13,14 +13,14 @@ import { InMemoryPetshopServiceRepository } from "./InMemoryDB/in-memory-petshop
       useClass: InMemoryPetshopServiceRepository,
     },
     {
-      provide: ClientRepository,
-      useClass: InMemoryClientRepository,
+      provide: CustomerRepository,
+      useClass: InMemoryCustomerRepository,
     },
     {
       provide: PetRepository,
       useClass: InMemoryPetRepository,
     },
   ],
-  exports: [PetshopServiceRepository, ClientRepository, PetRepository]
+  exports: [PetshopServiceRepository, CustomerRepository, PetRepository]
 })
 export class DatabaseModule { }

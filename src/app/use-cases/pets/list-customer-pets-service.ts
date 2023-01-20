@@ -2,7 +2,7 @@ import { PetRepository } from "@app/repositories/pet-repository";
 import { Injectable } from "@nestjs/common";
 
 @Injectable()
-export class ListClientPetsService {
+export class ListCustomerPetsService {
   constructor(private petRepository: PetRepository) { }
 
   async execute(ownerId: string) {

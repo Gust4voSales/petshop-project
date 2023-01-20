@@ -1,8 +1,8 @@
 import { Pet } from "@app/entities/pet";
-import { ClientRepository } from "@app/repositories/client-repository";
+import { CustomerRepository } from "@app/repositories/customer-repository";
 import { PetRepository } from "@app/repositories/pet-repository";
 import { Injectable } from "@nestjs/common";
-import { ClientNotFound } from "../errors/client-not-found";
+import { CustomerNotFound } from "../errors/customer-not-found";
 
 interface AddPetRequest {
   name: string
@@ -14,7 +14,7 @@ interface AddPetRequest {
 
 @Injectable()
 export class AddPetService {
-  constructor(private petRepository: PetRepository, private clientRepository: ClientRepository) { }
+  constructor(private petRepository: PetRepository, private customerRepository: CustomerRepository) { }
 
   async execute(request: AddPetRequest) {
     const { name,
@@ -22,10 +22,10 @@ export class AddPetService {
       breed,
       ownerId } = request
 
-    const client = await this.clientRepository.findById(ownerId)
+    const client = await this.customerRepository.findById(ownerId)
 
     if (!client) {
-      throw new ClientNotFound(ownerId)
+      throw new CustomerNotFound(ownerId)
     }
 
     const pet = new Pet({

@@ -2,17 +2,17 @@ import { randomUUID } from "node:crypto"
 import { Pet } from "./pet"
 
 
-export interface ClientProps {
+export interface CustomerProps {
   name: string
   phone: string
   pets: Pet[]
 }
 
-export class Client {
+export class Customer {
   private _id: string
-  private props: ClientProps
+  private props: CustomerProps
 
-  constructor(props: ClientProps, id?: string) {
+  constructor(props: CustomerProps, id?: string) {
     this.props = props
     this._id = id ?? randomUUID()
   }

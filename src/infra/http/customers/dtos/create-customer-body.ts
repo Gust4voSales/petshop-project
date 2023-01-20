@@ -1,6 +1,6 @@
 import { Length, } from "class-validator"
 
-export class CreateClientBody {
+export class CreateCustomerBody {
   @Length(3, 60)
   name: string
 

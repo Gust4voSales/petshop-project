@@ -11,12 +11,12 @@
 > - The user sets its new password in the first session
 > - The user must be signed in to access the others functionalities (apart from session)
 
-## Clients
+## Customers
 
 > **Functional Requirements**
 >
-> - Users should be able to CRUD clients
-> - Users should be able to query clients by name
+> - Users should be able to CRUD customers
+> - Users should be able to query customers by name
 
 ## Pets
 
@@ -26,7 +26,7 @@
 
 > **Business rules**
 >
-> - A pet is owned by a client (many-to-one relation)
+> - A pet is owned by a customer (many-to-one relation)
 
 ## Services
 
@@ -39,7 +39,7 @@
 > **Functional Requirements**
 >
 > - Users should be able to CRUD schedules
-> - Users should be able to query schedules by client
+> - Users should be able to query schedules by customers
 > - Users should be able to query schedules by services
 
 > **Business rules**
