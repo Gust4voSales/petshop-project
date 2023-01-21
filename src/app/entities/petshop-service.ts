@@ -4,6 +4,7 @@ export interface PetshopServiceProps {
   title: string
   description: string
   value: number
+  duration: number
 }
 
 export class PetshopService {
@@ -41,6 +42,14 @@ export class PetshopService {
 
   public set value(value: number) {
     this.props.value = value
+  }
+
+  public get duration() {
+    return this.props.duration
+  }
+
+  public set duration(duration: number) {
+    this.props.duration = duration
   }
 
 }

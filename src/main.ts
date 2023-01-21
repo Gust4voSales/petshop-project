@@ -6,7 +6,9 @@ import { NotFoundExceptionFilter } from '@infra/http/errors/not-found-exception'
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  app.useGlobalPipes(new ValidationPipe());
+  app.useGlobalPipes(new ValidationPipe({
+    transform: true
+  }));
   app.useGlobalFilters(new NotFoundExceptionFilter());
 
   await app.listen(3000);

@@ -7,6 +7,7 @@ export class PetshopServiceViewModel {
       title: petshopService.title,
       description: petshopService.description,
       value: petshopService.value,
+      duration: petshopService.duration,
     }
   }
 }

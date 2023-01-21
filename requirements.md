@@ -34,14 +34,14 @@
 >
 > - Users should be able to CRUD services
 
-## Schedules
+## Appointments
 
 > **Functional Requirements**
 >
-> - Users should be able to CRUD schedules
-> - Users should be able to query schedules by customers
-> - Users should be able to query schedules by services
+> - Users should be able to CRUD appointments
+> - Users should be able to query appointments by customers
+> - Users should be able to query appointments by services
 
 > **Business rules**
 >
-> - A schedule has only ONE service and ONE pet
+> - A appointment has only ONE service and ONE pet

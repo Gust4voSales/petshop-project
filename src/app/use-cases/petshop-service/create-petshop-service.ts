@@ -7,6 +7,7 @@ interface PetshopServiceRequest {
   title: string
   description: string
   value: number
+  duration: number
 }
 
 @Injectable()
@@ -14,9 +15,7 @@ export class CreatePetshopService {
   constructor(private petshopServiceRepository: PetshopServiceRepository) { }
 
   async execute(request: PetshopServiceRequest) {
-    const { title, description, value } = request
-
-    const petshopService = new PetshopService({ title, description, value })
+    const petshopService = new PetshopService(request)
 
     await this.petshopServiceRepository.create(petshopService)
 
