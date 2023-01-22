@@ -8,6 +8,7 @@ export class ListAppointmentsService {
 
   async execute(query: FindManyAppointmentsQuery) {
     let findManyQuery: FindManyAppointmentsQuery
+
     if (query.startDate && query.endDate)
       findManyQuery = query
 
