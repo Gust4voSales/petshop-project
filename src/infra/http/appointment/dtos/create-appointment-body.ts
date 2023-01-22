@@ -1,4 +1,4 @@
-import { Type, Transform } from "class-transformer"
+import { Type } from "class-transformer"
 import { IsDate, IsUUID } from "class-validator"
 
 export class CreateAppointmentBody {

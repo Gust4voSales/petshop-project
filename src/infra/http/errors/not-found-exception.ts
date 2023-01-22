@@ -1,10 +1,10 @@
-import { CustomerNotFound } from '@app/use-cases/errors/customer-not-found';
+import { EntityNotFound } from '@app/use-cases/errors/entity-not-found';
 import { ExceptionFilter, Catch, ArgumentsHost, HttpStatus } from '@nestjs/common';
 import { Request, Response } from 'express';
 
-@Catch(CustomerNotFound)
+@Catch(EntityNotFound)
 export class NotFoundExceptionFilter implements ExceptionFilter {
-  catch(exception: CustomerNotFound, host: ArgumentsHost) {
+  catch(exception: EntityNotFound, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse<Response>();
     const request = ctx.getRequest<Request>();

@@ -41,6 +41,7 @@
 > - Users should be able to CRUD appointments
 > - Users should be able to query appointments by customers
 > - Users should be able to query appointments by services
+> - Users should be able to query appointments by dates
 
 > **Business rules**
 >

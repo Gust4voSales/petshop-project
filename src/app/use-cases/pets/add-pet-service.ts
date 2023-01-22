@@ -2,7 +2,7 @@ import { Pet } from "@app/entities/pet";
 import { CustomerRepository } from "@app/repositories/customer-repository";
 import { PetRepository } from "@app/repositories/pet-repository";
 import { Injectable } from "@nestjs/common";
-import { CustomerNotFound } from "../errors/customer-not-found";
+import { EntityNotFound } from "../errors/entity-not-found";
 
 interface AddPetRequest {
   name: string
@@ -25,7 +25,7 @@ export class AddPetService {
     const client = await this.customerRepository.findById(ownerId)
 
     if (!client) {
-      throw new CustomerNotFound(ownerId)
+      throw new EntityNotFound('Customer', ownerId)
     }
 
     const pet = new Pet({
