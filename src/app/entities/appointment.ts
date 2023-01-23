@@ -1,7 +1,6 @@
 import { randomUUID } from "node:crypto"
 
 interface AppointmentProps {
-  customerId: string
   petId: string
   serviceId: string
   appointmentTime: Date
@@ -18,14 +17,6 @@ export class Appointment {
 
   public get id() {
     return this._id
-  }
-
-  public get customer() {
-    return this.props.customerId
-  }
-
-  public set customerId(customerId: string) {
-    this.props.customerId = customerId
   }
 
   public get petId() {

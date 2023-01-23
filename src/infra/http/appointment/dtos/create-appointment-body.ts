@@ -3,9 +3,6 @@ import { IsDate, IsUUID } from "class-validator"
 
 export class CreateAppointmentBody {
   @IsUUID()
-  customerId: string
-
-  @IsUUID()
   petId: string
 
   @IsUUID()
