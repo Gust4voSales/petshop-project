@@ -7,9 +7,11 @@ import { InMemoryPetRepository } from "./InMemoryDB/in-memory-pet-repository";
 import { InMemoryPetshopServiceRepository } from "./InMemoryDB/in-memory-petshop-service-repository";
 import { AppointmentRepository } from "@app/repositories/appointment-repository";
 import { InMemoryAppointmentRepository } from "./InMemoryDB/in-memory-appointment-repository";
+import { PrismaService } from "./prisma/prisma.service";
 
 @Module({
   providers: [
+    PrismaService,
     {
       provide: PetshopServiceRepository,
       useClass: InMemoryPetshopServiceRepository,
