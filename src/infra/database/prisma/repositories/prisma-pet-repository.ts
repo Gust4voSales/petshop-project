@@ -14,6 +14,17 @@ export class PrismaPetRepository implements PetRepository {
     })
   }
 
+  async findById(id: string): Promise<Pet> {
+    const pet = await this.prismaService.pet.findUnique({
+      where: {
+        id,
+      }
+    })
+
+    if (!pet) return null
+    return PetMapper.toDomain(pet)
+  }
+
   async findManyByOwnerId(id: string): Promise<Pet[]> {
     const pets = await this.prismaService.pet.findMany({
       where: {

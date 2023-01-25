@@ -16,6 +16,17 @@ export class PrismaPetshopServiceRepository implements PetshopServiceRepository 
     })
   }
 
+  async findById(id: string): Promise<PetshopService> {
+    const service = await this.prismaService.petshopService.findUnique({
+      where: {
+        id,
+      }
+    })
+
+    if (!service) return null
+    return PetshopServiceMapper.toDomain(service)
+  }
+
   async findMany(): Promise<PetshopService[]> {
     const petshopServices = await this.prismaService.petshopService.findMany()
 

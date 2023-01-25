@@ -1,6 +1,9 @@
 import { Injectable } from '@nestjs/common'
 import { Appointment } from "@app/entities/appointment"
 import { AppointmentRepository } from "@app/repositories/appointment-repository"
+import { PetRepository } from '@app/repositories/pet-repository'
+import { EntityNotFound } from '../errors/entity-not-found'
+import { PetshopServiceRepository } from '@app/repositories/petshop-service-repository'
 
 interface ScheduleAppointmentRequest {
   petId: string
@@ -10,14 +13,16 @@ interface ScheduleAppointmentRequest {
 
 @Injectable()
 export class ScheduleAppointmentService {
-  constructor(private appointmentRepository: AppointmentRepository) { }
+  constructor(private appointmentRepository: AppointmentRepository, private petRepository: PetRepository, private petshopServiceRepository: PetshopServiceRepository) { }
 
   async execute(request: ScheduleAppointmentRequest) {
     // TODO check if time is available 
 
-    // TODO check if pet exists 
+    const pet = await this.petRepository.findById(request.petId)
+    if (!pet) throw new EntityNotFound("Pet", request.petId)
 
-    // TODO check if service exists 
+    const service = await this.petshopServiceRepository.findById(request.serviceId)
+    if (!service) throw new EntityNotFound("Service", request.serviceId)
 
     const appointment = new Appointment(request)
 

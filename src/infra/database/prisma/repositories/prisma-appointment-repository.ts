@@ -16,6 +16,17 @@ export class PrismaAppointmentRepository implements AppointmentRepository {
     })
   }
 
+  async findById(id: string): Promise<Appointment> {
+    const appointment = await this.prismaService.appointment.findUnique({
+      where: {
+        id,
+      }
+    })
+
+    if (!appointment) return null
+    return AppointmentMapper.toDomain(appointment)
+  }
+
   async findMany(query?: FindManyAppointmentsQuery) {
     // if query parameters are undefined Prisma will ignore them 
     let startDate: Date | undefined
@@ -36,6 +47,13 @@ export class PrismaAppointmentRepository implements AppointmentRepository {
     })
 
     return appointments.map(AppointmentMapper.toDomain)
+  }
 
+  async delete(id: string): Promise<void> {
+    await this.prismaService.appointment.delete({
+      where: {
+        id,
+      }
+    })
   }
 }
