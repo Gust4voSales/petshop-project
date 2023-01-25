@@ -1,0 +1,25 @@
+import { Injectable } from "@nestjs/common";
+import { PetshopService } from "@app/entities/petshop-service";
+import { PetshopServiceRepository } from "@app/repositories/petshop-service-repository";
+import { PetshopServiceMapper } from "../mappers/petshop-service-mapper";
+import { PrismaService } from "../prisma.service";
+
+@Injectable()
+export class PrismaPetshopServiceRepository implements PetshopServiceRepository {
+  constructor(private prismaService: PrismaService) { }
+
+  async create(petshopService: PetshopService): Promise<void> {
+    const raw = PetshopServiceMapper.toPrisma(petshopService)
+
+    await this.prismaService.petshopService.create({
+      data: raw
+    })
+  }
+
+  async findMany(): Promise<PetshopService[]> {
+    const petshopServices = await this.prismaService.petshopService.findMany()
+
+    return petshopServices.map(PetshopServiceMapper.toDomain)
+  }
+
+}

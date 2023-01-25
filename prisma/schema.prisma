@@ -33,6 +33,7 @@ model Customer {
 
 model Pet {
   id      String @id
+  name    String
   age     Int
   breed   String
   ownerId String
