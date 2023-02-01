@@ -1,12 +1,20 @@
+import Link from "next/link";
+
 export function Header() {
   return (
-    <header className="w-full h-8 flex justify-between items-center px-2 bg-blue-500">
-      <h1>Petshop</h1>
+    <header className="navbar border-b-2">
+      <label htmlFor="sidebar-drawer" className="btn btn-ghost drawer-button lg:hidden">
+        =
+      </label>
+      <div className="flex-1">
+        <Link href="/" className="btn btn-link prose">
+          <h1>Petshop</h1>
+        </Link>
+      </div>
 
-      <div>
-        <span>Usuário Logado</span>
-
-        <button>Sair</button>
+      <div className="flex items-center gap-2">
+        <span className="text-sm font-semibold underline">Usuário Logado</span>
+        <button className="btn btn-ghost">Sair</button>
       </div>
     </header>
   );
