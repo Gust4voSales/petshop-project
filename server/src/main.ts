@@ -12,6 +12,6 @@ async function bootstrap() {
   }));
   app.useGlobalFilters(new NotFoundExceptionFilter());
 
-  await app.listen(3000);
+  await app.listen(3333);
 }
 bootstrap();
