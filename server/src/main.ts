@@ -12,6 +12,7 @@ async function bootstrap() {
   }));
   app.useGlobalFilters(new NotFoundExceptionFilter());
 
+  app.enableCors();
   await app.listen(3333);
 }
 bootstrap();
