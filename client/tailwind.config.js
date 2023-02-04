@@ -2,7 +2,11 @@
 module.exports = {
   content: ["./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      maxWidth: {
+        80: "20rem",
+      },
+    },
   },
   daisyui: {
     themes: ["dark"],

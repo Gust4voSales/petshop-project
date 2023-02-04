@@ -1,0 +1,13 @@
+import { PetshopService } from 'src/@types/PetshopServices';
+import api from '../api';
+
+interface PetshopServicesReturn {
+  services: PetshopService[]
+}
+export async function fetchPetshopServices(
+): Promise<PetshopServicesReturn> {
+  const { data } = await api.get(
+    `/services`
+  );
+  return data;
+}
