@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .scrollbar {
+    @apply flex bg-base-200 transition-colors select-none touch-none hover:bg-base-300;
+  }
+}

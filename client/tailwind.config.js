@@ -3,8 +3,22 @@ module.exports = {
   content: ["./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
-      maxWidth: {
-        80: "20rem",
+      maxHeight: {
+        "screen-2/3": "66.7vh",
+      },
+
+      keyframes: {
+        show: {
+          from: {
+            opacity: 0,
+          },
+          to: {
+            opacity: 1,
+          },
+        },
+      },
+      animation: {
+        show: "show 0.3s ease",
       },
     },
   },

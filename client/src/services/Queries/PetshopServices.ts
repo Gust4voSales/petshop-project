@@ -5,8 +5,8 @@ interface PetshopServicesReturn {
   services: PetshopService[]
 }
 export async function fetchPetshopServices(
-): Promise<PetshopServicesReturn> {
-  const { data } = await api.get(
+) {
+  const { data } = await api.get<PetshopServicesReturn>(
     `/services`
   );
   return data;
