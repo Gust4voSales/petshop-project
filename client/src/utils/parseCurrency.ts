@@ -3,6 +3,6 @@ const reais = new Intl.NumberFormat('pt-BR', {
   currency: 'BRL',
 });
 
-export function parseCurrecyToBRL(valueInCents: number) {
+export function parseCurrencyToBRL(valueInCents: number) {
   return reais.format(valueInCents / 100)
 }

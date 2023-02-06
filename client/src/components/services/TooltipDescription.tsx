@@ -13,7 +13,7 @@ export function TooltipDescription(props: Props) {
         </Tooltip.Trigger>
 
         <Tooltip.Portal>
-          <Tooltip.Content className="prose bg-primary-focus max-w-xs p-2 mx-2 animate-show rounded-lg shadow-md">
+          <Tooltip.Content className="prose bg-primary-focus max-w-xs p-2 mx-2 animate-show rounded-[var(--rounded-btn)] shadow-md">
             <h3 className="mb-1">Descrição</h3>
             <span>{props.description}</span>
             <Tooltip.Arrow className="fill-primary-focus w-4 h-2" />

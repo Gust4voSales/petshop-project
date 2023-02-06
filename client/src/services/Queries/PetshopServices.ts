@@ -9,5 +9,8 @@ export async function fetchPetshopServices(
   const { data } = await api.get<PetshopServicesReturn>(
     `/services`
   );
+
+  // throw new Error('vixi')
+  // return { services: [] }
   return data;
 }

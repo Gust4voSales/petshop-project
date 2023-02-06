@@ -23,6 +23,7 @@ const buttonStyle = cva("btn cursor-pointer", {
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof buttonStyle> {
   asChild?: boolean;
   tooltip?: string;
+  tooltipBottom?: boolean;
   children: React.ReactNode;
 }
 
@@ -36,8 +37,9 @@ export function Button({ intent, bg, ...props }: Props) {
   );
 
   if (props.tooltip) {
+    const { tooltipBottom = false } = props;
     return (
-      <div className="tooltip" data-tip={props.tooltip}>
+      <div className={`tooltip tooltip-${tooltipBottom ? "bottom" : "top"}`} data-tip={props.tooltip}>
         <Component />
       </div>
     );

@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Bag, Calendar, Person } from "phosphor-react";
-import { Header } from "./(components)/Header";
+import { Header } from "@components/dashboard/Header";
 
 const ROUTES = [
   {
