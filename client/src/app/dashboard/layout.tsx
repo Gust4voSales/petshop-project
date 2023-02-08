@@ -33,7 +33,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       <div className="drawer drawer-mobile">
         <input id="sidebar-drawer" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content flex ">
-          <main className="w-full p-4 max-h-screen">{children}</main>
+          <main className="w-full p-4">{children}</main>
         </div>
 
         <div className="drawer-side border-r-2">

@@ -10,6 +10,7 @@ import { ScrollArea } from "@components/ui/ScrollArea";
 import { PencilSimple, TrashSimple } from "phosphor-react";
 import { TooltipDescription } from "@components/services/TooltipDescription";
 import { AsynchronousContent } from "@components/AsynchronousContent";
+import Link from "next/link";
 
 export default function Services() {
   const petshopServicesListQuery = useQuery({
@@ -53,10 +54,10 @@ export default function Services() {
                       <td>{parseDuration(service.duration)}</td>
                       <td>
                         <div className="flex gap-3">
-                          <Button intent="circle" tooltip="Editar">
+                          <Button intent="circle" tooltipText="Editar">
                             <PencilSimple className="w-6 h-6" />
                           </Button>
-                          <Button intent="circle" bg="danger" tooltip="Remover">
+                          <Button intent="circle" bg="danger" tooltipText="Remover">
                             <TrashSimple className="w-6 h-6" />
                           </Button>
                         </div>
@@ -70,7 +71,9 @@ export default function Services() {
         </AsynchronousContent>
       </div>
 
-      <Button bg="accent">Novo serviço</Button>
+      <Button bg="accent" asChild>
+        <Link href="/dashboard/services/new">Novo serviço</Link>
+      </Button>
     </div>
   );
 }

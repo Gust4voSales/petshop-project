@@ -20,7 +20,7 @@ export function Header() {
       <div className="flex items-center gap-2">
         <span className="text-sm font-semibold underline">Usuário Logado</span>
 
-        <Button intent="ghost" tooltip="Sair" tooltipBottom>
+        <Button intent="ghost" tooltipText="Sair" tooltipBottom>
           <SignOut className="h-5 w-5" />
         </Button>
       </div>
