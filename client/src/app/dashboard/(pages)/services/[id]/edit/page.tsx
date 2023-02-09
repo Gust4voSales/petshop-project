@@ -19,7 +19,7 @@ export default function EditService({ params }: { params: { id: string } }) {
 
   return (
     <div>
-      <PageTitle title="Editar serviço" />
+      <PageTitle back title="Editar serviço" />
 
       <ServiceForm service={mockService} onSubmit={handleEditService} />
     </div>

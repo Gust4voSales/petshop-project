@@ -14,12 +14,12 @@ interface Props extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   label?: string;
   errorMessage?: string;
 }
-function TextAreaComponent({ label, ...props }: Props, ref: React.ForwardedRef<HTMLTextAreaElement>) {
+function TextAreaComponent({ errorMessage, ...props }: Props, ref: React.ForwardedRef<HTMLTextAreaElement>) {
   return (
     <>
-      {label && <Label htmlFor={props.name}>{label}</Label>}
-      <textarea className={textAreaStyle({ errorBorder: !!props.errorMessage })} ref={ref} {...props} />
-      <Label error>{props.errorMessage}</Label>
+      {props.label && <Label htmlFor={props.name}>{props.label}</Label>}
+      <textarea className={textAreaStyle({ errorBorder: !!errorMessage })} ref={ref} {...props} />
+      <Label error>{errorMessage}</Label>
     </>
   );
 }

@@ -1,10 +1,24 @@
+import { Button } from "@components/ui/Button";
+import { useRouter } from "next/navigation";
+import { ArrowLeft } from "phosphor-react";
+
 interface Props {
   title: string;
+  back?: boolean;
 }
 export function PageTitle(props: Props) {
+  const router = useRouter();
+
   return (
-    <div className="prose">
-      <h1>{props.title}</h1>
+    <div className="flex items-center gap-2">
+      {props.back && (
+        <Button onClick={router.back} bg="ghost" circle tooltipText="Voltar" tooltipBottom>
+          <ArrowLeft className="w-5 h-5" />
+        </Button>
+      )}
+      <div className="prose">
+        <h2>{props.title}</h2>
+      </div>
     </div>
   );
 }

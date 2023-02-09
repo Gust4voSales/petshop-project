@@ -10,7 +10,7 @@ export default function NewService() {
 
   return (
     <div>
-      <PageTitle title="Novo serviço" />
+      <PageTitle back title="Novo serviço" />
 
       <ServiceForm onSubmit={handleCreateService} />
     </div>

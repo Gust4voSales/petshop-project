@@ -4,11 +4,8 @@ import { ButtonHTMLAttributes } from "react";
 
 const buttonStyle = cva("btn cursor-pointer", {
   variants: {
-    intent: {
-      ghost: "btn-ghost",
-      circle: "btn-circle",
-    },
     bg: {
+      ghost: "btn-ghost",
       primary: "btn-primary",
       secondary: "btn-secondary",
       accent: "btn-accent",
@@ -16,6 +13,9 @@ const buttonStyle = cva("btn cursor-pointer", {
       info: "btn-info",
       warning: "btn-warning",
       danger: "btn-error",
+    },
+    circle: {
+      true: "btn-circle",
     },
   },
 });
@@ -27,11 +27,11 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<ty
   children: React.ReactNode;
 }
 
-export function Button({ intent, bg, asChild, tooltipText, tooltipBottom, ...props }: Props) {
+export function Button({ bg, circle, asChild, tooltipText, tooltipBottom, ...props }: Props) {
   const BaseComponent = asChild ? Slot : "button";
 
   const Component = () => (
-    <BaseComponent className={buttonStyle({ intent, bg })} {...props}>
+    <BaseComponent className={buttonStyle({ bg, circle })} {...props}>
       {props.children}
     </BaseComponent>
   );
