@@ -4,5 +4,9 @@ const reais = new Intl.NumberFormat('pt-BR', {
 });
 
 export function parseCurrencyToBRL(valueInCents: number) {
-  return reais.format(valueInCents / 100)
+  return reais.format(convertCentsToReais(valueInCents))
+}
+
+export function convertCentsToReais(valueInCents: number) {
+  return valueInCents / 100
 }

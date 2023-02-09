@@ -54,8 +54,10 @@ export default function Services() {
                       <td>{parseDuration(service.duration)}</td>
                       <td>
                         <div className="flex gap-3">
-                          <Button intent="circle" tooltipText="Editar">
-                            <PencilSimple className="w-6 h-6" />
+                          <Button intent="circle" tooltipText="Editar" asChild>
+                            <Link href={`/dashboard/services/${service.id}/edit`}>
+                              <PencilSimple className="w-6 h-6" />
+                            </Link>
                           </Button>
                           <Button intent="circle" bg="danger" tooltipText="Remover">
                             <TrashSimple className="w-6 h-6" />
