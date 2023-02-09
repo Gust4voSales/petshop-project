@@ -1,9 +1,12 @@
 "use client";
 
+import { useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Bag, Calendar, Person } from "phosphor-react";
 import { Header } from "@components/dashboard/Header";
+import { themeChange } from "theme-change";
+import { ThemeSelector } from "@components/dashboard/ThemeSelector";
 
 const ROUTES = [
   {
@@ -26,13 +29,18 @@ const ROUTES = [
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
 
+  useEffect(() => {
+    themeChange(false);
+  }, []);
+
   return (
     <div>
       <Header />
 
-      <div className="drawer drawer-mobile">
+      {/*  h-[calc(100vh-4rem-2px)] --> subtract Header vertical space */}
+      <div className="drawer drawer-mobile h-[calc(100vh-4rem-2px)]">
         <input id="sidebar-drawer" type="checkbox" className="drawer-toggle" />
-        <div className="drawer-content flex ">
+        <div className="drawer-content flex">
           <main className="w-full p-4">{children}</main>
         </div>
 
@@ -41,12 +49,14 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           <ul className="menu p-4 w-60 bg-base-100 text-base-content gap-2">
             {ROUTES.map((route) => (
               <li key={route.name}>
-                <Link href={route.link} className={pathname === route.link ? "active" : ""}>
+                <Link href={route.link} className={pathname?.includes(route.link) ? "active" : ""}>
                   <route.Icon />
                   {route.name}
                 </Link>
               </li>
             ))}
+
+            <ThemeSelector />
           </ul>
         </div>
       </div>
