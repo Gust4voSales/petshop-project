@@ -2,9 +2,9 @@ import { Button } from "@components/ui/Button";
 import { CurrencyInput } from "@components/ui/Form/Inputs/CurrencyInput";
 import { Input } from "@components/ui/Form/Inputs/Input";
 import { TextArea } from "@components/ui/Form/TextArea";
+import { SpinLoading } from "@components/ui/Loading/SpinLoading";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { convertCentsToReais } from "@utils/parseCurrency";
-import { CircleNotch } from "phosphor-react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { PetshopService } from "src/@types/PetshopServices";
 import { z } from "zod";
@@ -19,7 +19,10 @@ const petshopServiceSchema = z.object({
     .number()
     .min(0.01, "Valor mínimo é de 1 centavo")
     .max(100_000_000_000, "Valor máximo é de R$100.000.000.000"),
-  duration: z.coerce.number(),
+  duration: z.coerce
+    .number()
+    .min(1, "Valor mínimo é de 1s")
+    .max(24 * 60 * 60, "Valor máximo é de 86400s (24h)"), // MAX of 86400 seconds (24h) --> 24h * 60min * 60s
 });
 
 export type PetshopServiceFormData = z.infer<typeof petshopServiceSchema>;
@@ -40,7 +43,7 @@ export function ServiceForm(props: Props) {
       title: props.service?.title ?? "",
       description: props.service?.description ?? "",
       value: props.service ? convertCentsToReais(props.service.value) : 0.01,
-      duration: props.service?.duration ?? 0,
+      duration: props.service?.duration ?? 3600,
     },
   });
 
@@ -71,7 +74,7 @@ export function ServiceForm(props: Props) {
         <div>
           <fieldset>
             <Input
-              label="Duração"
+              label="Duração (em segundos)"
               type="number"
               id="duration"
               errorMessage={errors.duration?.message}
@@ -86,7 +89,7 @@ export function ServiceForm(props: Props) {
 
       <div className="mt-4">
         <Button type="submit" bg="submit" disabled={props.isLoading}>
-          {props.isLoading ? <CircleNotch size={24} className="animate-spin" /> : getSubmitButtonText()}
+          {props.isLoading ? <SpinLoading /> : getSubmitButtonText()}
         </Button>
       </div>
     </form>

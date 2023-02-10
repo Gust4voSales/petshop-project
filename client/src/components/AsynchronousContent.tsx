@@ -1,7 +1,7 @@
 import { QueryStatus } from "@tanstack/react-query";
 import { EmptyContent } from "./ui/EmptyContent";
 import { ErrorAlert } from "./ui/ErrorAlert";
-import { Loading } from "./ui/Loading";
+import { FancyLoading } from "./ui/Loading/FancyLoading";
 
 interface Props {
   status: QueryStatus;
@@ -31,7 +31,7 @@ interface Props {
  */
 export function AsynchronousContent({ renderLoading = true, renderError = true, ...props }: Props) {
   if (props.status === "loading") {
-    if (renderLoading) return props.loadingFallback ?? <Loading />;
+    if (renderLoading) return props.loadingFallback ?? <FancyLoading />;
     return null;
   }
 
