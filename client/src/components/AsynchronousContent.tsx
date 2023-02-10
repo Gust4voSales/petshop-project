@@ -13,6 +13,7 @@ interface Props {
 
   errorFallback?: JSX.Element;
   renderError?: boolean;
+  errorMessage?: string;
 }
 
 /**
@@ -35,7 +36,7 @@ export function AsynchronousContent({ renderLoading = true, renderError = true, 
   }
 
   if (props.status === "error") {
-    if (renderError) return props.errorFallback ?? <ErrorAlert />;
+    if (renderError) return props.errorFallback ?? <ErrorAlert text={props.errorMessage} />;
     return null;
   }
 

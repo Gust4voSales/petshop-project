@@ -1,16 +1,21 @@
 "use client";
 
+import { AsynchronousContent } from "@components/AsynchronousContent";
 import { PageTitle } from "@components/dashboard/PageTitle";
 import { PetshopServiceFormData, ServiceForm } from "@components/services/ServiceForm";
-import { PetshopService } from "src/@types/PetshopServices";
+import { fetchPetshopService } from "@services/queries/PetshopServices";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 
 export default function EditService({ params }: { params: { id: string } }) {
-  const mockService: PetshopService = {
-    id: params.id,
-    title: "Banho",
-    description: "Um banho com shampoos de qualidade e muito carinho!",
-    duration: 4000,
-    value: 4000,
+  const petshopServiceShowQuery = useQuery({
+    queryKey: ["petshopService-show", params.id],
+    queryFn: () => fetchPetshopService(params.id),
+  });
+
+  const errorMessage = () => {
+    const error = petshopServiceShowQuery.error;
+    if (axios.isAxiosError(error) && error.response?.status === 404) return "Erro! Serviço não encontrado.";
   };
 
   async function handleEditService(data: PetshopServiceFormData) {
@@ -21,7 +26,9 @@ export default function EditService({ params }: { params: { id: string } }) {
     <div>
       <PageTitle back title="Editar serviço" />
 
-      <ServiceForm service={mockService} onSubmit={handleEditService} isLoading={false} />
+      <AsynchronousContent status={petshopServiceShowQuery.status} errorMessage={errorMessage()}>
+        <ServiceForm service={petshopServiceShowQuery.data?.service} onSubmit={handleEditService} isLoading={false} />
+      </AsynchronousContent>
     </div>
   );
 }

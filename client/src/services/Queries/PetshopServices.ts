@@ -13,6 +13,14 @@ export async function fetchPetshopServices(
   return data;
 }
 
+export async function fetchPetshopService(id: string) {
+  const { data } = await api.get<{ service: PetshopService }>(
+    `/services/${id}`
+  );
+
+  return data;
+}
+
 export async function createPetshopService(petshopService: Omit<PetshopService, 'id'>) {
   await api.post("/services", {
     ...petshopService
