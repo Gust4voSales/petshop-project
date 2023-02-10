@@ -1,4 +1,4 @@
-import { ReactQueryWrapper } from "./ReactQueryWrapper";
+import { ProvidersWrapper } from "./ProvidersWrapper";
 import "./globals.css";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -10,7 +10,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       */}
       <head />
       <body>
-        <ReactQueryWrapper>{children}</ReactQueryWrapper>
+        <ProvidersWrapper>{children}</ProvidersWrapper>
       </body>
     </html>
   );

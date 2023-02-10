@@ -29,6 +29,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.43.1",
+    "react-hot-toast": "^2.4.0",
     "theme-change": "^2.3.0",
     "typescript": "4.9.4",
     "zod": "^3.20.5"

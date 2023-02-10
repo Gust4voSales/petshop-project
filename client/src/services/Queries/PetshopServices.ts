@@ -10,7 +10,11 @@ export async function fetchPetshopServices(
     `/services`
   );
 
-  // throw new Error('vixi')
-  // return { services: [] }
   return data;
+}
+
+export async function createPetshopService(petshopService: Omit<PetshopService, 'id'>) {
+  await api.post("/services", {
+    ...petshopService
+  })
 }

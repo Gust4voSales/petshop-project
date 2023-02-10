@@ -4,6 +4,7 @@ import { Input } from "@components/ui/Form/Inputs/Input";
 import { TextArea } from "@components/ui/Form/TextArea";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { convertCentsToReais } from "@utils/parseCurrency";
+import { CircleNotch } from "phosphor-react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { PetshopService } from "src/@types/PetshopServices";
 import { z } from "zod";
@@ -26,6 +27,7 @@ export type PetshopServiceFormData = z.infer<typeof petshopServiceSchema>;
 interface Props {
   service?: PetshopService;
   onSubmit: (d: PetshopServiceFormData) => Promise<void>;
+  isLoading: boolean;
 }
 export function ServiceForm(props: Props) {
   const {
@@ -42,13 +44,15 @@ export function ServiceForm(props: Props) {
     },
   });
 
-  const handleFormSubmit: SubmitHandler<PetshopServiceFormData> = (data) => {
+  const getSubmitButtonText = () => (props.service ? "Editar" : "Criar");
+
+  const handleFormSubmit: SubmitHandler<PetshopServiceFormData> = async (data) => {
     props.onSubmit(data);
   };
 
   return (
     <form onSubmit={handleSubmit(handleFormSubmit)} className="w-full max-w-2xl mt-4">
-      <div className="flex justify-between w-full [&>div]:w-72 ">
+      <div className="flex justify-between w-full [&>div]:w-72">
         <div>
           <fieldset>
             <Input label="Título" id="title" errorMessage={errors.title?.message} {...register("title")} />
@@ -81,8 +85,8 @@ export function ServiceForm(props: Props) {
       </div>
 
       <div className="mt-4">
-        <Button type="submit" bg="submit">
-          {props.service ? "Editar" : "Criar"}
+        <Button type="submit" bg="submit" disabled={props.isLoading}>
+          {props.isLoading ? <CircleNotch size={24} className="animate-spin" /> : getSubmitButtonText()}
         </Button>
       </div>
     </form>

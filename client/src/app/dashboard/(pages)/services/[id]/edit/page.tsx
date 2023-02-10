@@ -21,7 +21,7 @@ export default function EditService({ params }: { params: { id: string } }) {
     <div>
       <PageTitle back title="Editar serviço" />
 
-      <ServiceForm service={mockService} onSubmit={handleEditService} />
+      <ServiceForm service={mockService} onSubmit={handleEditService} isLoading={false} />
     </div>
   );
 }

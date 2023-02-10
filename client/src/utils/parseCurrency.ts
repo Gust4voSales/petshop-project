@@ -10,3 +10,7 @@ export function parseCurrencyToBRL(valueInCents: number) {
 export function convertCentsToReais(valueInCents: number) {
   return valueInCents / 100
 }
+
+export function convertReaisToCents(valueInReais: number) {
+  return valueInReais * 100
+}
