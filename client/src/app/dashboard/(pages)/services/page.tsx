@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { PageTitle } from "@components/dashboard/PageTitle";
-import { deletePetshopService, fetchPetshopServices } from "@services/queries/PetshopServices";
+import { deletePetshopService, fetchPetshopServices, PETSHOPSERVICE_KEY } from "@services/queries/PetshopServices";
 import { parseCurrencyToBRL } from "@utils/parseCurrency";
 import { parseDuration } from "@utils/parseDuration";
 import { Button } from "@components/ui/Button";
@@ -18,14 +18,15 @@ export default function Services() {
   const queryClient = useQueryClient();
 
   const petshopServicesListQuery = useQuery({
-    queryKey: ["petshopServices-list"],
+    queryKey: [PETSHOPSERVICE_KEY],
     queryFn: fetchPetshopServices,
   });
 
   const petshopServiceDeleteMutation = useMutation({
     mutationFn: (id: string) => deletePetshopService(id),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["petshopServices-list"] });
+      queryClient.invalidateQueries({ queryKey: [PETSHOPSERVICE_KEY] });
+      toast.success("Serviço removido com sucesso!");
     },
     onError: () => {
       toast.error("Ops. Ocorreu um problema ao tentar remover o serviço.");

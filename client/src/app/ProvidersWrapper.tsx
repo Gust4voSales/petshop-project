@@ -13,6 +13,12 @@ export function ProvidersWrapper({ children }: { children: React.ReactNode }) {
         position="top-right"
         toastOptions={{
           className: "bg-base-300 text-base-content",
+          success: {
+            iconTheme: {
+              primary: "hsl(var(--su))",
+              secondary: "hsl(var(--suc))",
+            },
+          },
           error: {
             iconTheme: {
               primary: "hsl(var(--er))",

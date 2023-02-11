@@ -3,7 +3,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { PageTitle } from "@components/dashboard/PageTitle";
 import { PetshopServiceFormData, ServiceForm } from "@components/services/ServiceForm";
-import { createPetshopService } from "@services/queries/PetshopServices";
+import { createPetshopService, PETSHOPSERVICE_KEY } from "@services/queries/PetshopServices";
 import { convertReaisToCents } from "@utils/parseCurrency";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
@@ -15,7 +15,8 @@ export default function NewService() {
   const createPetshopServiceMutation = useMutation({
     mutationFn: (data: PetshopServiceFormData) => createPetshopService(data),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["petshopServices-list"] });
+      queryClient.invalidateQueries({ queryKey: [PETSHOPSERVICE_KEY] });
+      toast.success("Serviço criado com sucesso!");
       router.push("/dashboard/services");
     },
     onError: (err) => {
