@@ -16,6 +16,17 @@ export class PrismaPetshopServiceRepository implements PetshopServiceRepository 
     })
   }
 
+  async save(petshopService: PetshopService): Promise<void> {
+    const raw = PetshopServiceMapper.toPrisma(petshopService)
+
+    await this.prismaService.petshopService.update({
+      where: {
+        id: petshopService.id
+      },
+      data: raw
+    })
+  }
+
   async findById(id: string): Promise<PetshopService> {
     const service = await this.prismaService.petshopService.findUnique({
       where: {
