@@ -1,21 +1,35 @@
 "use client";
 
-import { useQuery } from "@tanstack/react-query";
+import Link from "next/link";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { PageTitle } from "@components/dashboard/PageTitle";
-import { fetchPetshopServices } from "@services/queries/PetshopServices";
+import { deletePetshopService, fetchPetshopServices } from "@services/queries/PetshopServices";
 import { parseCurrencyToBRL } from "@utils/parseCurrency";
 import { parseDuration } from "@utils/parseDuration";
 import { Button } from "@components/ui/Button";
 import { ScrollArea } from "@components/ui/ScrollArea";
-import { PencilSimple, TrashSimple } from "phosphor-react";
+import { PencilSimple } from "phosphor-react";
 import { TooltipDescription } from "@components/services/TooltipDescription";
 import { AsynchronousContent } from "@components/AsynchronousContent";
-import Link from "next/link";
+import { toast } from "react-hot-toast";
+import { ConfirmDeletePopover } from "@components/ConfirmDeletePopover";
 
 export default function Services() {
+  const queryClient = useQueryClient();
+
   const petshopServicesListQuery = useQuery({
     queryKey: ["petshopServices-list"],
     queryFn: fetchPetshopServices,
+  });
+
+  const petshopServiceDeleteMutation = useMutation({
+    mutationFn: (id: string) => deletePetshopService(id),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["petshopServices-list"] });
+    },
+    onError: () => {
+      toast.error("Ops. Ocorreu um problema ao tentar remover o serviço.");
+    },
   });
 
   return (
@@ -59,9 +73,12 @@ export default function Services() {
                               <PencilSimple className="w-6 h-6" />
                             </Link>
                           </Button>
-                          <Button circle bg="danger" tooltipText="Remover">
-                            <TrashSimple className="w-6 h-6" />
-                          </Button>
+
+                          <ConfirmDeletePopover
+                            onConfirmDelete={() => {
+                              petshopServiceDeleteMutation.mutate(service.id);
+                            }}
+                          />
                         </div>
                       </td>
                     </tr>

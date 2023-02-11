@@ -26,3 +26,7 @@ export async function createPetshopService(petshopService: Omit<PetshopService, 
     ...petshopService
   })
 }
+
+export async function deletePetshopService(id: string) {
+  await api.delete(`/services/${id}`)
+}

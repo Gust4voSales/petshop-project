@@ -10,7 +10,7 @@ export function parseDuration(durationInSeconds: number) {
   let parsedString = ''
 
   // if there are minutes --> parse minutes 
-  if (duration.minutes() > 0) {
+  if (duration.minutes() > 0 || duration.hours() > 0) {
     parsedString = `${Math.floor(duration.asMinutes())}min`
     if (duration.seconds() > 0) { // if there are seconds --> parse seconds 
       parsedString += ` e ${duration.seconds()}s`
