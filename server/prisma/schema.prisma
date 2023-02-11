@@ -45,9 +45,9 @@ model Pet {
 model Appointment {
   id              String   @id
   petId           String
-  serviceId       String
+  serviceId       String?
   appointmentTime DateTime
 
-  pet     Pet            @relation(fields: [petId], references: [id])
-  service PetshopService @relation(fields: [serviceId], references: [id])
+  pet     Pet             @relation(fields: [petId], references: [id])
+  service PetshopService? @relation(fields: [serviceId], references: [id], onDelete: SetNull)
 }

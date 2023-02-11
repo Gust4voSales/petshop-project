@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, Put } from "@nestjs/common";
+import { Body, Controller, Get, Param, Post, Put, Delete } from "@nestjs/common";
 import { CreatePetshopService } from "@app/use-cases/petshop-service/create-petshop-service";
 import { ListPetshopServices } from "@app/use-cases/petshop-service/list-petshop-services";
 import { PetshopServiceViewModel } from "../view-models/petshop-service-view-model";
@@ -6,6 +6,7 @@ import { CreatePetshopServiceBody } from "./dtos/create-petshop-service-body";
 import { ShowPetshopService } from "@app/use-cases/petshop-service/show-petshop-service";
 import { EditPetshopService } from "@app/use-cases/petshop-service/edit-petshop-service";
 import { UpdatePetshopServiceBody } from "./dtos/update-petshop-service-body";
+import { DeletePetshopService } from "@app/use-cases/petshop-service/delete-petshop-service";
 
 @Controller("services")
 export class PetshopServicesController {
@@ -14,6 +15,7 @@ export class PetshopServicesController {
     private createPetshopService: CreatePetshopService,
     private showPetshopService: ShowPetshopService,
     private editPetshopService: EditPetshopService,
+    private deletePetshopService: DeletePetshopService,
   ) { }
 
   @Get()
@@ -42,5 +44,10 @@ export class PetshopServicesController {
     const { petshopService } = await this.editPetshopService.execute({ id, body })
 
     return { service: PetshopServiceViewModel.toHTTP(petshopService) }
+  }
+
+  @Delete(":id")
+  async destroy(@Param("id") id: string) {
+    await this.deletePetshopService.execute(id)
   }
 } 

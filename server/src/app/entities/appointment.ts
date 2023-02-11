@@ -2,7 +2,7 @@ import { randomUUID } from "node:crypto"
 
 interface AppointmentProps {
   petId: string
-  serviceId: string
+  serviceId: string | null
   appointmentTime: Date
 }
 

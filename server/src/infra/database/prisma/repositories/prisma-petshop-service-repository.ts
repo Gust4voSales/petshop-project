@@ -44,4 +44,12 @@ export class PrismaPetshopServiceRepository implements PetshopServiceRepository 
     return petshopServices.map(PetshopServiceMapper.toDomain)
   }
 
+  async deleteById(id: string): Promise<void> {
+    await this.prismaService.petshopService.delete({
+      where: {
+        id,
+      }
+    })
+  }
+
 }

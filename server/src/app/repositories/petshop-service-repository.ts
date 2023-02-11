@@ -5,4 +5,5 @@ export abstract class PetshopServiceRepository {
   abstract save(petshopService: PetshopService): Promise<void>;
   abstract findById(id: string): Promise<PetshopService | null>;
   abstract findMany(): Promise<PetshopService[]>;
+  abstract deleteById(id: string): Promise<void>;
 }

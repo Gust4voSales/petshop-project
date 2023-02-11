@@ -5,10 +5,11 @@ import { ShowPetshopService } from "@app/use-cases/petshop-service/show-petshop-
 import { DatabaseModule } from "@infra/database/database.module";
 import { PetshopServicesController } from "./petshop-services.controller";
 import { EditPetshopService } from "@app/use-cases/petshop-service/edit-petshop-service";
+import { DeletePetshopService } from "@app/use-cases/petshop-service/delete-petshop-service";
 
 @Module({
   imports: [DatabaseModule],
   controllers: [PetshopServicesController],
-  providers: [CreatePetshopService, ListPetshopServices, ShowPetshopService, EditPetshopService],
+  providers: [CreatePetshopService, ListPetshopServices, ShowPetshopService, EditPetshopService, DeletePetshopService],
 })
 export class PetshopServiceModule { }
