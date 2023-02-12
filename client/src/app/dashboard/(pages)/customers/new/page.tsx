@@ -29,7 +29,7 @@ export default function NewCustomer() {
 
   return (
     <div>
-      <PageTitle back title="Novo cliente" />
+      <PageTitle back="/dashboard/customers" title="Novo cliente" />
 
       <CustomersForm onSubmit={handleCreateCustomer} isLoading={createCustomerMutation.isLoading} />
     </div>
