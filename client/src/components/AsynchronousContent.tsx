@@ -26,6 +26,7 @@ interface Props {
  * @param loadingFallback Optional parameter. Custom Loading component
  * @param renderError Optional parameter. Whether it should render the Error component if status='error'. Defaults to true
  * @param errorFallback Optional parameter. Custom Error component
+ * @param errorFallback Optional parameter. Custom error message to be passed to the Default error component
  *
  * @returns A component based on the possible status
  */

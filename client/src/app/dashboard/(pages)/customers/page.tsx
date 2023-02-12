@@ -6,6 +6,7 @@ import { Button } from "@components/ui/Button";
 import { ScrollArea } from "@radix-ui/react-scroll-area";
 import { fetchCustomers } from "@services/queries/Customer";
 import { useQuery } from "@tanstack/react-query";
+import Link from "next/link";
 import { PencilSimple, TrashSimple } from "phosphor-react";
 
 export default function Customers() {
@@ -64,7 +65,9 @@ export default function Customers() {
         </AsynchronousContent>
       </div>
 
-      <Button bg="accent">Novo cliente</Button>
+      <Button bg="accent" asChild>
+        <Link href={"/dashboard/customers/new"}>Novo cliente</Link>
+      </Button>
     </div>
   );
 }
