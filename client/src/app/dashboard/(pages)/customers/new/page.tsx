@@ -13,10 +13,10 @@ export default function NewCustomer() {
 
   const createCustomerMutation = useMutation({
     mutationFn: (d: CustomerFormData) => createCustomer(d),
-    onSuccess: () => {
+    onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: [CUSTOMER_KEY] });
       toast.success("Cliente criado com sucesso!");
-      router.push("/dashboard/customers");
+      router.push(`/dashboard/customers/${data.customer.id}/edit`);
     },
     onError: () => {
       toast.error("Ops. Ocorreu um problema ao tentar criar o cliente.");

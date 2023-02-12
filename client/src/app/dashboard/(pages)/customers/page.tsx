@@ -48,8 +48,10 @@ export default function Customers() {
                       <td>{customer.pets.length}</td>
                       <td>
                         <div className="flex gap-3">
-                          <Button circle tooltipText="Editar">
-                            <PencilSimple className="w-6 h-6" />
+                          <Button circle tooltipText="Editar" asChild>
+                            <Link href={`/dashboard/customers/${customer.id}/edit`}>
+                              <PencilSimple className="w-6 h-6" />
+                            </Link>
                           </Button>
                           <Button circle bg="danger" tooltipText="Remover">
                             <TrashSimple className="w-6 h-6" />

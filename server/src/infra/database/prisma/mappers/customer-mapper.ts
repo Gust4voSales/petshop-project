@@ -13,7 +13,6 @@ export class CustomerMapper {
       id: customer.id,
       name: customer.name,
       phone: customer.phone,
-      pets: customer.pets
     }
   }
 

@@ -8,15 +8,6 @@ import { PrismaService } from "../prisma.service";
 export class PrismaCustomerRepository implements CustomerRepository {
   constructor(private prismaService: PrismaService) { }
 
-  async create(customer: Customer) {
-    await this.prismaService.customer.create({
-      data: {
-        id: customer.id,
-        name: customer.name,
-        phone: customer.phone,
-      }
-    })
-  }
 
   async findById(id: string): Promise<Customer | null> {
     const customer = await this.prismaService.customer.findUnique({
@@ -35,6 +26,25 @@ export class PrismaCustomerRepository implements CustomerRepository {
     const customers = await this.prismaService.customer.findMany({ include: { pets: true } })
 
     return customers.map(CustomerMapper.toDomain)
+  }
+
+  async create(customer: Customer) {
+    const raw = CustomerMapper.toPrisma(customer)
+
+    await this.prismaService.customer.create({
+      data: raw
+    })
+  }
+
+  async save(customer: Customer): Promise<void> {
+    const raw = CustomerMapper.toPrisma(customer)
+
+    await this.prismaService.customer.update({
+      where: {
+        id: customer.id
+      },
+      data: raw
+    })
   }
 
 }

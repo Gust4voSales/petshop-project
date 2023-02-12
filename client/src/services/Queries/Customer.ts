@@ -15,9 +15,23 @@ export async function fetchCustomers(
   return data;
 }
 
+export async function fetchCustomer(id: string) {
+  const { data } = await api.get<{ customer: Customer }>(
+    `/customers/${id}`
+  );
+
+  return data;
+}
 
 export async function createCustomer(customer: Omit<Customer, 'id' | 'pets'>) {
-  await api.post("/customers", {
+  const { data } = await api.post<{ customer: Customer }>("/customers", {
+    ...customer
+  })
+  return data
+}
+
+export async function updateCustomer(id: string, customer: Omit<Customer, 'id' | 'pets'>) {
+  await api.put(`/customers/${id}`, {
     ...customer
   })
 }
