@@ -48,7 +48,7 @@ export default function EditService({ params }: { params: { id: string } }) {
 
   return (
     <div>
-      <PageTitle back title="Editar serviço" />
+      <PageTitle back="/dashboard/services" title="Editar serviço" />
 
       <AsynchronousContent status={petshopServiceShowQuery.status} errorMessage={showPetshopServiceErrorMessage()}>
         <ServiceForm

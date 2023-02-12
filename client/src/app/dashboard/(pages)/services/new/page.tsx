@@ -35,7 +35,7 @@ export default function NewService() {
 
   return (
     <div>
-      <PageTitle back title="Novo serviço" />
+      <PageTitle back="/dashboard/services" title="Novo serviço" />
 
       <ServiceForm onSubmit={handleCreateService} isLoading={createPetshopServiceMutation.isLoading} />
     </div>

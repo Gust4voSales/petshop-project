@@ -3,7 +3,7 @@
 import { AsynchronousContent } from "@components/AsynchronousContent";
 import { PageTitle } from "@components/dashboard/PageTitle";
 import { Button } from "@components/ui/Button";
-import { ScrollArea } from "@radix-ui/react-scroll-area";
+import { ScrollArea } from "@components/ui/ScrollArea";
 import { fetchCustomers } from "@services/queries/Customer";
 import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
