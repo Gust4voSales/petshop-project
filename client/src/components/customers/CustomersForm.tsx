@@ -41,15 +41,18 @@ export function CustomersForm(props: Props) {
   const getSubmitButtonText = () => (props.customer ? "Editar" : "Criar");
 
   return (
-    <form onSubmit={handleSubmit(props.onSubmit)} className="w-full max-w-xs mt-4">
-      <fieldset>
-        <Input label="Nome" id="name" errorMessage={errors.name?.message} {...register("name")} />
-      </fieldset>
-      <fieldset>
-        <Input label="Celular" id="phone" type="tel" errorMessage={errors.phone?.message} {...register("phone")} />
-      </fieldset>
+    <form onSubmit={handleSubmit(props.onSubmit)} className="flex items-center w-full mt-4 gap-4 flex-wrap">
+      {/* xs:flex-col xs:items-start */}
+      <div className="flex gap-2 flex-wrap">
+        <fieldset>
+          <Input label="Nome" id="name" errorMessage={errors.name?.message} {...register("name")} />
+        </fieldset>
+        <fieldset>
+          <Input label="Celular" id="phone" type="tel" errorMessage={errors.phone?.message} {...register("phone")} />
+        </fieldset>
+      </div>
 
-      <div className="mt-4">
+      <div>
         <Button type="submit" bg="submit" disabled={props.isLoading}>
           {props.isLoading ? <SpinLoading /> : getSubmitButtonText()}
         </Button>

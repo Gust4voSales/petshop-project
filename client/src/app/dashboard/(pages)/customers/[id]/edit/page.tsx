@@ -50,6 +50,8 @@ export default function EditCustomer({ params }: { params: { id: string } }) {
           onSubmit={handleEditCustomer}
           isLoading={editCustomerMutation.isLoading}
         />
+
+        <div className="mt-4">PETS</div>
       </AsynchronousContent>
     </div>
   );

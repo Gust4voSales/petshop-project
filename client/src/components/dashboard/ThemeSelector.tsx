@@ -21,7 +21,7 @@ const THEMES = [
 
 export function ThemeSelector() {
   return (
-    <li className="mt-auto dropdown dropdown-top p-0" tabIndex={0}>
+    <li className="dropdown dropdown-bottom p-0" tabIndex={0}>
       <label>
         <PaintRoller size={24} />
         Tema
@@ -38,7 +38,7 @@ export function ThemeSelector() {
           >
             <div
               data-theme={theme.theme}
-              className="justify-between bg-base-100 text-base-content w-full cursor-pointer font-sans"
+              className="justify-between bg-base-100 text-base-content w-full cursor-pointer font-sans hover:bg-base-100"
             >
               <span>{theme.label}</span>
 

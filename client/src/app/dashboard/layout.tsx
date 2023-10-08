@@ -38,7 +38,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       <Header />
 
       {/*  h-[calc(100vh-4rem-2px)] --> subtract Header vertical space */}
-      <div className="drawer drawer-mobile h-[calc(100vh-4rem-2px)]">
+      <div className="drawer drawer-mobile lg:drawer-open h-[calc(100vh-4rem-2px)]">
         <input id="sidebar-drawer" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content flex">
           <main className="w-full p-4">{children}</main>
@@ -46,7 +46,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
         <div className="drawer-side border-r-2">
           <label htmlFor="sidebar-drawer" className="drawer-overlay"></label>
-          <ul className="menu p-4 w-60 bg-base-100 text-base-content gap-2">
+          <ul className="menu p-4 w-60 h-full bg-base-100 text-base-content gap-2">
             {ROUTES.map((route) => (
               <li key={route.name}>
                 <Link href={route.link} className={pathname?.includes(route.link) ? "active" : ""}>
@@ -55,7 +55,6 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                 </Link>
               </li>
             ))}
-
             <ThemeSelector />
           </ul>
         </div>

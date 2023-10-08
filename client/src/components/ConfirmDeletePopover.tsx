@@ -20,9 +20,9 @@ export function ConfirmDeletePopover(props: Props) {
         >
           <span>Tem certeza que deseja deletar o item permanentemente?</span>
           <div className="flex items-center justify-between">
-            <Popover.Close className="btn w-32 px-0 ">Cancelar</Popover.Close>
+            <Popover.Close className="btn btn-outline w-32 px-0 ">Cancelar</Popover.Close>
 
-            <Popover.Close onClick={props.onConfirmDelete} className="btn  btn-outline btn-error w-32 px-0">
+            <Popover.Close onClick={props.onConfirmDelete} className="btn btn-outline btn-error w-32 px-0">
               Deletar
             </Popover.Close>
           </div>
