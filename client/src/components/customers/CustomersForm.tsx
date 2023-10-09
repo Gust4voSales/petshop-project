@@ -53,8 +53,8 @@ export function CustomersForm(props: Props) {
       </div>
 
       <div>
-        <Button type="submit" bg="submit" disabled={props.isLoading}>
-          {props.isLoading ? <SpinLoading /> : getSubmitButtonText()}
+        <Button type="submit" bg="submit" isLoading={props.isLoading}>
+          {getSubmitButtonText()}
         </Button>
       </div>
     </form>

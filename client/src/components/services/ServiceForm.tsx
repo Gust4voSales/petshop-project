@@ -88,8 +88,8 @@ export function ServiceForm(props: Props) {
       </div>
 
       <div className="mt-4">
-        <Button type="submit" bg="submit" disabled={props.isLoading}>
-          {props.isLoading ? <SpinLoading /> : getSubmitButtonText()}
+        <Button type="submit" bg="submit" isLoading={props.isLoading}>
+          {getSubmitButtonText()}
         </Button>
       </div>
     </form>
