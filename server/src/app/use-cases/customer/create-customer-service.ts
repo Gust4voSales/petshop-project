@@ -1,12 +1,11 @@
-import { Customer } from "@app/entities/customer";
-import { Pet } from "@app/entities/pet";
+import { Customer, CustomerPet } from "@app/entities/customer";
 import { CustomerRepository } from "@app/repositories/customer-repository";
 import { Injectable } from "@nestjs/common";
 
 interface CreateCustomerRequest {
   name: string
   phone: string
-  pets?: Pet[]
+  pets?: CustomerPet[]
 }
 
 @Injectable()

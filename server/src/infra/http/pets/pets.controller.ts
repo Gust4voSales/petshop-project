@@ -1,4 +1,4 @@
-import { Controller, Body, Post, Get, Param } from "@nestjs/common"
+import { Controller, Body, Post, Get, Param, ValidationPipe } from "@nestjs/common"
 import { AddPetService } from "@app/use-cases/pets/add-pet-service"
 import { ListCustomerPetsService } from "@app/use-cases/pets/list-customer-pets-service"
 import { PetViewModel } from "../view-models/pet-view-model"
@@ -17,6 +17,8 @@ export class PetsController {
 
   @Post()
   async create(@Body() body: CreatePetBody) {
-    await this.addPetService.execute(body)
+    const { pet } = await this.addPetService.execute(body)
+
+    return { pet: PetViewModel.toHTTP(pet) }
   }
 } 

@@ -2,10 +2,15 @@ import { randomUUID } from "node:crypto"
 import { Pet } from "./pet"
 
 
-export interface CustomerProps {
+export interface CustomerPet extends Omit<Pet, 'id' | 'ownerId'> {
+  id?: string,
+  ownerId?: string
+}
+
+interface CustomerProps {
   name: string
   phone: string
-  pets: Pet[]
+  pets: Pet[] | CustomerPet[]
 }
 
 export class Customer {
@@ -13,10 +18,15 @@ export class Customer {
   private props: CustomerProps
 
   constructor(props: CustomerProps, id?: string) {
-    this.props = props
     this._id = id ?? randomUUID()
-  }
 
+    const customerPets = props.pets.map(pet => {
+      if (pet.id) return pet as Pet
+
+      return new Pet({ ...pet as CustomerPet, ownerId: this._id })
+    })
+    this.props = { ...props, pets: customerPets }
+  }
 
   public get id() {
     return this._id
@@ -39,7 +49,7 @@ export class Customer {
   }
 
   public get pets() {
-    return this.props.pets
+    return this.props.pets as Pet[]
   }
 
   public set pets(pets: Pet[]) {

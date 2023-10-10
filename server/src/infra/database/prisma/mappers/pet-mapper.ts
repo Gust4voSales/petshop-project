@@ -2,13 +2,13 @@ import { Pet } from "@app/entities/pet"
 import { Pet as RawPet } from '@prisma/client'
 
 export class PetMapper {
-  static toPrisma(pet: Pet) {
+  static toPrisma(pet: Pet, includeOwnerId: boolean | undefined = true) {
     return {
       id: pet.id,
       name: pet.name,
       breed: pet.breed,
       age: pet.age,
-      ownerId: pet.ownerId
+      ownerId: includeOwnerId ? pet.ownerId : undefined
     }
   }
 

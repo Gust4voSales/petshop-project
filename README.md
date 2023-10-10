@@ -1,6 +1,6 @@
 ## TODO
 
-1. Finish refactoring tables (Parent container with fixed height, async content)
+1. ✅ Finish refactoring tables (Parent container with fixed height, async content)
 2. Create user with array of pets
 3. Schedule appointments (no restriction)
 4. List appoiments

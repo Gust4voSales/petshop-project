@@ -3,11 +3,11 @@ import { CustomerRepository } from "@app/repositories/customer-repository";
 import { Injectable } from "@nestjs/common";
 import { CustomerMapper } from "../mappers/customer-mapper";
 import { PrismaService } from "../prisma.service";
+import { PetMapper } from "../mappers/pet-mapper";
 
 @Injectable()
 export class PrismaCustomerRepository implements CustomerRepository {
   constructor(private prismaService: PrismaService) { }
-
 
   async findById(id: string): Promise<Customer | null> {
     const customer = await this.prismaService.customer.findUnique({
@@ -30,9 +30,16 @@ export class PrismaCustomerRepository implements CustomerRepository {
 
   async create(customer: Customer) {
     const raw = CustomerMapper.toPrisma(customer)
+    const rawCustomerPets = customer.pets.map(p => PetMapper.toPrisma(p, false))
 
     await this.prismaService.customer.create({
-      data: raw
+      data: {
+        ...raw, pets: {
+          createMany: {
+            data: rawCustomerPets
+          }
+        }
+      },
     })
   }
 

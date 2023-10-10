@@ -2,7 +2,7 @@ import { CreateCustomerService } from "@app/use-cases/customer/create-customer-s
 import { EditCustomerService } from "@app/use-cases/customer/edit-customer-service";
 import { ListCustomersService } from "@app/use-cases/customer/list-customers-service";
 import { ShowCustomerService } from "@app/use-cases/customer/show-customer-service";
-import { Controller, Body, Post, Get, Put, Param } from "@nestjs/common"
+import { Controller, Body, Post, Get, Put, Param, ValidationPipe } from "@nestjs/common"
 import { CustomerViewModel } from "../view-models/customer-view-model";
 import { CreateCustomerBody } from "./dtos/create-customer-body";
 import { UpdateCustomerBody } from "./dtos/update-customer-body";
