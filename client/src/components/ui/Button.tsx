@@ -18,6 +18,9 @@ const buttonStyle = cva("btn cursor-pointer", {
     circle: {
       true: "btn-circle",
     },
+    outline: {
+      true: "btn-outline",
+    },
   },
 });
 
@@ -29,11 +32,20 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<ty
   isLoading?: boolean;
 }
 
-export function Button({ bg, circle, asChild, tooltipText, tooltipBottom, isLoading = false, ...props }: Props) {
+export function Button({
+  bg,
+  circle,
+  outline,
+  asChild,
+  tooltipText,
+  tooltipBottom,
+  isLoading = false,
+  ...props
+}: Props) {
   const BaseComponent = asChild && !isLoading ? Slot : "button";
 
   const Component = () => (
-    <BaseComponent className={buttonStyle({ bg, circle })} {...props} disabled={isLoading}>
+    <BaseComponent className={buttonStyle({ bg, circle, outline })} {...props} disabled={isLoading}>
       {isLoading ? <SpinLoading /> : props.children}
     </BaseComponent>
   );

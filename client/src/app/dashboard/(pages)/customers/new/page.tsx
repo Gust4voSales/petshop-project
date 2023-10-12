@@ -1,6 +1,6 @@
 "use client";
 
-import { CustomerFormData, CustomersForm } from "@components/customers/CustomersForm";
+import { CreateCustomerFormData, CreateCustomersForm } from "@components/customers/CreateCustomersForm";
 import { PageTitle } from "@components/dashboard/PageTitle";
 import { createCustomer, CUSTOMER_KEY } from "@services/queries/Customer";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -12,7 +12,7 @@ export default function NewCustomer() {
   const queryClient = useQueryClient();
 
   const createCustomerMutation = useMutation({
-    mutationFn: (d: CustomerFormData) => createCustomer(d),
+    mutationFn: (d: CreateCustomerFormData) => createCustomer(d),
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: [CUSTOMER_KEY] });
       toast.success("Cliente criado com sucesso!");
@@ -23,7 +23,7 @@ export default function NewCustomer() {
     },
   });
 
-  async function handleCreateCustomer(data: CustomerFormData) {
+  async function handleCreateCustomer(data: CreateCustomerFormData) {
     createCustomerMutation.mutate(data);
   }
 
@@ -31,7 +31,7 @@ export default function NewCustomer() {
     <div>
       <PageTitle back="/dashboard/customers" title="Novo cliente" />
 
-      <CustomersForm onSubmit={handleCreateCustomer} isLoading={createCustomerMutation.isLoading} />
+      <CreateCustomersForm onSubmit={handleCreateCustomer} isLoading={createCustomerMutation.isLoading} />
     </div>
   );
 }

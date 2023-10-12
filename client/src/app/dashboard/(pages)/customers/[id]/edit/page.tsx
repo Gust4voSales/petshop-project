@@ -1,7 +1,7 @@
 "use client";
 
 import { AsynchronousContent } from "@components/AsynchronousContent";
-import { CustomerFormData, CustomersForm } from "@components/customers/CustomersForm";
+import { CreateCustomerFormData, CreateCustomersForm } from "@components/customers/CreateCustomersForm";
 import { PageTitle } from "@components/dashboard/PageTitle";
 import { CUSTOMER_KEY, fetchCustomer, updateCustomer } from "@services/queries/Customer";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -10,7 +10,7 @@ import { toast } from "react-hot-toast";
 
 interface EditCustomerMutationPayload {
   id: string;
-  data: CustomerFormData;
+  data: CreateCustomerFormData;
 }
 export default function EditCustomer({ params }: { params: { id: string } }) {
   const queryClient = useQueryClient();
@@ -36,7 +36,7 @@ export default function EditCustomer({ params }: { params: { id: string } }) {
     if (axios.isAxiosError(error) && error.response?.status === 404) return "Erro! Cliente não encontrado.";
   };
 
-  async function handleEditCustomer(data: CustomerFormData) {
+  async function handleEditCustomer(data: CreateCustomerFormData) {
     editCustomerMutation.mutate({ id: params.id, data });
   }
 
@@ -45,13 +45,14 @@ export default function EditCustomer({ params }: { params: { id: string } }) {
       <PageTitle back="/dashboard/customers" title="Editar cliente" />
 
       <AsynchronousContent status={customerShowQuery.status} errorMessage={showCustomerErrorMessage()}>
-        <CustomersForm
-          customer={customerShowQuery.data?.customer}
-          onSubmit={handleEditCustomer}
-          isLoading={editCustomerMutation.isLoading}
-        />
-
-        <div className="mt-4">PETS</div>
+        {customerShowQuery.data?.customer.name}
+        {customerShowQuery.data?.customer.phone}
+        <div className="mt-4">
+          PETS
+          {customerShowQuery.data?.customer.pets.map((p) => (
+            <li key={p.id}>{JSON.stringify(p)}</li>
+          ))}
+        </div>
       </AsynchronousContent>
     </div>
   );
