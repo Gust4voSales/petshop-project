@@ -3,7 +3,7 @@ import { Label } from "../Label";
 import { inputStyle, Props } from "./InputTypes";
 
 export const CurrencyInputComponent = (
-  { errorMessage, ...props }: Props,
+  { errorMessage, ...props }: Props<HTMLInputElement>,
   ref: React.ForwardedRef<HTMLInputElement>
 ) => {
   return (

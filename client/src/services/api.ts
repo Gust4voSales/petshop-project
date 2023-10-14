@@ -5,12 +5,12 @@ const api = axios.create({
 });
 
 // get the response data and wait 3 seconds before returning - DEBUG purposes + disable Query caching
-// api.interceptors.response.use(response => {
-//   return new Promise((resolve, reject) => {
-//     setTimeout(() => {
-//       resolve(response);
-//     }, 1500);
-//   });
-// })
+api.interceptors.response.use(response => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve(response);
+    }, 1000);
+  });
+})
 
 export default api;

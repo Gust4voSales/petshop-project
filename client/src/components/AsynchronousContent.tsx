@@ -5,7 +5,7 @@ import { FancyLoading } from "./ui/Loading/FancyLoading";
 
 interface Props {
   status: QueryStatus;
-  children: React.ReactNode;
+  children: (() => React.ReactNode) | React.ReactNode;
   emptyContent?: JSX.Element | boolean;
 
   loadingFallback?: JSX.Element;
@@ -49,5 +49,5 @@ export function AsynchronousContent({ renderLoading = true, renderError = true, 
     return props.emptyContent;
   }
 
-  return <>{props.children}</>;
+  return <>{typeof props.children === "function" ? props.children() : props.children}</>;
 }

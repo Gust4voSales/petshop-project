@@ -10,7 +10,7 @@ export const inputStyle = cva("input input-bordered w-full", {
 });
 
 // interface Props extends InputHTMLAttributes<HTMLInputElement>, VariantProps<typeof inputStyle> {
-export interface Props extends InputHTMLAttributes<HTMLInputElement> {
+export interface Props<T> extends InputHTMLAttributes<T> {
   label?: string;
   errorMessage?: string;
 }

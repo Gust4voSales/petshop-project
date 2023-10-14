@@ -4,7 +4,6 @@ import { ScrollArea } from "@components/ui/ScrollArea";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Plus, X } from "phosphor-react";
 import { useFieldArray, useForm } from "react-hook-form";
-import { Customer } from "src/@types/Customer";
 import { z } from "zod";
 
 const customerSchema = z.object({
@@ -35,11 +34,10 @@ const customerSchema = z.object({
 export type CreateCustomerFormData = z.infer<typeof customerSchema>;
 
 interface Props {
-  customer?: Customer;
   onSubmit: (d: CreateCustomerFormData) => Promise<void>;
   isLoading: boolean;
 }
-export function CreateCustomersForm(props: Props) {
+export function CreateCustomerForm(props: Props) {
   const {
     control,
     register,
@@ -48,8 +46,8 @@ export function CreateCustomersForm(props: Props) {
   } = useForm<CreateCustomerFormData>({
     resolver: zodResolver(customerSchema),
     defaultValues: {
-      name: props.customer?.name ?? "",
-      phone: props.customer?.phone ?? "",
+      name: "",
+      phone: "",
       pets: [],
     },
   });
@@ -65,8 +63,6 @@ export function CreateCustomersForm(props: Props) {
       age: 0,
     });
   }
-
-  const getSubmitButtonText = () => (props.customer ? "Editar" : "Criar");
 
   return (
     <form onSubmit={handleSubmit(props.onSubmit)} className="flex flex-col w-full mt-4 gap-4 flex-wrap">
@@ -137,7 +133,7 @@ export function CreateCustomersForm(props: Props) {
 
       <div>
         <Button type="submit" bg="submit" isLoading={props.isLoading}>
-          {getSubmitButtonText()}
+          Criar
         </Button>
       </div>
     </form>

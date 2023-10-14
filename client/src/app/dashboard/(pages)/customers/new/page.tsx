@@ -1,6 +1,6 @@
 "use client";
 
-import { CreateCustomerFormData, CreateCustomersForm } from "@components/customers/CreateCustomersForm";
+import { CreateCustomerFormData, CreateCustomerForm } from "@components/customers/CreateCustomerForm";
 import { PageTitle } from "@components/dashboard/PageTitle";
 import { createCustomer, CUSTOMER_KEY } from "@services/queries/Customer";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -31,7 +31,7 @@ export default function NewCustomer() {
     <div>
       <PageTitle back="/dashboard/customers" title="Novo cliente" />
 
-      <CreateCustomersForm onSubmit={handleCreateCustomer} isLoading={createCustomerMutation.isLoading} />
+      <CreateCustomerForm onSubmit={handleCreateCustomer} isLoading={createCustomerMutation.isLoading} />
     </div>
   );
 }

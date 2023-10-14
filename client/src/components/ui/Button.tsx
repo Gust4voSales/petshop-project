@@ -45,7 +45,7 @@ export function Button({
   const BaseComponent = asChild && !isLoading ? Slot : "button";
 
   const Component = () => (
-    <BaseComponent className={buttonStyle({ bg, circle, outline })} {...props} disabled={isLoading}>
+    <BaseComponent className={buttonStyle({ bg, circle, outline })} {...props} disabled={isLoading || props.disabled}>
       {isLoading ? <SpinLoading /> : props.children}
     </BaseComponent>
   );

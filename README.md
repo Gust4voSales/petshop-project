@@ -3,7 +3,7 @@
 1. ✅ Finish refactoring tables (Parent container with fixed height, async content)
 2. ✅ Create user with array of pets - Backend
 3. ✅ Create user with array of pets - Frontend
-4. Show Users array of pets - Frontend
+4. ✅ Show Users array of pets - Frontend
 5. Schedule appointments (no restriction) - Frontend
 6. List appoiments
    1. [ ] List appointments today's appointments
