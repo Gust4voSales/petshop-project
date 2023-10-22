@@ -2,6 +2,8 @@ import { Customer } from 'src/@types/Customer';
 import api from '../api'
 import { CreateCustomerFormData } from '@components/customers/CreateCustomerForm';
 import { EditCustomerFormData } from '@components/customers/EditCustomerForm';
+import { PetFormData } from '@components/customers/pets/PetForm';
+import { Pet } from '@@types/Pet';
 
 export const CUSTOMER_KEY = 'customer-fetch'
 
@@ -33,7 +35,13 @@ export async function createCustomer(customer: CreateCustomerFormData) {
 }
 
 export async function updateCustomer(id: string, customer: EditCustomerFormData) {
-  await api.put(`/customers/${id}`, {
+  const { data } = await api.put<{ customer: Customer }>(`/customers/${id}`, {
     ...customer
   })
+  return data
+}
+
+export async function addCustomerPet(id: string, pet: PetFormData) {
+  const { data } = await api.post<{ pet: Pet }>(`/pets`, { ...pet, ownerId: id })
+  return data
 }

@@ -5,6 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Plus, X } from "phosphor-react";
 import { useFieldArray, useForm } from "react-hook-form";
 import { z } from "zod";
+import { petSchema } from "./pets/PetForm";
 
 const customerSchema = z.object({
   name: z
@@ -16,19 +17,7 @@ const customerSchema = z.object({
     .trim()
     .min(8, "Tamanho mínimo do celular é de 8 caracteres")
     .max(18, "Tamanho máximo do celular é de 18 caracteres"),
-  pets: z.array(
-    z.object({
-      name: z
-        .string()
-        .min(3, "Tamanho mínimo do nome é de 3 caracteres")
-        .max(60, "Tamanho máximo do nome é de 60 caracteres"),
-      breed: z
-        .string()
-        .min(1, "Tamanho mínimo da raça é de 1 caracteres")
-        .max(60, "Tamanho máximo da raça é de 60 caracteres"),
-      age: z.coerce.number().int().min(0, "Idade mínima é 0"),
-    })
-  ),
+  pets: z.array(petSchema),
 });
 
 export type CreateCustomerFormData = z.infer<typeof customerSchema>;
