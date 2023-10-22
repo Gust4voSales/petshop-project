@@ -1,9 +1,13 @@
 import { randomUUID } from "node:crypto"
+import { Pet } from "./pet"
+import { PetshopService } from "./petshop-service"
 
 interface AppointmentProps {
   petId: string
-  serviceId: string | null
+  serviceId: string
   appointmentTime: Date
+  pet?: Pet
+  service?: PetshopService
 }
 
 export class Appointment {
@@ -27,12 +31,21 @@ export class Appointment {
     this.props.petId = petId
   }
 
+  public get pet() {
+    return this.props.pet
+  }
+
+
   public get serviceId() {
     return this.props.serviceId
   }
 
   public set serviceId(serviceId: string) {
     this.props.serviceId = serviceId
+  }
+
+  public get service() {
+    return this.props.service
   }
 
   public get appointmentTime() {

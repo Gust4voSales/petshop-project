@@ -20,6 +20,10 @@ export class PrismaAppointmentRepository implements AppointmentRepository {
     const appointment = await this.prismaService.appointment.findUnique({
       where: {
         id,
+      },
+      include: {
+        pet: true,
+        service: true,
       }
     })
 
@@ -43,6 +47,10 @@ export class PrismaAppointmentRepository implements AppointmentRepository {
           gte: startDate, // if undefined, prisma will ignore them
           lte: endDate, // if undefined, prisma will ignore them
         }
+      },
+      include: {
+        pet: true,
+        service: true
       }
     })
 

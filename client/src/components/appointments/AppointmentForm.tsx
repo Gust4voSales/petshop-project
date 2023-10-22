@@ -1,7 +1,7 @@
 import { Button } from "@components/ui/Button";
 import { Input } from "@components/ui/Form/Inputs/Input";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { z } from "zod";
 import dayjs from "dayjs";
 import { SelectCustomerPet } from "./SelectCustomerPet";
@@ -11,7 +11,7 @@ import { useQuery } from "@tanstack/react-query";
 import { PETSHOPSERVICE_KEY, fetchPetshopServices } from "@services/queries/PetshopServices";
 
 const now = dayjs();
-const todayTimestamp = now.format("YYYY-MM-DD[T]00:00");
+const todayTimestamp = now.format("YYYY-MM-DD[T]HH:mm");
 
 const appointmentSchema = z.object({
   appointmentTime: z.coerce.date().min(now.toDate(), "Horário de agendamento não pode ser anterior a data atual"),

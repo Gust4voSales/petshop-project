@@ -1,5 +1,12 @@
 import { Appointment } from "@app/entities/appointment";
-import { Appointment as RawAppointment } from "@prisma/client";
+import { Prisma, Appointment as RawAppointment } from "@prisma/client";
+import { PetMapper } from "./pet-mapper";
+import { PetshopServiceMapper } from "./petshop-service-mapper";
+
+type RawAppointmentWithPetsAndService = Prisma.AppointmentGetPayload<{
+  include: { pet: true, service: true }
+}>
+
 
 export class AppointmentMapper {
   static toPrisma(appointment: Appointment) {
@@ -11,11 +18,13 @@ export class AppointmentMapper {
     }
   }
 
-  static toDomain(raw: RawAppointment) {
+  static toDomain(raw: RawAppointmentWithPetsAndService) {
     return new Appointment({
       petId: raw.petId,
       serviceId: raw.serviceId,
       appointmentTime: raw.appointmentTime,
+      pet: PetMapper.toDomain(raw.pet),
+      service: PetshopServiceMapper.toDomain(raw.service),
     }, raw.id)
   }
 }
