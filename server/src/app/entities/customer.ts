@@ -1,5 +1,5 @@
-import { randomUUID } from "node:crypto"
 import { Pet } from "./pet"
+import { BaseEntity } from "./BaseEntity"
 
 
 export interface CustomerPet extends Omit<Pet, 'id' | 'ownerId'> {
@@ -13,23 +13,16 @@ interface CustomerProps {
   pets: Pet[] | CustomerPet[]
 }
 
-export class Customer {
-  private _id: string
-  private props: CustomerProps
-
+export class Customer extends BaseEntity<CustomerProps>{
   constructor(props: CustomerProps, id?: string) {
-    this._id = id ?? randomUUID()
+    super(props, id)
 
     const customerPets = props.pets.map(pet => {
       if (pet.id) return pet as Pet
 
-      return new Pet({ ...pet as CustomerPet, ownerId: this._id })
+      return new Pet({ ...pet as CustomerPet, ownerId: this.id })
     })
     this.props = { ...props, pets: customerPets }
-  }
-
-  public get id() {
-    return this._id
   }
 
   public get name() {

@@ -1,4 +1,4 @@
-import { randomUUID } from 'node:crypto'
+import { BaseEntity } from './BaseEntity'
 
 export interface PetshopServiceProps {
   title: string
@@ -7,19 +7,7 @@ export interface PetshopServiceProps {
   duration: number
 }
 
-export class PetshopService {
-  private _id: string;
-  private props: PetshopServiceProps;
-
-  constructor(props: PetshopServiceProps, id?: string) {
-    this.props = props
-    this._id = id ?? randomUUID()
-  }
-
-  public get id() {
-    return this._id
-  }
-
+export class PetshopService extends BaseEntity<PetshopServiceProps> {
   public get title() {
     return this.props.title
   }
