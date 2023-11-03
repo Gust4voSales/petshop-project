@@ -37,7 +37,7 @@ const today = now.format("YYYY-MM-DD");
 
 export default function Appointments() {
   const [date, setDate] = useState(today);
-  const dateTimestamp = dayjs(date).toISOString();
+  const dateTimestamp = dayjs(date).isValid() ? dayjs(date).toISOString() : dayjs(today).toISOString();
 
   const appointmentsListQuery = useQuery({
     queryKey: [APPOINTMENT_KEY, dateTimestamp],
@@ -51,6 +51,7 @@ export default function Appointments() {
 
   return (
     <div>
+      {dateTimestamp}
       <PageTitle title="Agendamentos" />
 
       <div className="flex items-center justify-center">

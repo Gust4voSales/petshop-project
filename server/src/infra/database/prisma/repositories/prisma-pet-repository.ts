@@ -14,6 +14,15 @@ export class PrismaPetRepository implements PetRepository {
     })
   }
 
+  async save(pet: Pet): Promise<void> {
+    await this.prismaService.pet.update({
+      where: {
+        id: pet.id
+      },
+      data: PetMapper.toPrisma(pet)
+    })
+  }
+
   async findById(id: string): Promise<Pet> {
     const pet = await this.prismaService.pet.findUnique({
       where: {

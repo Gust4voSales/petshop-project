@@ -20,3 +20,6 @@ export class CreatePetBody extends PetBodyDTO {
 
 export class CreateCustomerPetBody extends PetBodyDTO {
 }
+
+export class UpdatePetBody extends PetBodyDTO {
+}

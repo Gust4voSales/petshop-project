@@ -1,5 +1,5 @@
 import { CustomerPet } from "@app/entities/customer"
-import { CreateCustomerPetBody } from "@infra/http/pets/dtos/create-pet-body"
+import { CreateCustomerPetBody } from "@infra/http/pets/dtos/pet-body"
 import { Type } from "class-transformer"
 import { Length, IsOptional, ValidateNested, } from "class-validator"
 

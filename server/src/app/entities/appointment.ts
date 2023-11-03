@@ -1,6 +1,6 @@
 import { Pet } from "./pet"
 import { PetshopService } from "./petshop-service"
-import { BaseEntity } from "./BaseEntity"
+import { BaseEntity } from "./base-entity"
 
 interface AppointmentProps {
   petId: string

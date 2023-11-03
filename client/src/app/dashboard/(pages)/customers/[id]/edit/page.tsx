@@ -11,6 +11,7 @@ import { Table } from "@components/ui/Table";
 import {
   CUSTOMER_KEY,
   addCustomerPet,
+  editCustomerPet,
   fetchCustomer,
   removeCustomerPet,
   updateCustomer,
@@ -23,6 +24,11 @@ import { toast } from "react-hot-toast";
 interface EditCustomerMutationPayload {
   id: string;
   data: EditCustomerFormData;
+}
+
+interface EditPetMutationPayload {
+  id: string;
+  data: PetFormData;
 }
 
 const columnHelper = createColumnHelper<Pet>();
@@ -64,6 +70,30 @@ export default function EditCustomer({ params }: { params: { id: string } }) {
     },
   });
 
+  const editPetMutation = useMutation({
+    mutationFn: (payload: EditPetMutationPayload) => editCustomerPet(payload.id, payload.data),
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({ queryKey: [CUSTOMER_KEY, params.id] });
+
+      const customerData = customerShowQuery.data?.customer;
+      const updatedCustomer = {
+        ...customerData,
+        pets: customerData?.pets.map((p) => {
+          if (p.id === data.pet.id) {
+            return data.pet;
+          }
+          return p;
+        }),
+      };
+      queryClient.setQueryData([CUSTOMER_KEY, params.id], { customer: updatedCustomer });
+
+      toast.success("Pet atualizado com sucesso!");
+    },
+    onError: () => {
+      toast.error("Ops. Ocorreu um problema ao tentar atualizar o pet do cliente.");
+    },
+  });
+
   const deletePetMutation = useMutation({
     mutationFn: (petId: string) => removeCustomerPet(petId),
     onSuccess: () => {
@@ -92,9 +122,8 @@ export default function EditCustomer({ params }: { params: { id: string } }) {
     addPetMutation.mutate(data);
   }
 
-  function handleEditPet(data: PetFormData) {
-    // editCustomerMutation.mutate({ id: params.id, data: { pets: [...customerShowQuery.data!.customer.pets, pet] } });
-    alert("EDIT" + JSON.stringify(data));
+  function handleEditPet(id: string, data: PetFormData) {
+    editPetMutation.mutate({ id, data });
   }
 
   const columns = [
@@ -118,7 +147,7 @@ export default function EditCustomer({ params }: { params: { id: string } }) {
       header: "Opções",
       cell: (props) => (
         <div className="flex gap-3">
-          <PetForm pet={props.row.original} onSubmit={handleEditPet} />
+          <PetForm pet={props.row.original} onSubmit={(d) => handleEditPet(props.row.original.id, d)} />
 
           <ConfirmDeletePopover
             onConfirmDelete={() => {

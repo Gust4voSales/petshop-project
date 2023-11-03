@@ -1,5 +1,5 @@
 import { Pet } from "./pet"
-import { BaseEntity } from "./BaseEntity"
+import { BaseEntity } from "./base-entity"
 
 
 export interface CustomerPet extends Omit<Pet, 'id' | 'ownerId'> {
