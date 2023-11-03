@@ -1,14 +1,15 @@
 import { EntityNotFound } from '@app/use-cases/errors/entity-not-found';
+import { InvalidDeleteOperation } from '@app/use-cases/errors/invalid-delete-operation';
 import { ExceptionFilter, Catch, ArgumentsHost, HttpStatus } from '@nestjs/common';
 import { Request, Response } from 'express';
 
-@Catch(EntityNotFound)
-export class NotFoundExceptionFilter implements ExceptionFilter {
+@Catch(InvalidDeleteOperation)
+export class InvalidDeleteOperationExceptionFilter implements ExceptionFilter {
   catch(exception: EntityNotFound, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse<Response>();
     const request = ctx.getRequest<Request>();
-    const status = HttpStatus.NOT_FOUND;
+    const status = HttpStatus.BAD_REQUEST;
 
     response
       .status(status)
@@ -18,11 +19,9 @@ export class NotFoundExceptionFilter implements ExceptionFilter {
         http: {
           path: request.url,
           method: request.method,
-          body: request.body,
           params: request.params,
-          query: request.query,
         },
-        name: 'NotFound',
+        name: 'InvalidDeleteOperation',
         message: exception.message
       });
   }

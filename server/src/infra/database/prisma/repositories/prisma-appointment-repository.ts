@@ -64,4 +64,14 @@ export class PrismaAppointmentRepository implements AppointmentRepository {
       }
     })
   }
+
+  async countByPetId(id: string): Promise<number> {
+    const count = await this.prismaService.appointment.count({
+      where: {
+        petId: id
+      }
+    })
+    return count
+  }
+
 }

@@ -1,18 +1,23 @@
 "use client";
 
-import { Customer } from "@@types/Customer";
+import { APIError } from "@@types/APIError";
 import { Pet } from "@@types/Pet";
 import { AsynchronousContent } from "@components/AsynchronousContent";
+import { ConfirmDeletePopover } from "@components/ConfirmDeletePopover";
 import { EditCustomerForm, EditCustomerFormData } from "@components/customers/EditCustomerForm";
 import { PetForm, PetFormData } from "@components/customers/pets/PetForm";
 import { PageTitle } from "@components/dashboard/PageTitle";
-import { Button } from "@components/ui/Button";
 import { Table } from "@components/ui/Table";
-import { CUSTOMER_KEY, addCustomerPet, fetchCustomer, updateCustomer } from "@services/queries/Customer";
+import {
+  CUSTOMER_KEY,
+  addCustomerPet,
+  fetchCustomer,
+  removeCustomerPet,
+  updateCustomer,
+} from "@services/queries/Customer";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { createColumnHelper } from "@tanstack/react-table";
 import axios from "axios";
-import { TrashSimple } from "phosphor-react";
 import { toast } from "react-hot-toast";
 
 interface EditCustomerMutationPayload {
@@ -59,6 +64,21 @@ export default function EditCustomer({ params }: { params: { id: string } }) {
     },
   });
 
+  const deletePetMutation = useMutation({
+    mutationFn: (petId: string) => removeCustomerPet(petId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: [CUSTOMER_KEY] });
+      toast.success("Pet removido com sucesso!");
+    },
+    onError: (err: APIError | Error) => {
+      if (axios.isAxiosError(err) && (err.response?.data as APIError).name === "InvalidDeleteOperation") {
+        toast.error("Não foi possível deletar o pet do cliente pois ele já possui agendamentos.");
+      } else {
+        toast.error("Ops. Ocorreu um problema ao tentar remover o pet do cliente.");
+      }
+    },
+  });
+
   const showCustomerErrorMessage = () => {
     const error = customerShowQuery.error;
     if (axios.isAxiosError(error) && error.response?.status === 404) return "Erro! Cliente não encontrado.";
@@ -100,9 +120,11 @@ export default function EditCustomer({ params }: { params: { id: string } }) {
         <div className="flex gap-3">
           <PetForm pet={props.row.original} onSubmit={handleEditPet} />
 
-          <Button circle bg="danger" tooltipText="Remover">
-            <TrashSimple className="w-6 h-6" />
-          </Button>
+          <ConfirmDeletePopover
+            onConfirmDelete={() => {
+              deletePetMutation.mutate(props.row.original.id);
+            }}
+          />
         </div>
       ),
     }),

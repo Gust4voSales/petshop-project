@@ -45,3 +45,7 @@ export async function addCustomerPet(id: string, pet: PetFormData) {
   const { data } = await api.post<{ pet: Pet }>(`/pets`, { ...pet, ownerId: id })
   return data
 }
+
+export async function removeCustomerPet(id: string) {
+  return await api.delete<void>(`/pets/${id}`)
+}
