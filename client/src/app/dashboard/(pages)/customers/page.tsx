@@ -5,19 +5,39 @@ import { PageTitle } from "@components/dashboard/PageTitle";
 import { Button } from "@components/ui/Button";
 import { ScrollArea } from "@components/ui/ScrollArea";
 import { Table } from "@components/ui/Table";
-import { fetchCustomers } from "@services/queries/Customer";
-import { useQuery } from "@tanstack/react-query";
+import { CUSTOMER_KEY, deleteCustomer, fetchCustomers } from "@services/queries/Customer";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { createColumnHelper } from "@tanstack/react-table";
 import Link from "next/link";
 import { PencilSimple, TrashSimple } from "phosphor-react";
 import { Customer } from "@@types/Customer";
+import { ConfirmDeletePopover } from "@components/ConfirmDeletePopover";
+import toast from "react-hot-toast";
+import axios from "axios";
+import { APIError } from "@@types/APIError";
 
 const columnHelper = createColumnHelper<Customer>();
 
 export default function Customers() {
+  const queryClient = useQueryClient();
   const customersListQuery = useQuery({
-    queryKey: ["customers-list"],
+    queryKey: [CUSTOMER_KEY],
     queryFn: fetchCustomers,
+  });
+
+  const deleteCustomerMutation = useMutation({
+    mutationFn: (id: string) => deleteCustomer(id),
+    onSuccess: () => {
+      toast.success("Cliente excluído com sucesso");
+      queryClient.invalidateQueries([CUSTOMER_KEY]);
+    },
+    onError: (err) => {
+      if (axios.isAxiosError(err) && (err.response?.data as APIError).name === "InvalidDeleteOperation") {
+        toast.error("Não foi possível deletar o cliente pois ele já possui agendamentos.");
+      } else {
+        toast.error("Ops. Ocorreu um problema ao tentar remover o cliente.");
+      }
+    },
   });
 
   const columns = [
@@ -46,9 +66,7 @@ export default function Customers() {
               <PencilSimple className="w-6 h-6" />
             </Link>
           </Button>
-          <Button circle bg="danger" tooltipText="Remover">
-            <TrashSimple className="w-6 h-6" />
-          </Button>
+          <ConfirmDeletePopover onConfirmDelete={() => deleteCustomerMutation.mutate(props.row.original.id)} />
         </div>
       ),
     }),

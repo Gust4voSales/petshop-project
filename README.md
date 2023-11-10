@@ -6,8 +6,8 @@
 4. ✅ Show Users array of pets - Frontend
 5. ✅ Schedule appointments (no restriction) - Frontend
 6. ✅ Delete pet
-7. Edit pet
-8. Delete user
+7. ✅ Edit pet
+8. ✅ Delete user
 9. List appoiments
    1. [x] List appointments today's appointments
    2. [ ] Add more filters (STATUS, CUSTOMER, PET)

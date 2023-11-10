@@ -11,4 +11,5 @@ export abstract class AppointmentRepository {
   abstract findMany(query?: FindManyAppointmentsQuery): Promise<Appointment[]>;
   abstract delete(id: string): Promise<void>
   abstract countByPetId(id: string): Promise<number>
+  abstract countByCustomerId(id: string): Promise<number>
 }

@@ -74,4 +74,34 @@ export class PrismaAppointmentRepository implements AppointmentRepository {
     return count
   }
 
+  async countByCustomerId(id: string): Promise<number> {
+    const customer = await this.prismaService.customer.findUnique({
+      where: {
+        id,
+      },
+      include: {
+        pets: {
+          include: {
+            _count: {
+              select: {
+                Appointment: true
+              }
+            }
+          }
+        }
+      }
+    })
+
+    if (!customer) {
+      return 0;
+    }
+
+    let appointmentCount = 0;
+    customer.pets.forEach((pet) => {
+      appointmentCount += pet._count.Appointment;
+    })
+
+    return appointmentCount;
+  }
+
 }

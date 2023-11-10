@@ -1,11 +1,12 @@
+import { Controller, Body, Post, Get, Put, Param, Delete, } from "@nestjs/common"
 import { CreateCustomerService } from "@app/use-cases/customer/create-customer-service";
 import { EditCustomerService } from "@app/use-cases/customer/edit-customer-service";
 import { ListCustomersService } from "@app/use-cases/customer/list-customers-service";
 import { ShowCustomerService } from "@app/use-cases/customer/show-customer-service";
-import { Controller, Body, Post, Get, Put, Param, ValidationPipe } from "@nestjs/common"
 import { CustomerViewModel } from "../view-models/customer-view-model";
 import { CreateCustomerBody } from "./dtos/create-customer-body";
 import { UpdateCustomerBody } from "./dtos/update-customer-body";
+import { DeleteCustomerService } from "@app/use-cases/customer/delete-customer-service";
 
 @Controller("customers")
 export class CustomersController {
@@ -14,6 +15,7 @@ export class CustomersController {
     private listCustomersService: ListCustomersService,
     private editCustomerService: EditCustomerService,
     private showCustomerService: ShowCustomerService,
+    private deleteCustomerService: DeleteCustomerService,
   ) { }
 
   @Get()
@@ -42,5 +44,10 @@ export class CustomersController {
     const { customer } = await this.editCustomerService.execute({ id, body })
 
     return { customer: CustomerViewModel.toHTTP(customer) }
+  }
+
+  @Delete(":id")
+  async destroy(@Param("id") id: string) {
+    return await this.deleteCustomerService.execute(id)
   }
 } 

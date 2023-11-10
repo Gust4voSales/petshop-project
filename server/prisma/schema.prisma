@@ -39,7 +39,7 @@ model Pet {
   ownerId String
 
   Appointment Appointment[]
-  owner       Customer      @relation(fields: [ownerId], references: [id])
+  owner       Customer      @relation(fields: [ownerId], references: [id], onDelete: Cascade)
 }
 
 model Appointment {

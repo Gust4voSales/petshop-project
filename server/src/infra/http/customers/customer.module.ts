@@ -5,10 +5,11 @@ import { ShowCustomerService } from "@app/use-cases/customer/show-customer-servi
 import { DatabaseModule } from "@infra/database/database.module";
 import { Module } from "@nestjs/common";
 import { CustomersController } from "./customers.controller";
+import { DeleteCustomerService } from "@app/use-cases/customer/delete-customer-service";
 
 @Module({
   imports: [DatabaseModule],
   controllers: [CustomersController],
-  providers: [CreateCustomerService, ListCustomersService, ShowCustomerService, EditCustomerService],
+  providers: [CreateCustomerService, ListCustomersService, ShowCustomerService, EditCustomerService, DeleteCustomerService],
 })
 export class CustomerModule { }
