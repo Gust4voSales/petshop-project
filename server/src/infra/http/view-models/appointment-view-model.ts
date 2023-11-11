@@ -1,4 +1,4 @@
-import { Appointment } from "@app/entities/appointment";
+import { Appointment, AppointmentStatus } from "@app/entities/appointment";
 import { PetViewModel } from "./pet-view-model";
 import { PetshopServiceViewModel } from "./petshop-service-view-model";
 
@@ -7,6 +7,7 @@ type AppointmentViewModelToHttp = {
   appointmentTime: Date
   petId: string
   serviceId: string
+  status: AppointmentStatus
 
   pet?: ReturnType<typeof PetViewModel.toHTTP>
   service?: ReturnType<typeof PetshopServiceViewModel.toHTTP>
@@ -19,6 +20,7 @@ export class AppointmentViewModel {
       appointmentTime: appointment.appointmentTime,
       petId: appointment.petId,
       serviceId: appointment.serviceId,
+      status: appointment.status,
     }
     if (appointment.pet) {
       appointmentViewModel.pet = PetViewModel.toHTTP(appointment.pet)

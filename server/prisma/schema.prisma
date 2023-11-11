@@ -14,6 +14,12 @@ generator erd {
   provider = "prisma-erd-generator"
 }
 
+enum AppointmentStatus {
+  PENDING
+  CANCELED
+  DONE
+}
+
 model PetshopService {
   id          String @id
   title       String
@@ -43,10 +49,11 @@ model Pet {
 }
 
 model Appointment {
-  id              String   @id
+  id              String            @id
   petId           String
   serviceId       String?
   appointmentTime DateTime
+  status          AppointmentStatus @default(PENDING)
 
   pet     Pet             @relation(fields: [petId], references: [id])
   service PetshopService? @relation(fields: [serviceId], references: [id], onDelete: SetNull)

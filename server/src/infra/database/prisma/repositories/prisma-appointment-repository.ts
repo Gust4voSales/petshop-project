@@ -16,6 +16,15 @@ export class PrismaAppointmentRepository implements AppointmentRepository {
     })
   }
 
+  async save(appointment: Appointment): Promise<void> {
+    await this.prismaService.appointment.update({
+      where: {
+        id: appointment.id
+      },
+      data: AppointmentMapper.toPrisma(appointment),
+    })
+  }
+
   async findById(id: string): Promise<Appointment> {
     const appointment = await this.prismaService.appointment.findUnique({
       where: {
