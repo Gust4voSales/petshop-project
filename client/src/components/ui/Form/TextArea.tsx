@@ -19,7 +19,7 @@ function TextAreaComponent({ errorMessage, ...props }: Props, ref: React.Forward
     <>
       {props.label && <Label htmlFor={props.name}>{props.label}</Label>}
       <textarea className={textAreaStyle({ errorBorder: !!errorMessage })} ref={ref} {...props} />
-      <Label error>{errorMessage}</Label>
+      {errorMessage && <Label error>{errorMessage}</Label>}
     </>
   );
 }

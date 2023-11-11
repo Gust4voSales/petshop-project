@@ -14,7 +14,7 @@ export const CurrencyInputComponent = (
         <span>R$</span>
         <input type="number" step="0.01" className={inputStyle({ errorBorder: !!errorMessage })} ref={ref} {...props} />
       </label>
-      <Label error>{errorMessage}</Label>
+      {errorMessage && <Label error>{errorMessage}</Label>}
     </>
   );
 };

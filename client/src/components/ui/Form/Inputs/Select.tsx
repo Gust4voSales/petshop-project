@@ -9,8 +9,12 @@ function SelectComponent(
   return (
     <>
       {props.label && <Label htmlFor={props.name}>{props.label}</Label>}
-      <select className={inputStyle({ errorBorder: !!errorMessage }) + "select select-bordered"} ref={ref} {...props} />
-      <Label error>{errorMessage}</Label>
+      <select
+        className={inputStyle({ errorBorder: !!errorMessage }) + "select select-bordered px-0"}
+        ref={ref}
+        {...props}
+      />
+      {errorMessage && <Label error>{errorMessage}</Label>}
     </>
   );
 }

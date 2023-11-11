@@ -23,12 +23,13 @@ export default function NewAppointment() {
   });
 
   async function handleCreateAppointment(data: AppointmentFormData) {
-    createAppointmentMutation.mutate(data);
+    // createAppointmentMutation.mutate(data);
+    console.log("mutate");
   }
 
   return (
     <div>
-      <PageTitle back="/dashboard/appointments" title="Novo agendamento" />
+      <PageTitle renderBackOption title="Novo agendamento" />
 
       <AppointmentForm isLoading={createAppointmentMutation.isLoading} onSubmit={handleCreateAppointment} />
     </div>

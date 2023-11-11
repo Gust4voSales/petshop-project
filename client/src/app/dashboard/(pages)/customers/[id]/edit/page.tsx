@@ -161,7 +161,7 @@ export default function EditCustomer({ params }: { params: { id: string } }) {
 
   return (
     <div>
-      <PageTitle back="/dashboard/customers" title="Editar cliente" />
+      <PageTitle renderBackOption title="Editar cliente" />
 
       <AsynchronousContent status={customerShowQuery.status} errorMessage={showCustomerErrorMessage()}>
         {() => (

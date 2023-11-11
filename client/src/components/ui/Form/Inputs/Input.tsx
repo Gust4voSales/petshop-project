@@ -10,7 +10,7 @@ function InputComponent(
     <>
       {props.label && <Label htmlFor={props.name}>{props.label}</Label>}
       <input className={inputStyle({ errorBorder: !!errorMessage })} ref={ref} {...props} />
-      <Label error>{errorMessage}</Label>
+      {errorMessage && <Label error>{errorMessage}</Label>}
     </>
   );
 }

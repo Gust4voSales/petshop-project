@@ -6,9 +6,10 @@ import { Table } from "@components/ui/Table";
 import { APPOINTMENT_KEY, fetchAppointments } from "@services/queries/Appointment";
 import { useQuery } from "@tanstack/react-query";
 import { createColumnHelper } from "@tanstack/react-table";
+import { parseAppointmentStatus } from "@utils/parseAppointmentStatus";
 import dayjs from "dayjs";
 import Link from "next/link";
-import { ArrowLeft, ArrowRight } from "phosphor-react";
+import { ArrowLeft, ArrowRight, PencilSimple } from "phosphor-react";
 import { useState } from "react";
 
 const columnHelper = createColumnHelper<Appointment>();
@@ -22,13 +23,43 @@ const columns = [
     cell: (info) => dayjs(info.getValue()).format("HH:mm"),
     header: "Horário",
   }),
-  columnHelper.accessor("pet.name", {
-    cell: (info) => info.getValue(),
+  columnHelper.display({
     header: "Pet",
+    cell: (props) => (
+      <Link
+        className="link tooltip"
+        data-tip={"Ver pet"}
+        href={`/dashboard/customers/${props.row.original.pet.ownerId}/edit`}
+      >
+        {props.row.original.pet.name}
+      </Link>
+    ),
   }),
-  columnHelper.accessor("service.title", {
-    cell: (info) => info.getValue(),
+  columnHelper.display({
     header: "Serviço",
+    cell: (props) => (
+      <Link
+        className="link tooltip"
+        data-tip={"Ver servico"}
+        href={`/dashboard/services/${props.row.original.service.id}/edit`}
+      >
+        {props.row.original.service.title}
+      </Link>
+    ),
+  }),
+  columnHelper.accessor("status", {
+    cell: (info) => parseAppointmentStatus(info.getValue()),
+    header: "Status",
+  }),
+  columnHelper.display({
+    header: "Acões",
+    cell: (props) => (
+      <Button circle tooltipText="Editar" asChild>
+        <Link href={`/dashboard/appointments/${props.row.original.id}/edit`}>
+          <PencilSimple className="w-6 h-6" />
+        </Link>
+      </Button>
+    ),
   }),
 ];
 

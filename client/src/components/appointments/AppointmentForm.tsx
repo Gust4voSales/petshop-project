@@ -10,11 +10,16 @@ import { Select } from "@components/ui/Form/Inputs/Select";
 import { useQuery } from "@tanstack/react-query";
 import { PETSHOPSERVICE_KEY, fetchPetshopServices } from "@services/queries/PetshopServices";
 
-const now = dayjs();
-const todayTimestamp = now.format("YYYY-MM-DD[T]HH:mm");
-
 const appointmentSchema = z.object({
-  appointmentTime: z.coerce.date().min(now.toDate(), "Horário de agendamento não pode ser anterior a data atual"),
+  appointmentTime: z.coerce.date().refine(
+    (d) => {
+      const now = dayjs();
+      return dayjs(d).isAfter(now);
+    },
+    {
+      message: "Horário de agendamento não pode ser anterior o horário atual",
+    }
+  ),
   petId: z
     .string({
       required_error: "É necessário selecionar um pet",
@@ -34,6 +39,7 @@ interface Props {
   isLoading: boolean;
 }
 export function AppointmentForm(props: Props) {
+  const todayTimestamp = dayjs().format("YYYY-MM-DD[T]HH:mm");
   const {
     register,
     handleSubmit,
