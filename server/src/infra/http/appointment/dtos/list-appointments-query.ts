@@ -1,5 +1,6 @@
+import { AppointmentStatus } from "@app/entities/appointment"
 import { Type } from "class-transformer"
-import { IsDate, IsDefined, ValidateIf } from "class-validator"
+import { IsDate, IsDefined, IsEnum, IsOptional, ValidateIf } from "class-validator"
 
 export class ListAppointmentsQuery {
   @ValidateIf(o => o.endDate) // only validate if endDate is also passed
@@ -13,4 +14,8 @@ export class ListAppointmentsQuery {
   @IsDate()
   @Type(() => Date)
   endDate: Date
+
+  @IsOptional()
+  @IsEnum(AppointmentStatus)
+  status?: AppointmentStatus
 }

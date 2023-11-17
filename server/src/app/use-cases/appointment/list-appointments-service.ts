@@ -7,12 +7,7 @@ export class ListAppointmentsService {
   constructor(private appointmentRepository: AppointmentRepository) { }
 
   async execute(query: FindManyAppointmentsQuery) {
-    let findManyQuery: FindManyAppointmentsQuery
-
-    if (query.startDate && query.endDate)
-      findManyQuery = query
-
-    const appointments = await this.appointmentRepository.findMany(findManyQuery)
+    const appointments = await this.appointmentRepository.findMany(query)
 
     return {
       appointments

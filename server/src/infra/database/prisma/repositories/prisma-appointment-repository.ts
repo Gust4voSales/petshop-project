@@ -40,12 +40,12 @@ export class PrismaAppointmentRepository implements AppointmentRepository {
     return AppointmentMapper.toDomain(appointment)
   }
 
-  async findMany(query?: FindManyAppointmentsQuery) {
+  async findMany(query: FindManyAppointmentsQuery) {
     // if query parameters are undefined Prisma will ignore them 
     let startDate: Date | undefined
     let endDate: Date | undefined
 
-    if (query) {
+    if (query.startDate && query.endDate) {
       startDate = dayjs(query.startDate).startOf("day").toDate() // consider the whole day, so sets time at 00h:00 to include the whole day
       endDate = dayjs(query.endDate).endOf("day").toDate() // consider the whole day, so sets time at 23h:59 to include the whole day
     }
@@ -55,7 +55,8 @@ export class PrismaAppointmentRepository implements AppointmentRepository {
         appointmentTime: {
           gte: startDate, // if undefined, prisma will ignore them
           lte: endDate, // if undefined, prisma will ignore them
-        }
+        },
+        status: query.status
       },
       include: {
         pet: true,

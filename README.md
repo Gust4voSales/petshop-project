@@ -10,7 +10,7 @@
 8. ✅ Delete user
 9. List appoiments
    1. [x] List appointments today's appointments
-   2. [ ] Add more filters (STATUS, CUSTOMER, PET)
+   2. [ ] Add more filters (STATUS)
    3. [ ] Order?
 10. Add pagination to at least one of the ENTITIES
 11. ✅ Add authentication
