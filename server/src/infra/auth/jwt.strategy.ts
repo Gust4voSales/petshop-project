@@ -16,13 +16,6 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       secretOrKey: jwtConstants.secret,
-      error(error: any) {
-        console.log('error', error)
-      },
-      fail(error: any) {
-        console.log('fail', error)
-        // throw error
-      }
     })
   }
 
