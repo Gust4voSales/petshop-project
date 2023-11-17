@@ -14,7 +14,7 @@ export class AppointmentsController {
   constructor(private scheduleAppointmentService: ScheduleAppointmentService, private showAppointmentService: ShowAppointmentService, private listAppointmentsService: ListAppointmentsService, private cancelAppointmentService: CancelAppointmentService, private updateAppointmentStatusService: UpdateAppointmentStatusService) { }
 
   @Get()
-  async list(@Query() query: ListAppointmentsQuery) {
+  async list(@Query() query: ListAppointmentsQuery,) {
     const { appointments } = await this.listAppointmentsService.execute(query)
 
     return {

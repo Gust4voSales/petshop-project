@@ -11,15 +11,21 @@ import { useQuery } from "@tanstack/react-query";
 import { PETSHOPSERVICE_KEY, fetchPetshopServices } from "@services/queries/PetshopServices";
 
 const appointmentSchema = z.object({
-  appointmentTime: z.coerce.date().refine(
-    (d) => {
-      const now = dayjs();
-      return dayjs(d).isAfter(now);
-    },
-    {
-      message: "Horário de agendamento não pode ser anterior o horário atual",
-    }
-  ),
+  appointmentTime: z.coerce
+    .date({
+      errorMap: (issue, { defaultError }) => ({
+        message: issue.code === "invalid_date" ? "Data inválida" : defaultError, // https://github.com/colinhacks/zod/issues/1526
+      }),
+    })
+    .refine(
+      (d) => {
+        const now = dayjs();
+        return dayjs(d).isAfter(now);
+      },
+      {
+        message: "Horário de agendamento não pode ser anterior o horário atual",
+      }
+    ),
   petId: z
     .string({
       required_error: "É necessário selecionar um pet",

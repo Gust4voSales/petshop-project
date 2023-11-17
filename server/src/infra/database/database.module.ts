@@ -8,6 +8,8 @@ import { PrismaPetshopServiceRepository } from "./prisma/repositories/prisma-pet
 import { PrismaCustomerRepository } from "./prisma/repositories/prisma-customer-repository";
 import { PrismaPetRepository } from "./prisma/repositories/prisma-pet-repository";
 import { PrismaAppointmentRepository } from "./prisma/repositories/prisma-appointment-repository";
+import { UserRepository } from "@app/repositories/user-repository";
+import { PrismaUserRepository } from "./prisma/repositories/prisma-user-repository";
 
 @Module({
   providers: [
@@ -28,7 +30,11 @@ import { PrismaAppointmentRepository } from "./prisma/repositories/prisma-appoin
       provide: AppointmentRepository,
       useClass: PrismaAppointmentRepository,
     },
+    {
+      provide: UserRepository,
+      useClass: PrismaUserRepository,
+    },
   ],
-  exports: [PetshopServiceRepository, CustomerRepository, PetRepository, AppointmentRepository]
+  exports: [PetshopServiceRepository, CustomerRepository, PetRepository, AppointmentRepository, UserRepository,]
 })
 export class DatabaseModule { }

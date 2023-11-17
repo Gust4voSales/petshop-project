@@ -58,3 +58,10 @@ model Appointment {
   pet     Pet             @relation(fields: [petId], references: [id])
   service PetshopService? @relation(fields: [serviceId], references: [id], onDelete: SetNull)
 }
+
+model User {
+  id       String @id
+  name     String
+  email    String @unique
+  password String
+}

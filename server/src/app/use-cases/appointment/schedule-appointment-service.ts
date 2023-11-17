@@ -16,8 +16,6 @@ export class ScheduleAppointmentService {
   constructor(private appointmentRepository: AppointmentRepository, private petRepository: PetRepository, private petshopServiceRepository: PetshopServiceRepository) { }
 
   async execute(request: ScheduleAppointmentRequest) {
-    // TODO check if time is available 
-
     const pet = await this.petRepository.findById(request.petId)
     if (!pet) throw new EntityNotFound("Pet", request.petId)
 
