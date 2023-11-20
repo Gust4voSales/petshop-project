@@ -2,11 +2,12 @@
 
 import { useEffect } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { redirect, usePathname } from "next/navigation";
 import { Bag, Calendar, Person } from "phosphor-react";
-import { Header } from "@components/dashboard/Header";
+import { Header } from "@components/Header";
 import { themeChange } from "theme-change";
 import { ThemeSelector } from "@components/dashboard/ThemeSelector";
+import { useSessionStore } from "src/stores/session";
 
 const ROUTES = [
   {
@@ -28,10 +29,15 @@ const ROUTES = [
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
+  const isUserLoggedIn = useSessionStore((state) => state.isLoggedIn);
 
   useEffect(() => {
     themeChange(false);
   }, []);
+
+  if (!isUserLoggedIn) {
+    redirect("/login");
+  }
 
   return (
     <div>

@@ -7,7 +7,7 @@ function SelectComponent(
   ref: React.ForwardedRef<HTMLSelectElement>
 ) {
   return (
-    <>
+    <div>
       {props.label && <Label htmlFor={props.name}>{props.label}</Label>}
       <select
         className={inputStyle({ errorBorder: !!errorMessage }) + "select select-bordered px-0"}
@@ -15,7 +15,7 @@ function SelectComponent(
         {...props}
       />
       {errorMessage && <Label error>{errorMessage}</Label>}
-    </>
+    </div>
   );
 }
 

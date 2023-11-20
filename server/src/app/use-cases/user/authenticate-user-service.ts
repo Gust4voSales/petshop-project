@@ -4,6 +4,7 @@ import { EntityNotFound } from "../errors/entity-not-found";
 import { Encrypter } from "@app/cryptography/encrypter";
 import { HashComparer } from "@app/cryptography/hash-comparer";
 import { Unauthorized } from "../errors/unauthorized";
+import { User } from "@app/entities/user";
 
 
 interface AuthenticateUserRequest {
@@ -38,6 +39,7 @@ export class AuthenticateUserService {
     })
 
     return {
+      user,
       accessToken,
     }
   }

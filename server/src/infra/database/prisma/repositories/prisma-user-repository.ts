@@ -16,7 +16,7 @@ export class PrismaUserRepository implements UserRepository {
       update: {},
       create: {
         id: user.id,
-        name: user.email,
+        name: user.name,
         email: user.email,
         password: user.password,
       }

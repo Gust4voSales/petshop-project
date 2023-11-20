@@ -7,11 +7,11 @@ function InputComponent(
   ref: React.ForwardedRef<HTMLInputElement>
 ) {
   return (
-    <>
+    <div>
       {props.label && <Label htmlFor={props.name}>{props.label}</Label>}
       <input className={inputStyle({ errorBorder: !!errorMessage })} ref={ref} {...props} />
       {errorMessage && <Label error>{errorMessage}</Label>}
-    </>
+    </div>
   );
 }
 

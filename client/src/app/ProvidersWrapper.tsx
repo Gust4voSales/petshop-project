@@ -14,7 +14,6 @@ export function ProvidersWrapper({ children }: { children: React.ReactNode }) {
 
   return (
     <QueryClientProvider client={client}>
-      {children}
       <Toaster
         position="top-right"
         toastOptions={{
@@ -33,6 +32,7 @@ export function ProvidersWrapper({ children }: { children: React.ReactNode }) {
           },
         }}
       />
+      {children}
     </QueryClientProvider>
   );
 }

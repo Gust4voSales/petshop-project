@@ -13,6 +13,7 @@
    2. [ ] Add more filters (STATUS)
    3. [ ] Order?
 10. Add pagination to at least one of the ENTITIES
-11. ✅ Add authentication
-12. ✅ Add refresh token logic - https://www.elvisduru.com/blog/nestjs-jwt-authentication-refresh-token
-13. Authorization? Levels?
+11. ✅ Add authentication in the server
+12. Integrate authentication in the front
+13. Add refresh token logic - https://www.elvisduru.com/blog/nestjs-jwt-authentication-refresh-token
+14. Authorization? Levels?

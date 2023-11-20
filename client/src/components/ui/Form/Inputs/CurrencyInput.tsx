@@ -7,7 +7,7 @@ export const CurrencyInputComponent = (
   ref: React.ForwardedRef<HTMLInputElement>
 ) => {
   return (
-    <>
+    <div>
       {props.label && <Label htmlFor={props.name}>{props.label}</Label>}
 
       <label className="input-group input-error">
@@ -15,7 +15,7 @@ export const CurrencyInputComponent = (
         <input type="number" step="0.01" className={inputStyle({ errorBorder: !!errorMessage })} ref={ref} {...props} />
       </label>
       {errorMessage && <Label error>{errorMessage}</Label>}
-    </>
+    </div>
   );
 };
 

@@ -1,7 +1,7 @@
 import { cva } from "class-variance-authority";
 import { InputHTMLAttributes } from "react";
 
-export const inputStyle = cva("input input-bordered w-full", {
+export const inputStyle = cva("input input-bordered w-full placeholder:text-gray-500", {
   variants: {
     errorBorder: {
       true: "input-error",
