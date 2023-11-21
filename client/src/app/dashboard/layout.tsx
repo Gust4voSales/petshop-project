@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { redirect, usePathname } from "next/navigation";
 import { Bag, Calendar, Person } from "phosphor-react";
@@ -29,16 +29,25 @@ const ROUTES = [
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
+  const [hydrated, setHydrated] = useState(false);
   const isUserLoggedIn = useSessionStore((state) => state.isLoggedIn);
+
+  useEffect(() => {
+    setHydrated(true);
+  }, []);
 
   useEffect(() => {
     themeChange(false);
   }, []);
 
+  if (!hydrated) {
+    // Returns null on first render, so the client and server match
+    return null;
+  }
+
   if (!isUserLoggedIn) {
     redirect("/login");
   }
-
   return (
     <div>
       <Header />

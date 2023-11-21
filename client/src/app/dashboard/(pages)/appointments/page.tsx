@@ -9,7 +9,7 @@ import { createColumnHelper } from "@tanstack/react-table";
 import { parseAppointmentStatus } from "@utils/parseAppointmentStatus";
 import dayjs from "dayjs";
 import Link from "next/link";
-import { ArrowLeft, ArrowRight, PencilSimple } from "phosphor-react";
+import { ArrowLeft, ArrowRight, Funnel, PencilSimple } from "phosphor-react";
 import { useState } from "react";
 
 const columnHelper = createColumnHelper<Appointment>();
@@ -82,8 +82,15 @@ export default function Appointments() {
 
   return (
     <div>
-      {dateTimestamp}
-      <PageTitle title="Agendamentos" />
+      <div className="flex items-center justify-between">
+        <PageTitle title="Agendamentos" />
+
+        <div className="prose">
+          <h4 className="flex items-center gap-2">
+            <Funnel size={16} weight="fill" /> Filtros
+          </h4>
+        </div>
+      </div>
 
       <div className="flex items-center justify-center">
         <Button bg="ghost" circle onClick={() => handleIncrementDate(-1)}>
