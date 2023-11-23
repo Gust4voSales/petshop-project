@@ -8,11 +8,12 @@ export const APPOINTMENT_KEY = 'appointment-fetch'
 type FetchAppointmentsParams = {
   startDate: string
   endDate: string
+  status?: AppointmentStatus
 }
-export async function fetchAppointments({ startDate, endDate }: FetchAppointmentsParams) {
+export async function fetchAppointments({ startDate, endDate, status }: FetchAppointmentsParams) {
   const { data } = await api.get<{ appointments: Appointment[] }>("/appointments", {
     params: {
-      startDate, endDate
+      startDate, endDate, status
     }
   })
   return data

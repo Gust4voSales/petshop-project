@@ -23,8 +23,7 @@ export default function NewAppointment() {
   });
 
   async function handleCreateAppointment(data: AppointmentFormData) {
-    // createAppointmentMutation.mutate(data);
-    console.log("mutate");
+    createAppointmentMutation.mutate(data);
   }
 
   return (
