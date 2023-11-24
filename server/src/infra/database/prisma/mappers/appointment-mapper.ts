@@ -1,13 +1,8 @@
 import { Appointment, AppointmentStatus } from "@app/entities/appointment";
-import { Prisma, AppointmentStatus as RawAppointmentStatus } from "@prisma/client";
+import { AppointmentStatus as RawAppointmentStatus } from "@prisma/client";
 import { PetMapper } from "./pet-mapper";
 import { PetshopServiceMapper } from "./petshop-service-mapper";
-
-type RawAppointmentWithPetsAndService = Prisma.AppointmentGetPayload<{
-  include: { pet: true, service: true }
-}>
-
-
+import { RawAppointmentWithPetsAndService } from "../types";
 
 export class AppointmentMapper {
   static toPrisma(appointment: Appointment) {

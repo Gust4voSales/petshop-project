@@ -1,4 +1,4 @@
-import { AppointmentRepository, FindManyAppointmentsQuery } from "@app/repositories/appointment-repository";
+import { AppointmentRepository, FindManyAppointmentsQueryPaginated } from "@app/repositories/appointment-repository";
 import { Injectable } from "@nestjs/common";
 
 
@@ -6,11 +6,12 @@ import { Injectable } from "@nestjs/common";
 export class ListAppointmentsService {
   constructor(private appointmentRepository: AppointmentRepository) { }
 
-  async execute(query: FindManyAppointmentsQuery) {
-    const appointments = await this.appointmentRepository.findMany(query)
+  async execute(query: FindManyAppointmentsQueryPaginated) {
+    const paginatedAppointments = await this.appointmentRepository.findManyPaginated(query)
 
     return {
-      appointments
+      appointments: paginatedAppointments.data,
+      meta: paginatedAppointments.meta
     }
   }
 }

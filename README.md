@@ -10,12 +10,12 @@
 8. ✅ Delete user
 9. List appoiments
    1. [x] List appointments today's appointments
-   2. [ ] Add more filters (STATUS)
-   3. [ ] Order?
-10. Add pagination to at least one of the ENTITIES
-11. ✅ Add authentication in the server
-12. ✅ Integrate authentication in the front
-13. Add refresh token logic
+   2. [x] Add more filters (STATUS)
+   3. [ ] Pagination
+   4. [ ] Order?
+10. ✅ Add authentication in the server
+11. ✅ Integrate authentication in the front
+12. Add refresh token logic
     1. https://www.elvisduru.com/blog/nestjs-jwt-authentication-refresh-token
     2. https://www.cyberchief.ai/2023/05/secure-jwt-token-storage.html
-14. Authorization? Levels?
+13. Authorization? Levels?

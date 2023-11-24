@@ -14,6 +14,7 @@ import { CreateDefaultUserService } from "@app/use-cases/user/create-default-use
 export class SessionModule implements OnApplicationBootstrap {
   constructor(private createDefaultUserService: CreateDefaultUserService) { }
 
+  // CREATE DEFAULT ADMIN USER ACCOUNT
   async onApplicationBootstrap() {
     await this.createDefaultUserService.execute()
   }
