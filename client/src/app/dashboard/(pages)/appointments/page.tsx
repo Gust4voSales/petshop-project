@@ -7,7 +7,7 @@ import { Label } from "@components/ui/Form/Label";
 import { Table } from "@components/ui/Table";
 import { APPOINTMENT_KEY, fetchAppointments } from "@services/queries/Appointment";
 import { useQuery } from "@tanstack/react-query";
-import { createColumnHelper } from "@tanstack/react-table";
+import { PaginationState, createColumnHelper } from "@tanstack/react-table";
 import { parseAppointmentStatus } from "@utils/parseAppointmentStatus";
 import dayjs from "dayjs";
 import Link from "next/link";
@@ -15,6 +15,8 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { ArrowLeft, ArrowRight, Funnel, PencilSimple } from "phosphor-react";
 import customParseFormatPlugin from "dayjs/plugin/customParseFormat";
 import { z } from "zod";
+import { useState } from "react";
+import { isFetchingWithPreviousData } from "@utils/isFetchingWithPreviousData";
 
 dayjs.extend(customParseFormatPlugin);
 
@@ -26,7 +28,7 @@ const columns = [
     id: "row-number",
   }),
   columnHelper.accessor("appointmentTime", {
-    cell: (info) => dayjs(info.getValue()).format("HH:mm"),
+    cell: (info) => dayjs(info.getValue()).format("DD/MM/YYYY - HH:mm"),
     header: "Horário",
   }),
   columnHelper.display({
@@ -69,9 +71,6 @@ const columns = [
   }),
 ];
 
-const now = dayjs();
-const today = now.format("YYYY-MM-DD");
-
 export default function Appointments() {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -79,15 +78,23 @@ export default function Appointments() {
   const date = parseDateParam();
   const status = parseStatusParam();
 
-  const dateTimestamp = dayjs(date).toISOString(); // value sent to the query
+  const [pagination, setPagination] = useState<PaginationState>({
+    pageIndex: 0,
+    pageSize: 10,
+  });
+
+  const dateTimestamp = date !== undefined ? dayjs(date).toISOString() : undefined; // value sent to the query
   const appointmentsListQuery = useQuery({
-    queryKey: [APPOINTMENT_KEY, dateTimestamp, status],
+    queryKey: [APPOINTMENT_KEY, dateTimestamp, status, pagination],
     queryFn: () =>
       fetchAppointments({
         startDate: dateTimestamp,
         endDate: dateTimestamp,
-        status: !!status ? status : undefined,
+        status: status,
+        page: pagination.pageIndex + 1,
+        pageSize: pagination.pageSize,
       }),
+    keepPreviousData: true,
   });
 
   function changeQueryParams(params: string) {
@@ -101,8 +108,7 @@ export default function Appointments() {
     if (validDateParam) {
       return dateParam as string;
     }
-    // default to today
-    return today;
+    return undefined;
   }
 
   function parseStatusParam() {
@@ -114,8 +120,7 @@ export default function Appointments() {
     if (validStatusParam) {
       return statusParam as AppointmentStatus;
     }
-    // default to empty
-    return "";
+    return undefined;
   }
 
   function handleChangeDate(date: string) {
@@ -147,6 +152,15 @@ export default function Appointments() {
             data={appointmentsListQuery.data?.appointments ?? []}
             columns={columns}
             asyncStatus={appointmentsListQuery.status}
+            pagination={{
+              state: pagination,
+              setState: setPagination,
+            }}
+            lastPage={appointmentsListQuery.data?.meta.lastPage}
+            isFetchingWithPreviousData={isFetchingWithPreviousData(
+              appointmentsListQuery.isFetching,
+              appointmentsListQuery.isPreviousData
+            )}
           />
         </div>
 
@@ -168,7 +182,7 @@ export default function Appointments() {
                 className="input input-bordered"
                 required
                 id="date"
-                value={date}
+                value={date ?? ""}
                 onChange={(e) => handleChangeDate(e.target.value)}
               />
               <Button bg="ghost" circle onClick={() => handleIncrementDate(1)}>
@@ -177,7 +191,7 @@ export default function Appointments() {
             </div>
 
             <Select
-              value={status}
+              value={status ?? ""}
               name="status"
               id="status"
               onChange={(e) => handleChangeStatus(e.target.value as AppointmentStatus)}
