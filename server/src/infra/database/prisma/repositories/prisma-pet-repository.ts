@@ -9,8 +9,12 @@ export class PrismaPetRepository implements PetRepository {
   constructor(private prismaService: PrismaService) { }
 
   async create(pet: Pet): Promise<void> {
+    const data = {
+      ...PetMapper.toPrisma(pet),
+      ownerId: pet.ownerId
+    }
     await this.prismaService.pet.create({
-      data: PetMapper.toPrisma(pet)
+      data
     })
   }
 
@@ -23,7 +27,7 @@ export class PrismaPetRepository implements PetRepository {
     })
   }
 
-  async findById(id: string): Promise<Pet> {
+  async findById(id: string): Promise<Pet | null> {
     const pet = await this.prismaService.pet.findUnique({
       where: {
         id,

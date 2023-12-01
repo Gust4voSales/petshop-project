@@ -1,9 +1,11 @@
 import { AppointmentStatus } from "@app/entities/appointment"
-import { PaginateQuery } from "@infra/http/dtos/paginate-query"
+import { SortByAppointmentsOptions, sortByAppointmentsOptions } from "@app/repositories/appointment-repository"
+import { PaginateSortQuery } from "@infra/http/dtos/paginate-sort-query"
 import { Type } from "class-transformer"
-import { IsDate, IsDefined, IsEnum, IsOptional, ValidateIf } from "class-validator"
+import { IsDate, IsDefined, IsEnum, IsIn, IsOptional, ValidateIf } from "class-validator"
 
-export class ListAppointmentsQuery extends PaginateQuery {
+
+export class ListAppointmentsQuery extends PaginateSortQuery {
   @ValidateIf(o => o.endDate) // only validate if endDate is also passed
   @IsDefined()
   @IsDate()
@@ -19,4 +21,8 @@ export class ListAppointmentsQuery extends PaginateQuery {
   @IsOptional()
   @IsEnum(AppointmentStatus)
   status?: AppointmentStatus
+
+  @IsOptional()
+  @IsIn(sortByAppointmentsOptions)
+  sortBy: SortByAppointmentsOptions
 }

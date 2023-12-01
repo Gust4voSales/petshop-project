@@ -1,13 +1,13 @@
 import { Injectable } from "@nestjs/common";
 import { Appointment } from "@app/entities/appointment";
-import { AppointmentRepository, FindManyAppointmentsQueryPaginated } from "@app/repositories/appointment-repository";
+import { AppointmentRepository, FindManyAppointmentsQueryPaginatedSorted } from "@app/repositories/appointment-repository";
 import { PrismaService, } from "../prisma.service";
 import { AppointmentMapper } from "../mappers/appointment-mapper";
 import dayjs from 'dayjs'
-import { PrismaPaginator } from "./utils/prisma-paginator";
 import { RawAppointmentWithPetsAndService } from "../types";
 import { Paginator } from "@app/repositories/utils/pagination";
-
+import { Prisma } from "@prisma/client";
+import { getPrismaSorter } from "./utils/prisma-sorter";
 
 @Injectable()
 export class PrismaAppointmentRepository implements AppointmentRepository {
@@ -28,7 +28,7 @@ export class PrismaAppointmentRepository implements AppointmentRepository {
     })
   }
 
-  async findById(id: string): Promise<Appointment> {
+  async findById(id: string): Promise<Appointment | null> {
     const appointment = await this.prismaService.appointment.findUnique({
       where: {
         id,
@@ -43,7 +43,7 @@ export class PrismaAppointmentRepository implements AppointmentRepository {
     return AppointmentMapper.toDomain(appointment)
   }
 
-  async findManyPaginated(query: FindManyAppointmentsQueryPaginated) {
+  async findManyPaginated(query: FindManyAppointmentsQueryPaginatedSorted) {
     // if query parameters are undefined Prisma will ignore them 
     let startDate: Date | undefined
     let endDate: Date | undefined
@@ -53,7 +53,7 @@ export class PrismaAppointmentRepository implements AppointmentRepository {
       endDate = dayjs(query.endDate).endOf("day").toDate() // consider the whole day, so sets time at 23h:59 to include the whole day
     }
 
-    const queryArgs = {
+    const queryArgs: Prisma.AppointmentFindManyArgs = {
       where: {
         appointmentTime: {
           gte: startDate, // if undefined, prisma will ignore them
@@ -61,6 +61,7 @@ export class PrismaAppointmentRepository implements AppointmentRepository {
         },
         status: query.status
       },
+      orderBy: getPrismaSorter({ sortBy: query.sortBy, sortOrder: query.sortOrder }),
       include: {
         pet: true,
         service: true

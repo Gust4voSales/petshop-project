@@ -18,10 +18,10 @@ export class AppointmentMapper {
   static toDomain(raw: RawAppointmentWithPetsAndService) {
     return new Appointment({
       petId: raw.petId,
-      serviceId: raw.serviceId,
+      serviceId: raw.serviceId ?? '',
       appointmentTime: raw.appointmentTime,
       pet: PetMapper.toDomain(raw.pet),
-      service: PetshopServiceMapper.toDomain(raw.service),
+      service: raw.service ? PetshopServiceMapper.toDomain(raw.service) : undefined,
       status: raw.status as AppointmentStatus
     }, raw.id)
   }

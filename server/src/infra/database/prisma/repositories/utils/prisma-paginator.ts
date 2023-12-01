@@ -1,14 +1,14 @@
 import { Paginator, PaginateOptions, PaginatedResult, PaginateFunctionArgs, } from "@app/repositories/utils/pagination";
 
-export const defaultOptions: PaginateOptions = {
+export const defaultPrismaPaginationOptions = {
   page: 1,
   pageSize: 10
-}
+} satisfies PaginateOptions
 
 export class PrismaPaginator implements Paginator {
   async paginate<T>({ model, args, options }: PaginateFunctionArgs): Promise<PaginatedResult<T>> {
-    const page = options?.page || defaultOptions.page
-    const pageSize = options?.pageSize || defaultOptions.pageSize
+    const page = options?.page || defaultPrismaPaginationOptions.page
+    const pageSize = options?.pageSize || defaultPrismaPaginationOptions.pageSize
 
     const skip = page > 0 ? pageSize * (page - 1) : 0;
 

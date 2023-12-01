@@ -27,7 +27,7 @@ export class PrismaPetshopServiceRepository implements PetshopServiceRepository 
     })
   }
 
-  async findById(id: string): Promise<PetshopService> {
+  async findById(id: string): Promise<PetshopService | null> {
     const service = await this.prismaService.petshopService.findUnique({
       where: {
         id,

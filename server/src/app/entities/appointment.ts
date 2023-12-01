@@ -31,7 +31,7 @@ export class Appointment extends BaseEntity<AppointmentProps> {
   }
 
   public get status() {
-    return this.props.status
+    return this.props.status!
   }
 
   public get serviceId() {

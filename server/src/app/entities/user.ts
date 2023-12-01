@@ -3,7 +3,7 @@ import { BaseEntity } from "./base-entity";
 interface UserProps {
   name: string
   email: string
-  password: string
+  password?: string
 }
 
 export class User extends BaseEntity<UserProps> {

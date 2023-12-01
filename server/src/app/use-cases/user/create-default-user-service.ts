@@ -9,7 +9,7 @@ export class CreateDefaultUserService {
 
   async execute() {
     const email = 'admin@email.com'
-    const hashedPassword = await this.hashGenerator.hash(process.env.ADMIN_PASSWORD)
+    const hashedPassword = await this.hashGenerator.hash(process.env.ADMIN_PASSWORD!)
 
     const user = new User({
       name: 'ADMIN',
