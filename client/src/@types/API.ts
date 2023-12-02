@@ -1,6 +1,16 @@
+export type APIError = {
+  name: string
+  message: string
+}
+
 export type PaginationParams = {
   page?: number
   pageSize?: number
+}
+
+export type SortingParams = {
+  sortBy?: string
+  sortOrder?: 'asc' | 'desc'
 }
 
 export type PaginatedResponse = {

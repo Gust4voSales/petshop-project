@@ -3,7 +3,7 @@ import { Slot } from "@radix-ui/react-slot";
 import { ButtonHTMLAttributes } from "react";
 import { SpinLoading } from "./Loading/SpinLoading";
 
-const buttonStyle = cva("btn cursor-pointer", {
+export const buttonStyle = cva("btn cursor-pointer", {
   variants: {
     bg: {
       ghost: "btn-ghost",

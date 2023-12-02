@@ -1,6 +1,6 @@
 "use client";
 
-import { APIError } from "@@types/APIError";
+import { APIError } from "@@types/API";
 import { Pet } from "@@types/Pet";
 import { AsynchronousContent } from "@components/AsynchronousContent";
 import { ConfirmDeletePopover } from "@components/ConfirmDeletePopover";

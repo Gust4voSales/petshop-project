@@ -8,11 +8,12 @@
 6. ✅ Delete pet
 7. ✅ Edit pet
 8. ✅ Delete user
-9. List appoiments
+9. ✅ List appoiments
    1. [x] List appointments today's appointments
    2. [x] Add more filters (STATUS)
    3. [x] Pagination
-   4. [ ] Sorting?
+   4. [x] Sorting?
+   5. [x] pagination and sorting in the URL
 10. ✅ Add authentication in the server
 11. ✅ Integrate authentication in the front
 12. Add refresh token logic

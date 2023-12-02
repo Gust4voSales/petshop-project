@@ -14,7 +14,7 @@ import { Customer } from "@@types/Customer";
 import { ConfirmDeletePopover } from "@components/ConfirmDeletePopover";
 import toast from "react-hot-toast";
 import axios from "axios";
-import { APIError } from "@@types/APIError";
+import { APIError } from "@@types/API";
 
 const columnHelper = createColumnHelper<Customer>();
 

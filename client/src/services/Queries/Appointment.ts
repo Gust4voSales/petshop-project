@@ -1,7 +1,7 @@
 import { AppointmentFormData } from '@components/appointments/AppointmentForm'
 import api from '../api'
 import { Appointment, AppointmentStatus } from '@@types/Appointment'
-import { PaginatedResponse, PaginationParams } from '@@types/APIPagination'
+import { PaginatedResponse, PaginationParams, SortingParams } from '@@types/API'
 
 export const APPOINTMENT_KEY = 'appointment-fetch'
 
@@ -10,12 +10,13 @@ type FetchAppointmentsParams = {
   startDate?: string
   endDate?: string
   status?: AppointmentStatus
-} & PaginationParams
-export async function fetchAppointments({ startDate, endDate, status, page, pageSize }: FetchAppointmentsParams) {
+} & PaginationParams & SortingParams
+export async function fetchAppointments({ startDate, endDate, status, page, pageSize, sortBy, sortOrder }: FetchAppointmentsParams) {
   const { data } = await api.get<{ appointments: Appointment[] } & PaginatedResponse>("/appointments", {
     params: {
       startDate, endDate,
-      status, page, pageSize
+      status, page, pageSize,
+      sortBy, sortOrder
     }
   })
   return data

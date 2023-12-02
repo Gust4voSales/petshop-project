@@ -1,6 +1,6 @@
 import * as Popover from "@radix-ui/react-popover";
 import { TrashSimple } from "phosphor-react";
-import { Button } from "./ui/Button";
+import { buttonStyle } from "./ui/Button";
 
 interface Props {
   onConfirmDelete: () => void;
@@ -8,10 +8,10 @@ interface Props {
 export function ConfirmDeletePopover(props: Props) {
   return (
     <Popover.Root>
-      <Popover.Trigger>
-        <Button bg="danger" circle tooltipText="Remover">
+      <Popover.Trigger className="tooltip" data-tip="Remover">
+        <div className={buttonStyle({ bg: "danger", circle: true })}>
           <TrashSimple className="w-6 h-6" />
-        </Button>
+        </div>
       </Popover.Trigger>
       <Popover.Portal>
         <Popover.Content

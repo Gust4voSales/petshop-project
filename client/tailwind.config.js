@@ -4,7 +4,7 @@ module.exports = {
   theme: {
     extend: {
       maxHeight: {
-        "screen-2/3": "66.7vh",
+        "screen-3/5": "60vh",
       },
 
       keyframes: {
