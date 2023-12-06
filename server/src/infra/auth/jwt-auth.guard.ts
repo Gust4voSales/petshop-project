@@ -2,7 +2,6 @@ import { ExecutionContext, Injectable } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { AuthGuard } from '@nestjs/passport';
 import { IS_PUBLIC_KEY } from './decorators/public-route-decorator';
-import { User } from '@app/entities/user';
 import { Unauthorized } from '@app/use-cases/errors/unauthorized';
 
 @Injectable()
@@ -27,7 +26,7 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
     if (err || !user) {
       throw new Unauthorized('Invalid token')
     }
-    return user;
+    return user; // if jwt token is valid this user is the object returned from jwt.strategy validate() function
   }
 
 }

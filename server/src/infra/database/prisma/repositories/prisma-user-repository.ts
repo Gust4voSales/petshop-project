@@ -8,6 +8,7 @@ import { UserMapper } from "../mappers/user-mapper";
 export class PrismaUserRepository implements UserRepository {
   constructor(private prismaService: PrismaService) { }
 
+
   async upsert(user: User): Promise<void> {
     await this.prismaService.user.upsert({
       where: {
@@ -19,8 +20,32 @@ export class PrismaUserRepository implements UserRepository {
         name: user.name,
         email: user.email,
         password: user.password!,
+        refreshToken: user.refreshToken,
       }
     })
+  }
+
+  async updateRefreshToken(userId: string, refreshToken: string | null): Promise<void> {
+    await this.prismaService.user.update({
+      where: {
+        id: userId,
+      },
+      data: {
+        refreshToken
+      }
+    })
+  }
+
+  async findById(id: string): Promise<User | null> {
+    const user = await this.prismaService.user.findUnique({
+      where: {
+        id,
+      }
+    })
+
+    if (!user) return null
+
+    return UserMapper.toDomain(user)
   }
 
   async findByEmail(email: string): Promise<User | null> {

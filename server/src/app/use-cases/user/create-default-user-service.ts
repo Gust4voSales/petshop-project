@@ -15,6 +15,7 @@ export class CreateDefaultUserService {
       name: 'ADMIN',
       email: email,
       password: hashedPassword,
+      refreshToken: null
     })
 
     await this.userRepository.upsert(user)

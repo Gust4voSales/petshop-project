@@ -4,6 +4,7 @@ interface UserProps {
   name: string
   email: string
   password?: string
+  refreshToken?: string | null
 }
 
 export class User extends BaseEntity<UserProps> {
@@ -19,8 +20,12 @@ export class User extends BaseEntity<UserProps> {
     return this.props.email
   }
 
-
   public get password() {
     return this.props.password
   }
+
+  public get refreshToken(): string | null {
+    return this.props.refreshToken ?? null
+  }
+
 }

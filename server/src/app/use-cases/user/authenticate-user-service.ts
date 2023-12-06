@@ -4,6 +4,8 @@ import { EntityNotFound } from "../errors/entity-not-found";
 import { Encrypter } from "@app/cryptography/encrypter";
 import { HashComparer } from "@app/cryptography/hash-comparer";
 import { Unauthorized } from "../errors/unauthorized";
+import { HashGenerator } from "@app/cryptography/hash-generator";
+import { generateAccessTokens } from "./helpers/generate-access-tokens";
 
 
 interface AuthenticateUserRequest {
@@ -13,7 +15,7 @@ interface AuthenticateUserRequest {
 
 @Injectable()
 export class AuthenticateUserService {
-  constructor(private userRepository: UserRepository, private hashComparer: HashComparer, private encrypter: Encrypter) { }
+  constructor(private userRepository: UserRepository, private hashComparer: HashComparer, private hashGenerator: HashGenerator, private encrypter: Encrypter) { }
 
   async execute(request: AuthenticateUserRequest) {
     const user = await this.userRepository.findByEmail(request.email)
@@ -31,15 +33,16 @@ export class AuthenticateUserService {
       throw new Unauthorized("Invalid password")
     }
 
-    const accessToken = await this.encrypter.encrypt({
-      sub: user.id.toString(), // token subject identifier
-      name: user.name,
-      email: user.email,
-    })
+    const { accessToken, refreshToken } = await generateAccessTokens(user, this.encrypter)
+
+    // save hashed refresh token for security
+    const hashedRefreshToken = await this.hashGenerator.hash(refreshToken)
+    await this.userRepository.updateRefreshToken(user.id, hashedRefreshToken)
 
     return {
       user,
       accessToken,
+      refreshToken,
     }
   }
 }

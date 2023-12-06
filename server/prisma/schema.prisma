@@ -60,8 +60,9 @@ model Appointment {
 }
 
 model User {
-  id       String @id
-  name     String
-  email    String @unique
-  password String
+  id           String  @id
+  name         String
+  email        String  @unique
+  password     String
+  refreshToken String?
 }
