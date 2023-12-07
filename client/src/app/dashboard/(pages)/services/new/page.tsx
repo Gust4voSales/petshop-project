@@ -2,18 +2,19 @@
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { PageTitle } from "@components/dashboard/PageTitle";
-import { PetshopServiceFormData, ServiceForm } from "@components/services/ServiceForm";
+import { ServiceForm } from "@components/services/ServiceForm";
 import { createPetshopService, PETSHOPSERVICE_KEY } from "@services/queries/PetshopServices";
 import { convertReaisToCents } from "@utils/parseCurrency";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
+import { CreatePetshopServiceData } from "@@types/PetshopServices";
 
 export default function NewService() {
   const router = useRouter();
   const queryClient = useQueryClient();
 
   const createPetshopServiceMutation = useMutation({
-    mutationFn: (data: PetshopServiceFormData) => createPetshopService(data),
+    mutationFn: (data: CreatePetshopServiceData) => createPetshopService(data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [PETSHOPSERVICE_KEY] });
       toast.success("Serviço criado com sucesso!");
@@ -24,8 +25,8 @@ export default function NewService() {
     },
   });
 
-  async function handleCreateService(data: PetshopServiceFormData) {
-    const parsedData: PetshopServiceFormData = {
+  async function handleCreateService(data: CreatePetshopServiceData) {
+    const parsedData: CreatePetshopServiceData = {
       ...data,
       value: convertReaisToCents(data.value),
     };

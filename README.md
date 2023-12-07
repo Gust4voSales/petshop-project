@@ -17,6 +17,6 @@
 10. ✅ Add authentication in the server
 11. ✅ Integrate authentication in the front
 12. ✅ Add refresh token logic
-13. Money input
-14. Sort appointments by date as default
+13. ✅ Money input
+14. ✅ Sort appointments by date as default
 15. Home Page

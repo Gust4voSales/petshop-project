@@ -61,7 +61,12 @@ export class PrismaAppointmentRepository implements AppointmentRepository {
         },
         status: query.status
       },
-      orderBy: getPrismaSorter({ sortBy: query.sortBy, sortOrder: query.sortOrder }),
+      orderBy: [
+        { ...getPrismaSorter({ sortBy: query.sortBy, sortOrder: query.sortOrder }) },
+
+        // if the query is not already sorting by appointmentTime, always sort by appointmentTime descending
+        query.sortBy !== 'appointmentTime' ? { appointmentTime: 'desc' } : {},
+      ],
       include: {
         pet: true,
         service: true

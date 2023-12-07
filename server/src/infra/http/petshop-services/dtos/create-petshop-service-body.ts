@@ -8,7 +8,7 @@ export class CreatePetshopServiceBody {
   description: string
 
   @Min(1)
-  @Max(100_000_000) //100_000_000_000_000 in cents --> R$ 100_000_000_000 
+  @Max(1_000_000_000) // max of 1_000_000_000 in cents --> R$ 1_000_000
   @IsInt()
   value: number
 

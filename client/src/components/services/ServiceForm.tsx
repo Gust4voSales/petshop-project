@@ -2,11 +2,10 @@ import { Button } from "@components/ui/Button";
 import { CurrencyInput } from "@components/ui/Form/Inputs/CurrencyInput";
 import { Input } from "@components/ui/Form/Inputs/Input";
 import { TextArea } from "@components/ui/Form/TextArea";
-import { SpinLoading } from "@components/ui/Loading/SpinLoading";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { convertCentsToReais } from "@utils/parseCurrency";
+import { maskNumberToCurrency, parseMaskedCurrencyValueToNumber } from "@utils/parseCurrency";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { PetshopService } from "src/@types/PetshopServices";
+import { CreatePetshopServiceData, PetshopService } from "src/@types/PetshopServices";
 import { z } from "zod";
 
 const petshopServiceSchema = z.object({
@@ -15,10 +14,13 @@ const petshopServiceSchema = z.object({
     .string()
     .min(1, "A descrição é obrigatória")
     .max(120, "Tamanho máximo da descrição é de 120 caracteres"),
-  value: z.coerce
-    .number()
-    .min(0.01, "Valor mínimo é de 1 centavo")
-    .max(100_000_000_000, "Valor máximo é de R$100.000.000.000"),
+  value: z
+    .string()
+    // CurrencyInput masks the currency value, so we need to transform that string value into
+    // a number for better validation
+    .transform((value) => parseMaskedCurrencyValueToNumber(value))
+    .pipe(z.number().min(0.01, "Valor mínimo é de 1 centavo").max(1_000_000, "Valor máximo é de R$1.000.000"))
+    .transform((value) => maskNumberToCurrency(value)), // transform back to string to use it as a string
   duration: z.coerce
     .number()
     .min(1, "Valor mínimo é de 1s")
@@ -29,7 +31,7 @@ export type PetshopServiceFormData = z.infer<typeof petshopServiceSchema>;
 
 interface Props {
   service?: PetshopService;
-  onSubmit: (d: PetshopServiceFormData) => Promise<void>;
+  onSubmit: (d: CreatePetshopServiceData) => Promise<void>;
   isLoading: boolean;
 }
 export function ServiceForm(props: Props) {
@@ -42,7 +44,7 @@ export function ServiceForm(props: Props) {
     defaultValues: {
       title: props.service?.title ?? "",
       description: props.service?.description ?? "",
-      value: props.service ? convertCentsToReais(props.service.value) : 0.01,
+      value: props.service ? maskNumberToCurrency(props.service?.value) : "0,00",
       duration: props.service?.duration ?? 3600,
     },
   });
@@ -50,7 +52,7 @@ export function ServiceForm(props: Props) {
   const getSubmitButtonText = () => (props.service ? "Editar" : "Criar");
 
   const handleFormSubmit: SubmitHandler<PetshopServiceFormData> = async (data) => {
-    props.onSubmit(data);
+    props.onSubmit({ ...data, value: parseMaskedCurrencyValueToNumber(data.value) });
   };
 
   return (

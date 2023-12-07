@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { PageTitle } from "@components/dashboard/PageTitle";
 import { deletePetshopService, fetchPetshopServices, PETSHOPSERVICE_KEY } from "@services/queries/PetshopServices";
-import { parseCurrencyToBRL } from "@utils/parseCurrency";
+import { parseCurrencyValueInCentsToBRL } from "@utils/parseCurrency";
 import { parseDuration } from "@utils/parseDuration";
 import { Button } from "@components/ui/Button";
 import { PencilSimple } from "phosphor-react";
@@ -51,7 +51,7 @@ export default function Services() {
       ),
     }),
     columnHelper.accessor("value", {
-      cell: (info) => parseCurrencyToBRL(info.getValue()),
+      cell: (info) => parseCurrencyValueInCentsToBRL(info.getValue()),
       header: "Valor",
     }),
     columnHelper.accessor("duration", {
