@@ -55,7 +55,7 @@ export default function Login() {
   const signInMutation = useMutation({
     mutationFn: (payload: SignInFormData) => signIn(payload),
     onSuccess: (data) => {
-      signInUser(data.user, data.access_token);
+      signInUser(data.user, data.accessToken, data.refreshToken);
       router.push("/dashboard");
     },
     onError: (err) => {

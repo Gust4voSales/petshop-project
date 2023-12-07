@@ -7,10 +7,8 @@ import { deletePetshopService, fetchPetshopServices, PETSHOPSERVICE_KEY } from "
 import { parseCurrencyToBRL } from "@utils/parseCurrency";
 import { parseDuration } from "@utils/parseDuration";
 import { Button } from "@components/ui/Button";
-import { ScrollArea } from "@components/ui/ScrollArea";
 import { PencilSimple } from "phosphor-react";
 import { TooltipDescription } from "@components/services/TooltipDescription";
-import { AsynchronousContent } from "@components/AsynchronousContent";
 import { toast } from "react-hot-toast";
 import { ConfirmDeletePopover } from "@components/ConfirmDeletePopover";
 import { Table } from "@components/ui/Table";

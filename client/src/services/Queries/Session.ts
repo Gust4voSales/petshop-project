@@ -7,12 +7,25 @@ interface SignInParams {
 }
 interface SignInResponse {
   user: User
-  access_token: string
+  accessToken: string
+  refreshToken: string
 }
 export async function signIn({ email, password }: SignInParams) {
   const { data } = await api.post<SignInResponse>('/sessions', {
     email,
     password
   });
+  return data
+}
+
+interface RefreshTokenResponse {
+  accessToken: string
+  refreshToken: string
+}
+export async function refreshAccessToken(refreshToken: string) {
+  const { data } = await api.post<RefreshTokenResponse>('/sessions/refresh-token', {
+    refreshToken,
+  })
+
   return data
 }

@@ -30,7 +30,7 @@ export class SessionController {
 
   @PublicRoute() // so that we don't use the default JWT Guard
   @UseGuards(RefreshJwtGuard)
-  @Get('/refresh-token')
+  @Post('/refresh-token')
   async refreshToken(@CurrentUser() user: User) {
     const tokens = await this.refreshTokenService.execute({ userId: user.id, refreshToken: user.refreshToken! });
 

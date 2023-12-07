@@ -16,11 +16,11 @@ export async function generateAccessTokens(user: User, encrypter: Encrypter) {
 
   const [accessToken, refreshToken] = await Promise.all([
     encrypter.encrypt({ ...encryptionData }, {
-      expiresIn: '10s'
+      expiresIn: '60s'
     }),
 
     encrypter.encrypt({ ...encryptionData }, {
-      expiresIn: '7d'
+      expiresIn: '30d'
     }),
   ])
 

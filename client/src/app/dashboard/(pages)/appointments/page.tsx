@@ -51,9 +51,9 @@ const columns = [
       <Link
         className="link tooltip"
         data-tip={"Ver servico"}
-        href={`/dashboard/services/${props.row.original.service.id}/edit`}
+        href={props.row.original.service ? `/dashboard/services/${props.row.original.service.id}/edit` : ""}
       >
-        {props.row.original.service.title}
+        {props.row.original.service?.title}
       </Link>
     ),
   }),

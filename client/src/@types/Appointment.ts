@@ -12,5 +12,5 @@ export type Appointment = {
   appointmentTime: Date
   status: AppointmentStatus
   pet: Pet
-  service: PetshopService
+  service?: PetshopService
 }

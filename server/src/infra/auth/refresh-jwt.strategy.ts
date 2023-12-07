@@ -10,14 +10,14 @@ import { User } from "@app/entities/user";
 export class RefreshJwtStrategy extends PassportStrategy(Strategy, 'jwt-refresh') {
   constructor() {
     super({
-      jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+      jwtFromRequest: ExtractJwt.fromBodyField('refreshToken'),
       secretOrKey: jwtConstants.refreshTokenSecret,
       passReqToCallback: true,
     });
   }
 
   async validate(req: Request, payload: UserTokenPayload) {
-    const refreshToken = req.get('Authorization')?.replace('Bearer', '').trim();
+    const refreshToken = req.body.refreshToken
 
     return new User({ name: payload.name, email: payload.email, refreshToken }, payload.sub);
   }
