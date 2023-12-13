@@ -8,25 +8,26 @@ export function parseCurrencyValueInCentsToBRL(valueInCents: number) {
 }
 
 export function convertCentsToReais(valueInCents: number) {
-  return valueInCents / 100
+  return Number((valueInCents / 100).toFixed(2)) // https://stackoverflow.com/questions/1458633/how-can-i-deal-with-floating-point-number-precision-in-javascript?page=1&tab=scoredesc#tab-top
+
 }
 
 export function convertReaisToCents(valueInReais: number) {
-  return valueInReais * 100
+  return Number((valueInReais * 100).toFixed(2)) // https://stackoverflow.com/questions/1458633/how-can-i-deal-with-floating-point-number-precision-in-javascript?page=1&tab=scoredesc#tab-top
+}
+
+export function parseMaskedCurrencyValueToNumber(value: string) {
+  // removing all non-numeric characters
+  return parseFloat(value.replaceAll('.', '').replace(',', '.'))
 }
 
 // Given any numeric string, mask it to be a currency with the format "0,00"
-export function maskNumberToCurrency(stringValue: string | number) {
-  // removing all non-numeric characters
-  const value = String(stringValue).replaceAll(".", "").replace(",", "").replace(/\D/g, "");
+export function maskNumberToCurrency(rawValue: string | number) {
+  const value = typeof rawValue === 'string' ? parseMaskedCurrencyValueToNumber(rawValue) : rawValue
 
-  const options = { minimumFractionDigits: 2 };
-  const maskedValue = new Intl.NumberFormat("pt-BR", options).format(
-    isNaN(parseFloat(value)) ? 0 : parseFloat(value) / 100
+  const maskedValue = new Intl.NumberFormat("pt-BR", { minimumFractionDigits: 2 }).format(
+    isNaN(value) ? 0 : value
   );
 
   return maskedValue;
-}
-export function parseMaskedCurrencyValueToNumber(value: string) {
-  return parseFloat(value.replaceAll(".", "").replace(",", "."));
 }

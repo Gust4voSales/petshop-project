@@ -3,9 +3,9 @@ import { CurrencyInput } from "@components/ui/Form/Inputs/CurrencyInput";
 import { Input } from "@components/ui/Form/Inputs/Input";
 import { TextArea } from "@components/ui/Form/TextArea";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { maskNumberToCurrency, parseMaskedCurrencyValueToNumber } from "@utils/parseCurrency";
+import { convertCentsToReais, maskNumberToCurrency, parseMaskedCurrencyValueToNumber } from "@utils/parseCurrency";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { CreatePetshopServiceData, PetshopService } from "src/@types/PetshopServices";
+import { PetshopServiceBodyData, PetshopService } from "src/@types/PetshopServices";
 import { z } from "zod";
 
 const petshopServiceSchema = z.object({
@@ -16,6 +16,9 @@ const petshopServiceSchema = z.object({
     .max(120, "Tamanho máximo da descrição é de 120 caracteres"),
   value: z
     .string()
+    .nonempty({
+      message: "O valor é obrigatório",
+    })
     // CurrencyInput masks the currency value, so we need to transform that string value into
     // a number for better validation
     .transform((value) => parseMaskedCurrencyValueToNumber(value))
@@ -31,7 +34,7 @@ export type PetshopServiceFormData = z.infer<typeof petshopServiceSchema>;
 
 interface Props {
   service?: PetshopService;
-  onSubmit: (d: CreatePetshopServiceData) => Promise<void>;
+  onSubmit: (d: PetshopServiceBodyData) => Promise<void>;
   isLoading: boolean;
 }
 export function ServiceForm(props: Props) {
@@ -44,7 +47,7 @@ export function ServiceForm(props: Props) {
     defaultValues: {
       title: props.service?.title ?? "",
       description: props.service?.description ?? "",
-      value: props.service ? maskNumberToCurrency(props.service?.value) : "0,00",
+      value: props.service ? maskNumberToCurrency(convertCentsToReais(props.service?.value)) : "0,00",
       duration: props.service?.duration ?? 3600,
     },
   });

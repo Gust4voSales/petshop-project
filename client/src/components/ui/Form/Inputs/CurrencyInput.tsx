@@ -1,28 +1,30 @@
 import React from "react";
 import { Label } from "../Label";
 import { inputStyle, Props } from "./InputTypes";
-import { maskNumberToCurrency } from "@utils/parseCurrency";
+import CurrencyInputLib from "react-currency-input-field";
 
 export const CurrencyInputComponent = (
-  { errorMessage, ...props }: Props<HTMLInputElement>,
+  { errorMessage, label, ...props }: Props<HTMLInputElement>,
   ref: React.ForwardedRef<HTMLInputElement>
 ) => {
-  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
-    e.target.value = maskNumberToCurrency(e.target.value);
-  }
-
   return (
     <div>
-      {props.label && <Label htmlFor={props.name}>{props.label}</Label>}
+      {label && <Label htmlFor={props.name}>{label}</Label>}
 
       <label className="input-group input-error">
         <span>R$</span>
-        <input
-          type="string"
-          className={inputStyle({ errorBorder: !!errorMessage })}
+        <CurrencyInputLib
           ref={ref}
+          className={inputStyle({ errorBorder: !!errorMessage })}
           {...props}
-          onChange={handleChange}
+          // onValueChange={(value: any, name: any) => console.log(value, name)}
+          decimalsLimit={2}
+          allowNegativeValue={false}
+          decimalScale={2}
+          intlConfig={{ locale: "pt-BR" }}
+          defaultValue={props.defaultValue ? Number(props.defaultValue) : undefined}
+          step={undefined}
+          maxLength={undefined}
         />
       </label>
       {errorMessage && <Label error>{errorMessage}</Label>}

@@ -211,7 +211,7 @@ export default function Appointments() {
   return (
     <div>
       <PageTitle title="Agendamentos" />
-      <div className="flex mb-4">
+      <div className="flex my-4">
         <div className="w-full">
           <Table
             data={appointmentsListQuery.data?.appointments ?? []}

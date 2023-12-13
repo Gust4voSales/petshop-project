@@ -4,14 +4,15 @@ import axios from "axios";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { AsynchronousContent } from "@components/AsynchronousContent";
 import { PageTitle } from "@components/dashboard/PageTitle";
-import { PetshopServiceFormData, ServiceForm } from "@components/services/ServiceForm";
+import { ServiceForm } from "@components/services/ServiceForm";
 import { fetchPetshopService, PETSHOPSERVICE_KEY, updatePetshopService } from "@services/queries/PetshopServices";
 import { toast } from "react-hot-toast";
 import { convertReaisToCents } from "@utils/parseCurrency";
+import { PetshopServiceBodyData } from "@@types/PetshopServices";
 
 interface EditPetshopServiceMutationPayload {
   id: string;
-  data: PetshopServiceFormData;
+  data: PetshopServiceBodyData;
 }
 export default function EditService({ params }: { params: { id: string } }) {
   const queryClient = useQueryClient();
@@ -37,8 +38,8 @@ export default function EditService({ params }: { params: { id: string } }) {
     if (axios.isAxiosError(error) && error.response?.status === 404) return "Erro! Serviço não encontrado.";
   };
 
-  async function handleEditService(data: PetshopServiceFormData) {
-    const parsedData: PetshopServiceFormData = {
+  async function handleEditService(data: PetshopServiceBodyData) {
+    const parsedData: PetshopServiceBodyData = {
       ...data,
       value: convertReaisToCents(data.value),
     };

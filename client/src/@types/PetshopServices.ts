@@ -6,7 +6,7 @@ export type PetshopService = {
   duration: number
 }
 
-export type CreatePetshopServiceData = {
+export type PetshopServiceBodyData = {
   title: string
   description: string
   value: number
