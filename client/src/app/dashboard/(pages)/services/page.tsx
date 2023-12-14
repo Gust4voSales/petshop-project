@@ -5,7 +5,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { PageTitle } from "@components/dashboard/PageTitle";
 import { deletePetshopService, fetchPetshopServices, PETSHOPSERVICE_KEY } from "@services/queries/PetshopServices";
 import { parseCurrencyValueInCentsToBRL } from "@utils/parseCurrency";
-import { parseDuration } from "@utils/parseDuration";
+import { parseSecondsToHuman } from "@utils/timeDuration";
 import { Button } from "@components/ui/Button";
 import { PencilSimple } from "phosphor-react";
 import { TooltipDescription } from "@components/services/TooltipDescription";
@@ -55,7 +55,7 @@ export default function Services() {
       header: "Valor",
     }),
     columnHelper.accessor("duration", {
-      cell: (info) => parseDuration(info.getValue()),
+      cell: (info) => parseSecondsToHuman(info.getValue()),
       header: "Duração",
     }),
     columnHelper.display({

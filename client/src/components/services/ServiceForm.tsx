@@ -4,6 +4,7 @@ import { Input } from "@components/ui/Form/Inputs/Input";
 import { TextArea } from "@components/ui/Form/TextArea";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { convertCentsToReais, maskNumberToCurrency, parseMaskedCurrencyValueToNumber } from "@utils/parseCurrency";
+import { parseTimeStringToDuration, parseSecondsToTimeDurationString } from "@utils/timeDuration";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { PetshopServiceBodyData, PetshopService } from "src/@types/PetshopServices";
 import { z } from "zod";
@@ -24,10 +25,19 @@ const petshopServiceSchema = z.object({
     .transform((value) => parseMaskedCurrencyValueToNumber(value))
     .pipe(z.number().min(0.01, "Valor mínimo é de 1 centavo").max(1_000_000, "Valor máximo é de R$1.000.000"))
     .transform((value) => maskNumberToCurrency(value)), // transform back to string to use it as a string
-  duration: z.coerce
-    .number()
-    .min(1, "Valor mínimo é de 1s")
-    .max(24 * 60 * 60, "Valor máximo é de 86400s (24h)"), // MAX of 86400 seconds (24h) --> 24h * 60min * 60s
+  duration: z
+    .string()
+    .length(8, "O tempo é obrigatório")
+    // parses time string into seconds for validation
+    .transform((value) => {
+      const timeDuration = parseTimeStringToDuration(value);
+      return timeDuration.asSeconds();
+    })
+    .pipe(z.number().min(1, "Valor mínimo é de 1s"))
+    .transform((value) => {
+      // transform back to time string (HH:mm:ss) to use it as a string
+      return parseSecondsToTimeDurationString(value);
+    }),
 });
 
 export type PetshopServiceFormData = z.infer<typeof petshopServiceSchema>;
@@ -48,14 +58,20 @@ export function ServiceForm(props: Props) {
       title: props.service?.title ?? "",
       description: props.service?.description ?? "",
       value: props.service ? maskNumberToCurrency(convertCentsToReais(props.service?.value)) : "0,00",
-      duration: props.service?.duration ?? 3600,
+      duration: parseSecondsToTimeDurationString(props.service?.duration ?? 3600),
     },
   });
 
   const getSubmitButtonText = () => (props.service ? "Editar" : "Criar");
 
   const handleFormSubmit: SubmitHandler<PetshopServiceFormData> = async (data) => {
-    props.onSubmit({ ...data, value: parseMaskedCurrencyValueToNumber(data.value) });
+    const timeDuration = parseTimeStringToDuration(data.duration);
+
+    props.onSubmit({
+      ...data,
+      value: parseMaskedCurrencyValueToNumber(data.value),
+      duration: timeDuration.asSeconds(),
+    });
   };
 
   return (
@@ -79,8 +95,9 @@ export function ServiceForm(props: Props) {
         <div>
           <fieldset>
             <Input
-              label="Duração (em segundos)"
-              type="number"
+              label="Duração"
+              type="time"
+              step={1} // required to render seconds as well
               id="duration"
               errorMessage={errors.duration?.message}
               {...register("duration")}
