@@ -15,6 +15,8 @@ import { ConfirmDeletePopover } from "@components/ConfirmDeletePopover";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { APIError } from "@@types/API";
+import { patternFormatter } from "react-number-format";
+import { cellPhonePattern, removeCountryCodeAnd9FromRawPhone } from "@utils/phoneNumber";
 
 const columnHelper = createColumnHelper<Customer>();
 
@@ -50,7 +52,11 @@ export default function Customers() {
       header: "Nome",
     }),
     columnHelper.accessor("phone", {
-      cell: (info) => info.getValue(),
+      cell: (info) =>
+        patternFormatter(removeCountryCodeAnd9FromRawPhone(info.getValue()), {
+          format: cellPhonePattern,
+          patternChar: "#",
+        }),
       header: "Celular",
     }),
     columnHelper.accessor("pets", {

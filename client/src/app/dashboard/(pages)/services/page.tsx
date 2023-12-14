@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { PageTitle } from "@components/dashboard/PageTitle";
 import { deletePetshopService, fetchPetshopServices, PETSHOPSERVICE_KEY } from "@services/queries/PetshopServices";
-import { parseCurrencyValueInCentsToBRL } from "@utils/parseCurrency";
+import { parseCurrencyValueInCentsToBRL } from "@utils/currency";
 import { parseSecondsToHuman } from "@utils/timeDuration";
 import { Button } from "@components/ui/Button";
 import { PencilSimple } from "phosphor-react";

@@ -7,7 +7,7 @@ import { PageTitle } from "@components/dashboard/PageTitle";
 import { ServiceForm } from "@components/services/ServiceForm";
 import { fetchPetshopService, PETSHOPSERVICE_KEY, updatePetshopService } from "@services/queries/PetshopServices";
 import { toast } from "react-hot-toast";
-import { convertReaisToCents } from "@utils/parseCurrency";
+import { convertReaisToCents } from "@utils/currency";
 import { PetshopServiceBodyData } from "@@types/PetshopServices";
 
 interface EditPetshopServiceMutationPayload {

@@ -3,20 +3,22 @@ import { Input } from "@components/ui/Form/Inputs/Input";
 import { ScrollArea } from "@components/ui/ScrollArea";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Plus, X } from "phosphor-react";
-import { useFieldArray, useForm } from "react-hook-form";
+import { Controller, useFieldArray, useForm } from "react-hook-form";
 import { z } from "zod";
 import { petSchema } from "./pets/PetForm";
+import { PatternFormat } from "react-number-format";
+import { removeNonNumericFromString } from "@utils/removeNonNumericFromString";
+import { cellPhonePattern } from "@utils/phoneNumber";
 
 const customerSchema = z.object({
   name: z
     .string()
     .min(3, "Tamanho mínimo do nome é de 3 caracteres")
     .max(60, "Tamanho máximo do nome é de 60 caracteres"),
-  phone: z
-    .string()
-    .trim()
-    .min(8, "Tamanho mínimo do celular é de 8 caracteres")
-    .max(18, "Tamanho máximo do celular é de 18 caracteres"),
+  phone: z.string().refine((value) => {
+    const rawValue = removeNonNumericFromString(value);
+    return rawValue.length === 13;
+  }, "Celular inválido"),
   pets: z.array(petSchema),
 });
 
@@ -53,14 +55,37 @@ export function CreateCustomerForm(props: Props) {
     });
   }
 
+  function handleSubmitForm(d: CreateCustomerFormData) {
+    props.onSubmit({ ...d, phone: removeNonNumericFromString(d.phone) });
+  }
+
   return (
-    <form onSubmit={handleSubmit(props.onSubmit)} className="flex flex-col w-full mt-4 gap-4 flex-wrap">
+    <form onSubmit={handleSubmit(handleSubmitForm)} className="flex flex-col w-full mt-4 gap-4 flex-wrap">
       <div className="flex gap-2 flex-wrap">
         <fieldset>
           <Input label="Nome" id="name" errorMessage={errors.name?.message} {...register("name")} />
         </fieldset>
         <fieldset>
-          <Input label="Celular" id="phone" type="tel" errorMessage={errors.phone?.message} {...register("phone")} />
+          <Controller
+            control={control}
+            name="phone"
+            render={({ field: { name, onChange, value, ref } }) => (
+              <PatternFormat
+                format={cellPhonePattern}
+                patternChar="#"
+                customInput={Input}
+                // Input props are passed to customInput
+                label="Celular"
+                id="phone"
+                type="tel"
+                errorMessage={errors.phone?.message}
+                name={name}
+                onChange={onChange}
+                value={value}
+                getInputRef={ref}
+              />
+            )}
+          />
         </fieldset>
       </div>
 

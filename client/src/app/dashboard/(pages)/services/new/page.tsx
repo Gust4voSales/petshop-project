@@ -4,7 +4,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { PageTitle } from "@components/dashboard/PageTitle";
 import { ServiceForm } from "@components/services/ServiceForm";
 import { createPetshopService, PETSHOPSERVICE_KEY } from "@services/queries/PetshopServices";
-import { convertReaisToCents } from "@utils/parseCurrency";
+import { convertReaisToCents } from "@utils/currency";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { PetshopServiceBodyData } from "@@types/PetshopServices";

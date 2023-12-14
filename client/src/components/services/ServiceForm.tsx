@@ -3,7 +3,7 @@ import { CurrencyInput } from "@components/ui/Form/Inputs/CurrencyInput";
 import { Input } from "@components/ui/Form/Inputs/Input";
 import { TextArea } from "@components/ui/Form/TextArea";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { convertCentsToReais, maskNumberToCurrency, parseMaskedCurrencyValueToNumber } from "@utils/parseCurrency";
+import { convertCentsToReais, maskNumberToCurrency, parseMaskedCurrencyValueToNumber } from "@utils/currency";
 import { parseTimeStringToDuration, parseSecondsToTimeDurationString } from "@utils/timeDuration";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { PetshopServiceBodyData, PetshopService } from "src/@types/PetshopServices";
