@@ -23,4 +23,4 @@
 16. ✅ Add cell phone number format https://github.com/s-yadav/react-number-format#readme
 17. ✅ Home Page
 18. ✅ Responsiveness
-19. Deploy
+19. ✅ Deploy
