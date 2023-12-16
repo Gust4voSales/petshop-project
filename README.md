@@ -20,5 +20,7 @@
 13. ✅ Money input
 14. ✅ Sort appointments by date as default
 15. ✅ Use time input (with step={1} to render seconds) as duration input
-16. Add cell phone number format https://github.com/s-yadav/react-number-format#readme
-17. Home Page
+16. ✅ Add cell phone number format https://github.com/s-yadav/react-number-format#readme
+17. ✅ Home Page
+18. Responsiveness
+19. Deploy

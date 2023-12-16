@@ -7,7 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { signIn } from "@services/queries/Session";
 import { useMutation } from "@tanstack/react-query";
 import { isAxiosError } from "axios";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useSessionStore } from "src/stores/session";

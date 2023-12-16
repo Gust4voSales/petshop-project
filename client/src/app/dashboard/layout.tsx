@@ -3,10 +3,8 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { redirect, usePathname } from "next/navigation";
-import { Bag, Calendar, Person } from "phosphor-react";
+import { Bag, Calendar, Info, Person } from "phosphor-react";
 import { Header } from "@components/Header";
-import { themeChange } from "theme-change";
-import { ThemeSelector } from "@components/dashboard/ThemeSelector";
 import { useSessionStore } from "src/stores/session";
 
 const ROUTES = [
@@ -25,6 +23,11 @@ const ROUTES = [
     link: "/dashboard/services",
     Icon: () => <Bag size={24} />,
   },
+  {
+    name: "Sobre",
+    link: "/dashboard/about",
+    Icon: () => <Info size={24} />,
+  },
 ];
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
@@ -34,10 +37,6 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
   useEffect(() => {
     setHydrated(true);
-  }, []);
-
-  useEffect(() => {
-    themeChange(false);
   }, []);
 
   if (!hydrated) {
@@ -52,8 +51,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     <div>
       <Header />
 
-      {/*  h-[calc(100vh-4rem-2px)] --> subtract Header vertical space */}
-      <div className="drawer drawer-mobile lg:drawer-open h-[calc(100vh-4rem-2px)]">
+      <div className="drawer drawer-mobile lg:drawer-open">
         <input id="sidebar-drawer" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content flex">
           <main className="w-full p-4">{children}</main>
@@ -70,7 +68,6 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                 </Link>
               </li>
             ))}
-            <ThemeSelector />
           </ul>
         </div>
       </div>
