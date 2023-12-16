@@ -2,7 +2,7 @@ import { ExternalLink } from "./ui/ExternalLink";
 
 export function Footer() {
   return (
-    <footer className="flex gap-2 items-center justify-between lg:justify-around max-sm:flex-col p-4 bg-base-200 text-neutral-content">
+    <footer className="flex gap-2 items-center justify-between p-4 bg-base-200 text-neutral-content lg:justify-around max-sm:flex-col">
       <div>
         <p className="flex items-center gap-2">
           <span className="font-bold text-3xl">♠</span>

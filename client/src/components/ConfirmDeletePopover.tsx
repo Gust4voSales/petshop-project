@@ -8,7 +8,7 @@ interface Props {
 export function ConfirmDeletePopover(props: Props) {
   return (
     <Popover.Root>
-      <Popover.Trigger className="tooltip" data-tip="Remover">
+      <Popover.Trigger className="tooltip tooltip-left" data-tip="Remover">
         <div className={buttonStyle({ bg: "danger", circle: true })}>
           <TrashSimple className="w-6 h-6" />
         </div>

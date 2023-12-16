@@ -96,7 +96,7 @@ export function CreateCustomerForm(props: Props) {
           return (
             <div
               key={field.id}
-              className={`flex items-center w-[38rem] gap-2 border-2 p-2 rounded-[var(--rounded-box)] relative`}
+              className={`flex items-center gap-2 border-2 p-2 rounded-[var(--rounded-box)] relative flex-wrap`}
             >
               <fieldset>
                 <Input

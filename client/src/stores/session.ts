@@ -26,7 +26,7 @@ const getClientInitialState = () => {
 
   if (storedUser && storedTtokens) {
     try {
-      const { user } = JSON.parse(storedUser)
+      const user = JSON.parse(storedUser)
       const { accessToken } = JSON.parse(storedTtokens)
 
       setAPIAuthorizationHeader(accessToken)

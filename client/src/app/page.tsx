@@ -1,8 +1,14 @@
 "use client";
+
 import { About } from "@components/About";
+import { Header } from "@components/Header";
 import { Button } from "@components/ui/Button";
+import { Table } from "@components/ui/Table";
+import { createColumnHelper } from "@tanstack/react-table";
 import Link from "next/link";
-import { CaretDown, CaretUp, PawPrint, SignIn } from "phosphor-react";
+import { CaretDown, CaretUp, PawPrint } from "phosphor-react";
+
+const columnHelper = createColumnHelper<any>();
 
 export default function Home() {
   const handleScrollBackToTop = () => {
@@ -19,21 +25,9 @@ export default function Home() {
   return (
     <div className="h-full min-h-screen flex flex-col">
       {/* header height is 65px */}
-      <header className="navbar border-b-2">
-        <div className="flex-1">
-          <Link href="/" className="btn btn-link prose">
-            <h1>Petshop</h1>
-          </Link>
-        </div>
+      <Header />
 
-        <Button bg="ghost" tooltipText="Entrar" tooltipBottom asChild>
-          <Link href={"/login"}>
-            <SignIn className="h-5 w-5" />
-          </Link>
-        </Button>
-      </header>
-
-      <section className="hero h-[calc(100vh-66px)] bg-base-100 relativ">
+      <section className="hero min-h-[calc(100vh-66px)] bg-base-100 relativ">
         <div className="hero-content text-center">
           <div className="max-w-md">
             <h1 className="text-5xl font-bold underline flex items-end gap-4 justify-center">
@@ -57,7 +51,7 @@ export default function Home() {
         </button>
       </section>
 
-      <section id="about-section" className="relative h-screen bg-base-300 flex justify-center items-center">
+      <section id="about-section" className="relative min-h-screen bg-base-300 flex justify-center items-center p-4">
         <About transparentBg={false} />
 
         <button

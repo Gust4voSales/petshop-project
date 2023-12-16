@@ -14,7 +14,7 @@ interface Props extends LabelHTMLAttributes<HTMLLabelElement>, VariantProps<type
 
 export const Label = ({ error, ...props }: Props) => {
   return (
-    <label className="label max-w-fit" {...props}>
+    <label className="label max-w-fit whitespace-nowrap" {...props}>
       <span className={labelTextStyle({ error })}>{props.children}</span>
     </label>
   );

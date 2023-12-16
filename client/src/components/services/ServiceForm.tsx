@@ -76,8 +76,8 @@ export function ServiceForm(props: Props) {
 
   return (
     <form onSubmit={handleSubmit(handleFormSubmit)} className="w-full max-w-2xl mt-4">
-      <div className="flex justify-between w-full [&>div]:w-72">
-        <div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4">
+        <div className="flex flex-col gap-2">
           <fieldset>
             <Input label="Título" id="title" errorMessage={errors.title?.message} {...register("title")} />
           </fieldset>
@@ -92,7 +92,7 @@ export function ServiceForm(props: Props) {
           </fieldset>
         </div>
 
-        <div>
+        <div className="flex flex-col gap-2">
           <fieldset>
             <Input
               label="Duração"

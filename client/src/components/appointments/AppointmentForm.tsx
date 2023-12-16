@@ -82,14 +82,15 @@ export function AppointmentForm(props: Props) {
 
   return (
     <form onSubmit={handleSubmit(handleFormSubmit)} className="w-full max-w-2xl mt-4">
-      <div className="flex flex-col justify-between w-full">
-        <div className="flex gap-8">
+      <div className="flex flex-col justify-between w-full gap-2">
+        <div className="flex w-fit flex-col md:flex-row gap-2 md:gap-8 flex-wrap">
           <fieldset>
             <Label>Selecione o Pet</Label>
             <input className="hidden" {...register("petId")} />
             <SelectCustomerPet onPetSelectionChange={onPetSelectionChange} />
-            <Label error>{errors.petId?.message}</Label>
+            {errors.petId?.message && <Label error>{errors.petId?.message}</Label>}
           </fieldset>
+
           <fieldset>
             <Select label="Serviço" id="serviceId" errorMessage={errors.serviceId?.message} {...register("serviceId")}>
               <option disabled value="">

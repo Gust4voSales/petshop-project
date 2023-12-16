@@ -7,7 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { signIn } from "@services/queries/Session";
 import { useMutation } from "@tanstack/react-query";
 import { isAxiosError } from "axios";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useSessionStore } from "src/stores/session";
@@ -63,6 +63,7 @@ export default function Login() {
         toast.error("Email ou senha inválidos");
       } else {
         toast.error("Ocorreu um problema ao tentar realizar o login");
+        alert(JSON.stringify(err as any));
       }
     },
   });
@@ -74,6 +75,7 @@ export default function Login() {
   return (
     <div className="h-screen flex flex-col">
       <Header />
+
       <div className="card bg-neutral-focus shadow-md m-auto w-96 flex flex-col p-2 items-center">
         <div className="prose">
           <h2>LOGIN</h2>

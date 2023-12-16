@@ -211,31 +211,8 @@ export default function Appointments() {
   return (
     <div>
       <PageTitle title="Agendamentos" />
-      <div className="flex my-4">
-        <div className="w-full">
-          <Table
-            data={appointmentsListQuery.data?.appointments ?? []}
-            columns={columns}
-            asyncStatus={appointmentsListQuery.status}
-            pagination={{
-              state: pagination,
-              setState: setPagination,
-            }}
-            lastPage={appointmentsListQuery.data?.meta.lastPage}
-            sorting={{
-              state: sorting,
-              setState: setSorting,
-            }}
-            isFetchingWithPreviousData={isFetchingWithPreviousData(
-              appointmentsListQuery.isFetching,
-              appointmentsListQuery.isPreviousData
-            )}
-          />
-        </div>
-
-        <div className="divider divider-horizontal divider-accent"></div>
-
-        <div className="prose">
+      <div className="flex my-4 flex-col items-center lg:flex-row lg:items-start">
+        <div className="prose w-fit">
           <h3 className="flex items-center gap-2 w-40">
             <Funnel size={16} weight="fill" /> Filtros
           </h3>
@@ -273,11 +250,36 @@ export default function Appointments() {
             </Select>
           </div>
         </div>
+
+        <div className="divider lg:divider-horizontal divider-accent"></div>
+
+        <div className="w-full">
+          <Table
+            data={appointmentsListQuery.data?.appointments ?? []}
+            columns={columns}
+            asyncStatus={appointmentsListQuery.status}
+            pagination={{
+              state: pagination,
+              setState: setPagination,
+            }}
+            lastPage={appointmentsListQuery.data?.meta.lastPage}
+            sorting={{
+              state: sorting,
+              setState: setSorting,
+            }}
+            isFetchingWithPreviousData={isFetchingWithPreviousData(
+              appointmentsListQuery.isFetching,
+              appointmentsListQuery.isPreviousData
+            )}
+          />
+        </div>
       </div>
 
-      <Button bg="accent" asChild>
-        <Link href={"/dashboard/appointments/new"}>Novo agendamento</Link>
-      </Button>
+      <div className="my-4">
+        <Button bg="accent" asChild>
+          <Link href={"/dashboard/appointments/new"}>Novo agendamento</Link>
+        </Button>
+      </div>
     </div>
   );
 }

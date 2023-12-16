@@ -5,7 +5,7 @@ interface Props {
 }
 export function About({ transparentBg }: Props) {
   return (
-    <div className={`${!transparentBg ? "bg-base-300" : ""} flex items-center justify-center gap-6`}>
+    <div className={`${!transparentBg ? "bg-base-300" : ""} flex items-center justify-center gap-6 flex-wrap`}>
       <span className="text-9xl">🐈</span>
       <div className="prose text-justify">
         <h2>

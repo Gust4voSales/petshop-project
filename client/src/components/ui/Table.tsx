@@ -96,9 +96,9 @@ export function Table<T>({
   return (
     <AsynchronousContent status={asyncStatus}>
       <div className={`max-h-screen-3/5 overflow-auto ${isFetchingWithPreviousData ? "animate-pulse" : ""}`}>
-        <table className="table">
+        <table className="table whitespace-nowrap">
           {hasItems && (
-            <thead>
+            <thead className="sticky top-0 bg-base-200 z-[2]">
               {table.getHeaderGroups().map((headerGroup) => (
                 <tr key={headerGroup.id}>
                   {headerGroup.headers.map((header) => (
@@ -140,7 +140,7 @@ export function Table<T>({
       </div>
 
       {pagination !== undefined && (
-        <div className="flex items-center gap-4 justify-end mt-4">
+        <div className="flex items-center gap-4 justify-end mt-4 whitespace-nowrap flex-wrap">
           <div className="flex items-center gap-1">
             <label htmlFor="page-size">Itens por página</label>
             <select

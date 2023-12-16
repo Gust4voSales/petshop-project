@@ -1,3 +1,4 @@
+"use client";
 import { cva, VariantProps } from "class-variance-authority";
 import { Slot } from "@radix-ui/react-slot";
 import { ButtonHTMLAttributes } from "react";
@@ -54,7 +55,7 @@ export function Button({
 
   if (tooltipText) {
     return (
-      <div className={`tooltip ${tooltipBottom ? "tooltip-bottom" : "tooltip-top"}`} data-tip={tooltipText}>
+      <div className={`tooltip ${tooltipBottom ? "tooltip-bottom" : "tooltip-left"}`} data-tip={tooltipText}>
         <Component />
       </div>
     );
