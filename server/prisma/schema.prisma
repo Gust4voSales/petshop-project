@@ -6,8 +6,9 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("POSTGRES_URL")
+  provider     = "mysql"
+  url          = env("MYSQL_URL")
+  relationMode = "prisma"
 }
 
 generator erd {
@@ -46,6 +47,8 @@ model Pet {
 
   Appointment Appointment[]
   owner       Customer      @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+
+  @@index([ownerId])
 }
 
 model Appointment {
@@ -57,6 +60,9 @@ model Appointment {
 
   pet     Pet             @relation(fields: [petId], references: [id])
   service PetshopService? @relation(fields: [serviceId], references: [id], onDelete: SetNull)
+
+  @@index([petId])
+  @@index([serviceId])
 }
 
 model User {
