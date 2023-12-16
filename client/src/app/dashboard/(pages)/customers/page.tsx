@@ -1,9 +1,7 @@
 "use client";
 
-import { AsynchronousContent } from "@components/AsynchronousContent";
 import { PageTitle } from "@components/dashboard/PageTitle";
 import { Button } from "@components/ui/Button";
-import { ScrollArea } from "@components/ui/ScrollArea";
 import { Table } from "@components/ui/Table";
 import { CUSTOMER_KEY, deleteCustomer, fetchCustomers } from "@services/queries/Customer";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";

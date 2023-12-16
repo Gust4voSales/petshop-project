@@ -171,7 +171,7 @@ export default function EditCustomer({ params }: { params: { id: string } }) {
               isLoading={editCustomerMutation.isLoading}
               onSubmit={handleEditCustomer}
             />
-            <div className="prose flex items-center gap-2">
+            <div className="prose flex items-center gap-2 mt-4">
               <h3 className="my-0">Pets</h3>
             </div>
             <Table data={customerShowQuery.data?.customer.pets ?? []} columns={columns} />

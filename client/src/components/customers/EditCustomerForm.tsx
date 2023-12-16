@@ -72,6 +72,8 @@ export function EditCustomerForm(props: Props) {
             )}
           />
         </fieldset>
+      </div>
+      <div>
         <Button type="submit" bg="submit" isLoading={props.isLoading}>
           Editar
         </Button>

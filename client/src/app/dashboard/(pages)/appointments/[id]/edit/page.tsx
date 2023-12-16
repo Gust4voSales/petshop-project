@@ -83,9 +83,9 @@ export default function EditService({ params }: { params: { id: string } }) {
               <Link
                 className="link font-normal tooltip w-fit"
                 data-tip={"Ver serviço"}
-                href={`/dashboard/services/${appointment?.service.id}/edit`}
+                href={`/dashboard/services/${appointment?.service?.id}/edit`}
               >
-                {appointment?.service.title}
+                {appointment?.service?.title}
               </Link>
             }
           />

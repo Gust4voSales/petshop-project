@@ -1,6 +1,5 @@
 import { Button } from "@components/ui/Button";
 import { Input } from "@components/ui/Form/Inputs/Input";
-import { ScrollArea } from "@components/ui/ScrollArea";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Plus, X } from "phosphor-react";
 import { Controller, useFieldArray, useForm } from "react-hook-form";
@@ -92,58 +91,56 @@ export function CreateCustomerForm(props: Props) {
       <div className="prose flex items-center gap-2">
         <h3 className="my-0">Pets</h3>
       </div>
-      <ScrollArea>
-        <div className="flex flex-wrap gap-2 items-center max-h-96 ">
-          {fieldArrayForm.fields.map((field, index) => {
-            return (
-              <div
-                key={field.id}
-                className={`flex items-center w-[38rem] gap-2 border-2 p-2 rounded-[var(--rounded-box)] relative`}
-              >
-                <fieldset>
-                  <Input
-                    label="Nome do pet"
-                    id={`pets.${index}.name`}
-                    errorMessage={errors.pets?.[index]?.name?.message}
-                    {...register(`pets.${index}.name` as const)}
-                  />
-                </fieldset>
-                <fieldset>
-                  <Input
-                    label="Raça do pet"
-                    id={`pets.${index}.breed`}
-                    errorMessage={errors.pets?.[index]?.breed?.message}
-                    {...register(`pets.${index}.breed` as const)}
-                  />
-                </fieldset>
-                <fieldset className="w-32">
-                  <Input
-                    type="number"
-                    label="Idade do pet"
-                    id={`pets.${index}.age`}
-                    errorMessage={errors.pets?.[index]?.age?.message}
-                    {...register(`pets.${index}.age` as const)}
-                  />
-                </fieldset>
+      <div className="flex flex-wrap gap-2 items-center max-h-96 overflow-y-auto">
+        {fieldArrayForm.fields.map((field, index) => {
+          return (
+            <div
+              key={field.id}
+              className={`flex items-center w-[38rem] gap-2 border-2 p-2 rounded-[var(--rounded-box)] relative`}
+            >
+              <fieldset>
+                <Input
+                  label="Nome do pet"
+                  id={`pets.${index}.name`}
+                  errorMessage={errors.pets?.[index]?.name?.message}
+                  {...register(`pets.${index}.name` as const)}
+                />
+              </fieldset>
+              <fieldset>
+                <Input
+                  label="Raça do pet"
+                  id={`pets.${index}.breed`}
+                  errorMessage={errors.pets?.[index]?.breed?.message}
+                  {...register(`pets.${index}.breed` as const)}
+                />
+              </fieldset>
+              <fieldset className="w-32">
+                <Input
+                  type="number"
+                  label="Idade do pet"
+                  id={`pets.${index}.age`}
+                  errorMessage={errors.pets?.[index]?.age?.message}
+                  {...register(`pets.${index}.age` as const)}
+                />
+              </fieldset>
 
-                <button
-                  className="tooltip tooltip-left absolute right-2 top-2 bg-error text-primary-content rounded-[--var(rounded-btn)]"
-                  data-tip="Remover Pet"
-                  type="button"
-                  onClick={() => fieldArrayForm.remove(index)}
-                >
-                  <X />
-                </button>
-              </div>
-            );
-          })}
-          <div>
-            <Button onClick={addPetForm} tooltipText="Adicionar Pet" type="button" outline circle>
-              <Plus />
-            </Button>
-          </div>
+              <button
+                className="tooltip tooltip-left absolute right-2 top-2 bg-error text-primary-content rounded-[--var(rounded-btn)]"
+                data-tip="Remover Pet"
+                type="button"
+                onClick={() => fieldArrayForm.remove(index)}
+              >
+                <X />
+              </button>
+            </div>
+          );
+        })}
+        <div>
+          <Button onClick={addPetForm} tooltipText="Adicionar Pet" type="button" outline circle>
+            <Plus />
+          </Button>
         </div>
-      </ScrollArea>
+      </div>
 
       <div>
         <Button type="submit" bg="submit" isLoading={props.isLoading}>

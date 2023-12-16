@@ -8,7 +8,6 @@ import {
   Column,
 } from "@tanstack/react-table";
 import { EmptyContent } from "./EmptyContent";
-import { ScrollArea } from "./ScrollArea";
 import { AsynchronousContent } from "@components/AsynchronousContent";
 import { QueryStatus } from "@tanstack/react-query";
 import { Dispatch, SetStateAction } from "react";
@@ -96,53 +95,49 @@ export function Table<T>({
 
   return (
     <AsynchronousContent status={asyncStatus}>
-      <ScrollArea>
-        <div className={`max-h-screen-3/5 ${isFetchingWithPreviousData ? "animate-pulse" : ""}`}>
-          <table className="table">
-            {hasItems && (
-              <thead>
-                {table.getHeaderGroups().map((headerGroup) => (
-                  <tr key={headerGroup.id}>
-                    {headerGroup.headers.map((header) => (
-                      <th key={header.id}>
-                        <div className="flex items-center gap-1">
-                          {header.isPlaceholder
-                            ? null
-                            : flexRender(header.column.columnDef.header, header.getContext())}
+      <div className={`max-h-screen-3/5 overflow-auto ${isFetchingWithPreviousData ? "animate-pulse" : ""}`}>
+        <table className="table">
+          {hasItems && (
+            <thead>
+              {table.getHeaderGroups().map((headerGroup) => (
+                <tr key={headerGroup.id}>
+                  {headerGroup.headers.map((header) => (
+                    <th key={header.id}>
+                      <div className="flex items-center gap-1">
+                        {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
 
-                          {header.column.columnDef.enableSorting && (
-                            <SortColumnButton
-                              sortingOrder={header.column.getIsSorted()}
-                              onClick={() => handleToggleSorting(header.column)}
-                            />
-                          )}
-                        </div>
-                      </th>
-                    ))}
-                  </tr>
-                ))}
-              </thead>
-            )}
-            <tbody>
-              {table.getRowModel().rows.map((row) => (
-                <tr key={row.id}>
-                  {row.getVisibleCells().map((cell) => (
-                    <td key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</td>
+                        {header.column.columnDef.enableSorting && (
+                          <SortColumnButton
+                            sortingOrder={header.column.getIsSorted()}
+                            onClick={() => handleToggleSorting(header.column)}
+                          />
+                        )}
+                      </div>
+                    </th>
                   ))}
                 </tr>
               ))}
+            </thead>
+          )}
+          <tbody>
+            {table.getRowModel().rows.map((row) => (
+              <tr key={row.id}>
+                {row.getVisibleCells().map((cell) => (
+                  <td key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</td>
+                ))}
+              </tr>
+            ))}
 
-              {!hasItems && (
-                <tr>
-                  <td>
-                    <EmptyContent />
-                  </td>
-                </tr>
-              )}
-            </tbody>
-          </table>
-        </div>
-      </ScrollArea>
+            {!hasItems && (
+              <tr>
+                <td>
+                  <EmptyContent />
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
 
       {pagination !== undefined && (
         <div className="flex items-center gap-4 justify-end mt-4">
