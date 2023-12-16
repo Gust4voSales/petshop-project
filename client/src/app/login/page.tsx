@@ -63,7 +63,6 @@ export default function Login() {
         toast.error("Email ou senha inválidos");
       } else {
         toast.error("Ocorreu um problema ao tentar realizar o login");
-        alert(JSON.stringify(err as any));
       }
     },
   });

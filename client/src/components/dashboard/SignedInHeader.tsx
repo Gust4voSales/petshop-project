@@ -12,9 +12,6 @@ export function SignedInHeader() {
   function handleSignOut() {
     signOutUser();
   }
-  useEffect(() => {
-    console.log("name, ", user?.name);
-  }, []);
 
   return (
     <header className="navbar border-b-2">
