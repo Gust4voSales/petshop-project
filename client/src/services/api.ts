@@ -1,4 +1,4 @@
-import { APIError } from "@@types/API";
+import { APIError } from "@/@types/API";
 import axios, { AxiosError } from "axios";
 import { refreshAccessToken } from "./queries/Session";
 import { SESSION_TOKENS_STORAGE_KEY, useSessionStore } from "src/stores/session";

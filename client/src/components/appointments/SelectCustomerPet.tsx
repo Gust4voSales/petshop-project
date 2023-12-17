@@ -1,8 +1,8 @@
-import { Customer } from "@@types/Customer";
-import { Pet } from "@@types/Pet";
-import { Button } from "@components/ui/Button";
-import { Table } from "@components/ui/Table";
-import { fetchCustomers } from "@services/queries/Customer";
+import { Customer } from "@/@types/Customer";
+import { Pet } from "@/@types/Pet";
+import { Button } from "@/components/ui/Button";
+import { Table } from "@/components/ui/Table";
+import { fetchCustomers } from "@/services/queries/Customer";
 import { useQuery } from "@tanstack/react-query";
 import { createColumnHelper } from "@tanstack/react-table";
 import { Check, X } from "phosphor-react";

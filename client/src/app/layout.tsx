@@ -1,6 +1,6 @@
 import { ProvidersWrapper } from "./ProvidersWrapper";
 import "./globals.css";
-import { Footer } from "@components/Footer";
+import { Footer } from "@/components/Footer";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (

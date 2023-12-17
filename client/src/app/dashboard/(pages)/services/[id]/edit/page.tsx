@@ -2,13 +2,13 @@
 
 import axios from "axios";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { AsynchronousContent } from "@components/AsynchronousContent";
-import { PageTitle } from "@components/dashboard/PageTitle";
-import { ServiceForm } from "@components/services/ServiceForm";
-import { fetchPetshopService, PETSHOPSERVICE_KEY, updatePetshopService } from "@services/queries/PetshopServices";
+import { AsynchronousContent } from "@/components/AsynchronousContent";
+import { PageTitle } from "@/components/dashboard/PageTitle";
+import { ServiceForm } from "@/components/services/ServiceForm";
+import { fetchPetshopService, PETSHOPSERVICE_KEY, updatePetshopService } from "@/services/queries/PetshopServices";
 import { toast } from "react-hot-toast";
-import { convertReaisToCents } from "@utils/currency";
-import { PetshopServiceBodyData } from "@@types/PetshopServices";
+import { convertReaisToCents } from "@/utils/currency";
+import { PetshopServiceBodyData } from "@/@types/PetshopServices";
 
 interface EditPetshopServiceMutationPayload {
   id: string;

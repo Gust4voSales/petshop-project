@@ -1,10 +1,10 @@
 "use client";
 
-import { Header } from "@components/Header";
-import { Button } from "@components/ui/Button";
-import { Input } from "@components/ui/Form/Inputs/Input";
+import { Header } from "@/components/Header";
+import { Button } from "@/components/ui/Button";
+import { Input } from "@/components/ui/Form/Inputs/Input";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { signIn } from "@services/queries/Session";
+import { signIn } from "@/services/queries/Session";
 import { useMutation } from "@tanstack/react-query";
 import { isAxiosError } from "axios";
 import { useRouter } from "next/navigation";

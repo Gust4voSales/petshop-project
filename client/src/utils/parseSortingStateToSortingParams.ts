@@ -1,4 +1,4 @@
-import { SortingParams } from "@@types/API";
+import { SortingParams } from "@/@types/API";
 import { SortingState } from "@tanstack/react-table";
 
 export function parseSortingStateToSortingParams(sortingState: SortingState): SortingParams {

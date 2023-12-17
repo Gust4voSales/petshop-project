@@ -4,10 +4,10 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { redirect, usePathname } from "next/navigation";
 import { Bag, Calendar, Info, Person } from "phosphor-react";
-import { SignedInHeader } from "@components/dashboard/SignedInHeader";
+import { SignedInHeader } from "@/components/dashboard/SignedInHeader";
 import { useSessionStore } from "src/stores/session";
-import { Header } from "@components/Header";
-import { FancyLoading } from "@components/ui/Loading/FancyLoading";
+import { Header } from "@/components/Header";
+import { FancyLoading } from "@/components/ui/Loading/FancyLoading";
 
 const ROUTES = [
   {

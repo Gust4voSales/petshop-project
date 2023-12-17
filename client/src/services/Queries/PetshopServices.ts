@@ -1,4 +1,4 @@
-import { PetshopService } from 'src/@types/PetshopServices';
+import { PetshopService } from '@/@types/PetshopServices';
 import api from '../api';
 
 // Query key

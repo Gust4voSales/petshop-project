@@ -1,8 +1,8 @@
-import { Button } from "@components/ui/Button";
-import { Input } from "@components/ui/Form/Inputs/Input";
+import { Button } from "@/components/ui/Button";
+import { Input } from "@/components/ui/Form/Inputs/Input";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { cellPhonePattern, removeCountryCodeAnd9FromRawPhone } from "@utils/phoneNumber";
-import { removeNonNumericFromString } from "@utils/removeNonNumericFromString";
+import { cellPhonePattern, removeCountryCodeAnd9FromRawPhone } from "@/utils/phoneNumber";
+import { removeNonNumericFromString } from "@/utils/removeNonNumericFromString";
 import { Controller, useForm } from "react-hook-form";
 import { PatternFormat } from "react-number-format";
 import { Customer } from "src/@types/Customer";

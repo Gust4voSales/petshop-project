@@ -1,13 +1,13 @@
-import { Button } from "@components/ui/Button";
-import { Input } from "@components/ui/Form/Inputs/Input";
+import { Button } from "@/components/ui/Button";
+import { Input } from "@/components/ui/Form/Inputs/Input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Plus, X } from "phosphor-react";
 import { Controller, useFieldArray, useForm } from "react-hook-form";
 import { z } from "zod";
 import { petSchema } from "./pets/PetForm";
 import { PatternFormat } from "react-number-format";
-import { removeNonNumericFromString } from "@utils/removeNonNumericFromString";
-import { cellPhonePattern } from "@utils/phoneNumber";
+import { removeNonNumericFromString } from "@/utils/removeNonNumericFromString";
+import { cellPhonePattern } from "@/utils/phoneNumber";
 
 const customerSchema = z.object({
   name: z

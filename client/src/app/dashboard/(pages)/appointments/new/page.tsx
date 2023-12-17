@@ -1,7 +1,7 @@
 "use client";
-import { AppointmentForm, AppointmentFormData } from "@components/appointments/AppointmentForm";
-import { PageTitle } from "@components/dashboard/PageTitle";
-import { APPOINTMENT_KEY, createAppointment } from "@services/queries/Appointment";
+import { AppointmentForm, AppointmentFormData } from "@/components/appointments/AppointmentForm";
+import { PageTitle } from "@/components/dashboard/PageTitle";
+import { APPOINTMENT_KEY, createAppointment } from "@/services/queries/Appointment";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";

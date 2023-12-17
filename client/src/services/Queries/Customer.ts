@@ -1,9 +1,9 @@
 import { Customer } from 'src/@types/Customer';
 import api from '../api'
-import { CreateCustomerFormData } from '@components/customers/CreateCustomerForm';
-import { EditCustomerFormData } from '@components/customers/EditCustomerForm';
-import { PetFormData } from '@components/customers/pets/PetForm';
-import { Pet } from '@@types/Pet';
+import { CreateCustomerFormData } from '@/components/customers/CreateCustomerForm';
+import { EditCustomerFormData } from '@/components/customers/EditCustomerForm';
+import { PetFormData } from '@/components/customers/pets/PetForm';
+import { Pet } from '@/@types/Pet';
 
 export const CUSTOMER_KEY = 'customer-fetch'
 

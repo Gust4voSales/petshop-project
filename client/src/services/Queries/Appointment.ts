@@ -1,7 +1,7 @@
-import { AppointmentFormData } from '@components/appointments/AppointmentForm'
+import { AppointmentFormData } from '@/components/appointments/AppointmentForm'
 import api from '../api'
-import { Appointment, AppointmentStatus } from '@@types/Appointment'
-import { PaginatedResponse, PaginationParams, SortingParams } from '@@types/API'
+import { Appointment, AppointmentStatus } from '@/@types/Appointment'
+import { PaginatedResponse, PaginationParams, SortingParams } from '@/@types/API'
 
 export const APPOINTMENT_KEY = 'appointment-fetch'
 

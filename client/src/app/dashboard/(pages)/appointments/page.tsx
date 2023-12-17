@@ -1,14 +1,14 @@
 "use client";
-import { Appointment, AppointmentStatus } from "@@types/Appointment";
-import { PageTitle } from "@components/dashboard/PageTitle";
-import { Button } from "@components/ui/Button";
-import { Select } from "@components/ui/Form/Inputs/Select";
-import { Label } from "@components/ui/Form/Label";
-import { Table } from "@components/ui/Table";
-import { APPOINTMENT_KEY, fetchAppointments } from "@services/queries/Appointment";
+import { Appointment, AppointmentStatus } from "@/@types/Appointment";
+import { PageTitle } from "@/components/dashboard/PageTitle";
+import { Button } from "@/components/ui/Button";
+import { Select } from "@/components/ui/Form/Inputs/Select";
+import { Label } from "@/components/ui/Form/Label";
+import { Table } from "@/components/ui/Table";
+import { APPOINTMENT_KEY, fetchAppointments } from "@/services/queries/Appointment";
 import { useQuery } from "@tanstack/react-query";
 import { PaginationState, SortingState, createColumnHelper } from "@tanstack/react-table";
-import { parseAppointmentStatus } from "@utils/parseAppointmentStatus";
+import { parseAppointmentStatus } from "@/utils/parseAppointmentStatus";
 import dayjs from "dayjs";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -16,8 +16,8 @@ import { ArrowLeft, ArrowRight, Funnel, PencilSimple } from "phosphor-react";
 import customParseFormatPlugin from "dayjs/plugin/customParseFormat";
 import { z } from "zod";
 import { useEffect, useState } from "react";
-import { isFetchingWithPreviousData } from "@utils/isFetchingWithPreviousData";
-import { parseSortingStateToSortingParams } from "@utils/parseSortingStateToSortingParams";
+import { isFetchingWithPreviousData } from "@/utils/isFetchingWithPreviousData";
+import { parseSortingStateToSortingParams } from "@/utils/parseSortingStateToSortingParams";
 
 dayjs.extend(customParseFormatPlugin);
 

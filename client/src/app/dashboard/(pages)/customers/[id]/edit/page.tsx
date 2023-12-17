@@ -1,13 +1,13 @@
 "use client";
 
-import { APIError } from "@@types/API";
-import { Pet } from "@@types/Pet";
-import { AsynchronousContent } from "@components/AsynchronousContent";
-import { ConfirmDeletePopover } from "@components/ConfirmDeletePopover";
-import { EditCustomerForm, EditCustomerFormData } from "@components/customers/EditCustomerForm";
-import { PetForm, PetFormData } from "@components/customers/pets/PetForm";
-import { PageTitle } from "@components/dashboard/PageTitle";
-import { Table } from "@components/ui/Table";
+import { APIError } from "@/@types/API";
+import { Pet } from "@/@types/Pet";
+import { AsynchronousContent } from "@/components/AsynchronousContent";
+import { ConfirmDeletePopover } from "@/components/ConfirmDeletePopover";
+import { EditCustomerForm, EditCustomerFormData } from "@/components/customers/EditCustomerForm";
+import { PetForm, PetFormData } from "@/components/customers/pets/PetForm";
+import { PageTitle } from "@/components/dashboard/PageTitle";
+import { Table } from "@/components/ui/Table";
 import {
   CUSTOMER_KEY,
   addCustomerPet,
@@ -15,7 +15,7 @@ import {
   fetchCustomer,
   removeCustomerPet,
   updateCustomer,
-} from "@services/queries/Customer";
+} from "@/services/queries/Customer";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { createColumnHelper } from "@tanstack/react-table";
 import axios from "axios";

@@ -1,5 +1,5 @@
-import { User } from '@@types/User'
-import api, { setAPIAuthorizationHeader, setAPIRefreshTokenInterceptor } from '@services/api'
+import { User } from '@/@types/User'
+import api, { setAPIAuthorizationHeader, setAPIRefreshTokenInterceptor } from '@/services/api'
 import { create, } from 'zustand'
 
 export const SESSION_USER_STORAGE_KEY = "@session/user"

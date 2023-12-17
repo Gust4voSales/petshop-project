@@ -1,5 +1,5 @@
-import { User } from "@@types/User";
-import api from "@services/api";
+import { User } from "@/@types/User";
+import api from "@/services/api";
 
 interface SignInParams {
   email: string

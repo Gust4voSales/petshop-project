@@ -1,4 +1,4 @@
-import { AppointmentStatus } from "@@types/Appointment";
+import { AppointmentStatus } from "@/@types/Appointment";
 
 const parsedAppointmentStatus: Record<AppointmentStatus, string> = {
   PENDING: "Pendente",

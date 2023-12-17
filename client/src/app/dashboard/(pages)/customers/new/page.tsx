@@ -1,8 +1,8 @@
 "use client";
 
-import { CreateCustomerFormData, CreateCustomerForm } from "@components/customers/CreateCustomerForm";
-import { PageTitle } from "@components/dashboard/PageTitle";
-import { createCustomer, CUSTOMER_KEY } from "@services/queries/Customer";
+import { CreateCustomerFormData, CreateCustomerForm } from "@/components/customers/CreateCustomerForm";
+import { PageTitle } from "@/components/dashboard/PageTitle";
+import { createCustomer, CUSTOMER_KEY } from "@/services/queries/Customer";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";

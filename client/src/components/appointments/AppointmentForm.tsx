@@ -1,14 +1,14 @@
-import { Button } from "@components/ui/Button";
-import { Input } from "@components/ui/Form/Inputs/Input";
+import { Button } from "@/components/ui/Button";
+import { Input } from "@/components/ui/Form/Inputs/Input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import dayjs from "dayjs";
 import { SelectCustomerPet } from "./SelectCustomerPet";
-import { Label } from "@components/ui/Form/Label";
-import { Select } from "@components/ui/Form/Inputs/Select";
+import { Label } from "@/components/ui/Form/Label";
+import { Select } from "@/components/ui/Form/Inputs/Select";
 import { useQuery } from "@tanstack/react-query";
-import { PETSHOPSERVICE_KEY, fetchPetshopServices } from "@services/queries/PetshopServices";
+import { PETSHOPSERVICE_KEY, fetchPetshopServices } from "@/services/queries/PetshopServices";
 
 const appointmentSchema = z.object({
   appointmentTime: z.coerce

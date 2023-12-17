@@ -1,17 +1,17 @@
 "use client";
 
-import { AsynchronousContent } from "@components/AsynchronousContent";
-import { InfoContent } from "@components/InfoContent";
-import { PageTitle } from "@components/dashboard/PageTitle";
-import { APPOINTMENT_KEY, fetchAppointment, updateAppointmentStatus } from "@services/queries/Appointment";
+import { AsynchronousContent } from "@/components/AsynchronousContent";
+import { InfoContent } from "@/components/InfoContent";
+import { PageTitle } from "@/components/dashboard/PageTitle";
+import { APPOINTMENT_KEY, fetchAppointment, updateAppointmentStatus } from "@/services/queries/Appointment";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import dayjs from "dayjs";
 import Link from "next/link";
-import { AppointmentStatus } from "@@types/Appointment";
-import { Select } from "@components/ui/Form/Inputs/Select";
-import { parseAppointmentStatus } from "@utils/parseAppointmentStatus";
+import { AppointmentStatus } from "@/@types/Appointment";
+import { Select } from "@/components/ui/Form/Inputs/Select";
+import { parseAppointmentStatus } from "@/utils/parseAppointmentStatus";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
 

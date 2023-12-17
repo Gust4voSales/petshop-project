@@ -2,18 +2,18 @@
 
 import Link from "next/link";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { PageTitle } from "@components/dashboard/PageTitle";
-import { deletePetshopService, fetchPetshopServices, PETSHOPSERVICE_KEY } from "@services/queries/PetshopServices";
-import { parseCurrencyValueInCentsToBRL } from "@utils/currency";
-import { parseSecondsToHuman } from "@utils/timeDuration";
-import { Button } from "@components/ui/Button";
+import { PageTitle } from "@/components/dashboard/PageTitle";
+import { deletePetshopService, fetchPetshopServices, PETSHOPSERVICE_KEY } from "@/services/queries/PetshopServices";
+import { parseCurrencyValueInCentsToBRL } from "@/utils/currency";
+import { parseSecondsToHuman } from "@/utils/timeDuration";
+import { Button } from "@/components/ui/Button";
 import { PencilSimple } from "phosphor-react";
-import { TooltipDescription } from "@components/services/TooltipDescription";
+import { TooltipDescription } from "@/components/services/TooltipDescription";
 import { toast } from "react-hot-toast";
-import { ConfirmDeletePopover } from "@components/ConfirmDeletePopover";
-import { Table } from "@components/ui/Table";
+import { ConfirmDeletePopover } from "@/components/ConfirmDeletePopover";
+import { Table } from "@/components/ui/Table";
 import { createColumnHelper } from "@tanstack/react-table";
-import { PetshopService } from "@@types/PetshopServices";
+import { PetshopService } from "@/@types/PetshopServices";
 
 const columnHelper = createColumnHelper<PetshopService>();
 

@@ -1,20 +1,20 @@
 "use client";
 
-import { PageTitle } from "@components/dashboard/PageTitle";
-import { Button } from "@components/ui/Button";
-import { Table } from "@components/ui/Table";
-import { CUSTOMER_KEY, deleteCustomer, fetchCustomers } from "@services/queries/Customer";
+import { PageTitle } from "@/components/dashboard/PageTitle";
+import { Button } from "@/components/ui/Button";
+import { Table } from "@/components/ui/Table";
+import { CUSTOMER_KEY, deleteCustomer, fetchCustomers } from "@/services/queries/Customer";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { createColumnHelper } from "@tanstack/react-table";
 import Link from "next/link";
 import { PencilSimple, TrashSimple } from "phosphor-react";
-import { Customer } from "@@types/Customer";
-import { ConfirmDeletePopover } from "@components/ConfirmDeletePopover";
+import { Customer } from "@/@types/Customer";
+import { ConfirmDeletePopover } from "@/components/ConfirmDeletePopover";
 import toast from "react-hot-toast";
 import axios from "axios";
-import { APIError } from "@@types/API";
+import { APIError } from "@/@types/API";
 import { patternFormatter } from "react-number-format";
-import { cellPhonePattern, removeCountryCodeAnd9FromRawPhone } from "@utils/phoneNumber";
+import { cellPhonePattern, removeCountryCodeAnd9FromRawPhone } from "@/utils/phoneNumber";
 
 const columnHelper = createColumnHelper<Customer>();
 

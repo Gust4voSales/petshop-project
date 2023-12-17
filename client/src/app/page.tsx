@@ -1,14 +1,10 @@
 "use client";
 
-import { About } from "@components/About";
-import { Header } from "@components/Header";
-import { Button } from "@components/ui/Button";
-import { Table } from "@components/ui/Table";
-import { createColumnHelper } from "@tanstack/react-table";
+import { About } from "@/components/About";
+import { Header } from "@/components/Header";
+import { Button } from "@/components/ui/Button";
 import Link from "next/link";
 import { CaretDown, CaretUp, PawPrint } from "phosphor-react";
-
-const columnHelper = createColumnHelper<any>();
 
 export default function Home() {
   const handleScrollBackToTop = () => {

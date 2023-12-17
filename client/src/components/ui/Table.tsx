@@ -8,11 +8,11 @@ import {
   Column,
 } from "@tanstack/react-table";
 import { EmptyContent } from "./EmptyContent";
-import { AsynchronousContent } from "@components/AsynchronousContent";
+import { AsynchronousContent } from "@/components/AsynchronousContent";
 import { QueryStatus } from "@tanstack/react-query";
 import { Dispatch, SetStateAction } from "react";
 import { ArrowLeft, ArrowLineLeft, ArrowLineRight, ArrowRight, Icon } from "phosphor-react";
-import { SortColumnButton } from "@components/SortColumnButton";
+import { SortColumnButton } from "@/components/SortColumnButton";
 
 type Props<T> = {
   data: T[];

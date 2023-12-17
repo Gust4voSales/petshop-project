@@ -1,7 +1,7 @@
-import { Pet } from "@@types/Pet";
-import { PageTitle } from "@components/dashboard/PageTitle";
-import { Button } from "@components/ui/Button";
-import { Input } from "@components/ui/Form/Inputs/Input";
+import { Pet } from "@/@types/Pet";
+import { PageTitle } from "@/components/dashboard/PageTitle";
+import { Button } from "@/components/ui/Button";
+import { Input } from "@/components/ui/Form/Inputs/Input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { PencilSimple, Plus, X } from "phosphor-react";
 import { useForm } from "react-hook-form";

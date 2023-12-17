@@ -1,10 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { Button } from "@components/ui/Button";
+import { Button } from "@/components/ui/Button";
 import { List, SignOut } from "phosphor-react";
 import { useSessionStore } from "src/stores/session";
-import { useEffect } from "react";
 
 export function SignedInHeader() {
   const [user, signOutUser] = useSessionStore((state) => [state.user, state.signOut]);
