@@ -17,6 +17,6 @@ async function bootstrap() {
   app.useGlobalFilters(new UnauthorizedExceptionFilter());
 
   app.enableCors();
-  await app.listen(3333);
+  await app.listen(process.env.PORT || 3000);
 }
 bootstrap();
