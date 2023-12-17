@@ -49,8 +49,8 @@ export class PrismaAppointmentRepository implements AppointmentRepository {
     let endDate: Date | undefined
 
     if (query.startDate && query.endDate) {
-      startDate = dayjs(query.startDate).startOf("day").toDate() // consider the whole day, so sets time at 00h:00 to include the whole day
-      endDate = dayjs(query.endDate).endOf("day").toDate() // consider the whole day, so sets time at 23h:59 to include the whole day
+      startDate = dayjs(query.startDate).toDate()
+      endDate = dayjs(query.endDate).toDate()
     }
 
     const queryArgs: Prisma.AppointmentFindManyArgs = {
@@ -64,7 +64,7 @@ export class PrismaAppointmentRepository implements AppointmentRepository {
       orderBy: [
         { ...getPrismaSorter({ sortBy: query.sortBy, sortOrder: query.sortOrder }) },
 
-        // if the query is not already sorting by appointmentTime, always sort by appointmentTime descending
+        // if the query is not already sorting by appointmentTime and , always sort by appointmentTime descending
         query.sortBy !== 'appointmentTime' ? { appointmentTime: 'desc' } : {},
       ],
       include: {
