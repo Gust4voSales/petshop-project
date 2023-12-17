@@ -74,6 +74,8 @@ const columns = [
   }),
 ];
 
+const DATE_INPUT_FORMAT = "YYYY-MM-DDTHH:mm";
+
 export default function Appointments() {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -89,13 +91,14 @@ export default function Appointments() {
   });
   const [sorting, setSorting] = useState<SortingState>(sortingParams);
 
-  const dateTimestamp = date !== undefined ? dayjs(date).toISOString() : undefined; // value sent to the query
+  const startTimestamp = date !== undefined ? dayjs(date).toISOString() : undefined; // value sent to the query
+  const endTimestamp = date !== undefined ? dayjs(date).endOf("day").toISOString() : undefined; // value sent to the query
   const appointmentsListQuery = useQuery({
-    queryKey: [APPOINTMENT_KEY, dateTimestamp, status, pagination, sorting],
+    queryKey: [APPOINTMENT_KEY, startTimestamp, status, pagination, sorting],
     queryFn: () =>
       fetchAppointments({
-        startDate: dateTimestamp,
-        endDate: dateTimestamp,
+        startDate: startTimestamp,
+        endDate: endTimestamp,
         status: status,
         page: pagination.pageIndex + 1,
         pageSize: pagination.pageSize,
@@ -133,8 +136,7 @@ export default function Appointments() {
 
   function parseDateParam() {
     const dateParam = searchParams.get("date");
-    const validDateParam = dayjs(dateParam, "YYYY-MM-DD", true).isValid();
-
+    const validDateParam = dayjs(dateParam, DATE_INPUT_FORMAT, true).isValid();
     if (validDateParam) {
       return dateParam as string;
     }
@@ -197,7 +199,7 @@ export default function Appointments() {
   }
 
   function handleIncrementDate(increment: -1 | 1) {
-    const newDate = dayjs(date).add(increment, "day").format("YYYY-MM-DD");
+    const newDate = dayjs(date).add(increment, "day").format(DATE_INPUT_FORMAT);
     handleChangeDate(newDate);
   }
 
@@ -224,7 +226,7 @@ export default function Appointments() {
                 <ArrowLeft className="w-5 h-5" />
               </Button>
               <input
-                type="date"
+                type="datetime-local"
                 className="input input-bordered"
                 required
                 id="date"
