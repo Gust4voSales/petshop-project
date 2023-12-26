@@ -2,16 +2,17 @@
 
 import { Button } from "@/components/ui/Button";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { X } from "phosphor-react";
-import { useEffect, useState } from "react";
-import toast, { Toaster } from "react-hot-toast";
-
-const SERVER_RESTART_MESSAGE =
-  "Conforme explicado nesse site, este projeto utiliza recursos e hospedagem gratuitas. Portanto, o servidor será reiniciado automaticamente e isto pode demorar até 1 MINUTO. Não se espante se a primeira requisição demorar carregando...";
+import { useState } from "react";
+import { Toaster } from "react-hot-toast";
 
 export function ProvidersWrapper({ children }: { children: React.ReactNode }) {
   const client = new QueryClient();
+  const pathname = usePathname();
   const [showWarning, setShowWarning] = useState(true);
+  const aboutPageURL = pathname.includes("dashboard") ? "/dashboard/about" : "/#about-section";
 
   return (
     <QueryClientProvider client={client}>
@@ -59,7 +60,15 @@ export function ProvidersWrapper({ children }: { children: React.ReactNode }) {
               d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
             />
           </svg>
-          <span className="text-justify">{SERVER_RESTART_MESSAGE}</span>
+          <span className="text-justify">
+            Conforme explicado{" "}
+            <Link href={aboutPageURL} className="link">
+              aqui
+            </Link>
+            , este projeto utiliza recursos e hospedagem gratuitas. Portanto, após um tempo inativo, o servidor é
+            desligado e será reiniciado automaticamente quando acessado. Isto pode demorar de 1~3 MINUTOS. Não se
+            espante se a primeira requisição demorar carregando...
+          </span>
         </div>
       )}
     </QueryClientProvider>

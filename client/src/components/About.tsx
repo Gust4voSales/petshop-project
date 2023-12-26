@@ -18,9 +18,11 @@ export function About({ transparentBg }: Props) {
         </p>
         <p className="italic">
           Aviso: Este é um projeto fictício, não vinculado a um negócio real. Hospedado gratuitamente e utilizando
-          recursos e armazenamentos também gratuitos. Portanto, a performance pode ser impactada...
+          recursos e armazenamentos também gratuitos. Após um tempo inativo, o servidor é desligado e será reiniciado
+          automaticamente quando acessado. Isto pode demorar de 1~3 MINUTOS. Não se espante se a primeira requisição
+          demorar carregando...
         </p>
-        <p>Sinta-se à vontade para explorar e compartilhar feedback!</p>
+        <p>Sinta-se à vontade para explorar e compartilhar seu feedback!</p>
       </div>
     </div>
   );
