@@ -62,7 +62,7 @@ export function ProvidersWrapper({ children }: { children: React.ReactNode }) {
           </svg>
           <span className="text-justify">
             Conforme explicado{" "}
-            <Link href={aboutPageURL} className="link">
+            <Link href={aboutPageURL} className="link" prefetch={false}>
               aqui
             </Link>
             , este projeto utiliza recursos e hospedagem gratuitas. Portanto, após um tempo inativo, o servidor é
