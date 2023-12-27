@@ -55,7 +55,7 @@ Here are some features I added that I'm very proud of, wether because they were 
 
 ## 🛠 Getting started
 
-1. Clone this repo running on your terminal `git clone https://github.com/Gust4voSales/loop-pedal-online.git`
+1. Clone this repo running on your terminal `git clone https://github.com/Gust4voSales/petshop-project.git`
 2. Inside the project `server` folder run `yarn` to install all dependencies
 3. Create a `.env` file with with the `.example.env` file as model
 4. Run `yarn prisma migrate dev` to apply the migrations to you db
