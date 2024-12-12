@@ -3,12 +3,6 @@ import "./globals.css";
 import { Footer } from "@/components/Footer";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  // ping the server since we're hosting using RENDER free tier, this will
-  // restart the server as soon as possible
-  fetch(process.env.NEXT_PUBLIC_API_URL || "", {
-    method: "get",
-  });
-
   return (
     <html lang="pt-br" data-theme="dark">
       <head>

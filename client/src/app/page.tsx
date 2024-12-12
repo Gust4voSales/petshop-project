@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import { About } from "@/components/About";
 import { Header } from "@/components/Header";
 import { Button } from "@/components/ui/Button";
@@ -7,6 +8,24 @@ import Link from "next/link";
 import { CaretDown, CaretUp, PawPrint } from "phosphor-react";
 
 export default function Home() {
+  useEffect(() => {
+    // ping the server since we're hosting using RENDER free tier, this will
+    // wake up the server as soon as possible
+    async function pingServer() {
+      console.log("pinging server");
+
+      fetch(process.env.NEXT_PUBLIC_API_URL || "", {
+        method: "get",
+      })
+        .then(() => {
+          console.log("ping response");
+        })
+        .catch(() => {});
+    }
+
+    pingServer();
+  }, []);
+
   const handleScrollBackToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
